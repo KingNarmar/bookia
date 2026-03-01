@@ -1,16 +1,137 @@
-# bookia
+# 📚 Bookia
 
-A new Flutter project.
+A Flutter authentication flow implementation based on the provided Figma design.  
+Developed as part of **Session 15 Task** in the Flutter course.
 
-## Getting Started
+This project focuses on:
+- Clean folder structure (Feature-based architecture)
+- Reusable UI components
+- Form validation
+- Custom widgets
+- OTP verification flow
+- Consistent design system
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
+# 🏗 Project Structure
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+```text
+lib/
+│
+├── app_root/
+│   └── app_root.dart
+│
+├── core/
+│   ├── constants/
+│   ├── functions/
+│   ├── styles/
+│   └── widgets/
+│
+├── features/
+│   ├── auth/
+│   │   ├── functions/
+│   │   ├── screens/
+│   │   └── widgets/
+│   │
+│   ├── home/
+│   │   └── screens/
+│   │
+│   └── welcome/
+│       └── screens/
+│
+└── main.dart
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
+
+# 🎨 Implemented Screens
+
+## 🟢 Splash Screen
+
+<img src="screenshots/splash_screen.png" width="300"/>
+
+---
+
+## 🟢 Welcome Screen
+
+<img src="screenshots/welcome_screen.png" width="300"/>
+
+---
+
+## 🟢 Login Screen
+
+<img src="screenshots/login_screen.png" width="300"/>
+
+**Features:**
+- Email & Password fields
+- Password visibility toggle
+- Form validation
+- Social authentication buttons
+- Navigation to Register / Forgot Password
+
+---
+
+## 🟢 Register Screen
+
+<img src="screenshots/register_screen.png" width="300"/>
+
+**Features:**
+- Username validation
+- Email validation
+- Password & Confirm Password
+- Custom reusable password field
+- Form validation handling
+
+---
+
+## 🟢 Forgot Password Screen
+
+<img src="screenshots/forget_password_screen.png" width="300"/>
+
+**Features:**
+- Email input
+- Send verification code
+
+---
+
+## 🟢 OTP Verification Screen
+
+<img src="screenshots/otp_verification_screen.png" width="300"/>
+
+**Features:**
+- PIN code input (OTP)
+- Verification button
+- Resend option
+
+---
+
+## 🟢 Create New Password Screen
+
+<img src="screenshots/create_new_password_screen.png" width="300"/>
+
+**Features:**
+- New password field
+- Confirm password field
+- Validation
+- Reset password action
+
+---
+
+## 🟢 Password Changed Screen
+
+<img src="screenshots/password_changed_screen.png" width="300"/>
+
+**Features:**
+- Success state UI
+- Back to Login navigation
+
+---
+
+# 🧩 Reusable Components
+
+- `MainButton`
+- `CustomTextFormField`
+- `PasswordTextFormField`
+- `SocialAuthButton`
+- `AuthFooter`
+- `PinCodeSection`
