@@ -6,6 +6,7 @@ import 'package:bookia/core/widgets/custom_text_form_field.dart';
 import 'package:bookia/core/widgets/main_button.dart';
 import 'package:bookia/core/widgets/password_text_form_field.dart';
 import 'package:bookia/features/auth/functions/validators.dart';
+import 'package:bookia/features/auth/screens/forget_password.dart';
 import 'package:bookia/features/auth/screens/register_screen.dart';
 import 'package:bookia/features/auth/widgets/auth_footer.dart';
 import 'package:bookia/features/auth/widgets/social_auth_button.dart';
@@ -75,10 +76,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   onPressed: () {},
                   child: Align(
                     alignment: AlignmentGeometry.centerRight,
-                    child: Text(
-                      "Forgot Password?",
-                      style: TextStyles.w400s14.copyWith(
-                        color: AppColors.darkGray,
+                    child: GestureDetector(
+                      onTap: () => pushTo(ForgetPasswordScreen(), context),
+                      child: Text(
+                        "Forgot Password?",
+                        style: TextStyles.w400s14.copyWith(
+                          color: AppColors.darkGray,
+                        ),
                       ),
                     ),
                   ),
