@@ -1,7 +1,9 @@
 import 'package:bookia/core/constants/app_images.dart';
+import 'package:bookia/core/functions/navigations.dart';
 import 'package:bookia/core/styles/app_colors.dart';
 import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/core/widgets/main_button.dart';
+import 'package:bookia/features/auth/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
@@ -29,7 +31,12 @@ class WelcomeScreen extends StatelessWidget {
                 Gap(30),
                 Text("Order Your Book Now!", style: TextStyles.w400s20),
                 Spacer(flex: 4),
-                MainButton(text: "Login", onPressed: () {}),
+                MainButton(
+                  text: "Login",
+                  onPressed: () {
+                    pushTo(LoginScreen(), context);
+                  },
+                ),
                 Gap(15),
                 MainButton(
                   text: "Register",

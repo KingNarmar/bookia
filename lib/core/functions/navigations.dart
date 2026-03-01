@@ -11,6 +11,6 @@ void pushTo(Widget nextPage, BuildContext context) {
   Navigator.push(context, MaterialPageRoute(builder: (context) => nextPage));
 }
 
-void pop(Widget nextPage, BuildContext context) {
+void pop(BuildContext context) {
   Navigator.pop(context);
 }
