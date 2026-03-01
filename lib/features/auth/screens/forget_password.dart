@@ -4,13 +4,22 @@ import 'package:bookia/core/styles/app_colors.dart';
 import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/core/widgets/custom_text_form_field.dart';
 import 'package:bookia/core/widgets/main_button.dart';
+import 'package:bookia/features/auth/functions/validators.dart';
+import 'package:bookia/features/auth/screens/otp_verification_screen.dart';
 import 'package:bookia/features/auth/widgets/auth_footer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 
-class ForgetPasswordScreen extends StatelessWidget {
+class ForgetPasswordScreen extends StatefulWidget {
   const ForgetPasswordScreen({super.key});
+
+  @override
+  State<ForgetPasswordScreen> createState() => _ForgetPasswordScreenState();
+}
+
+class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -25,20 +34,41 @@ class ForgetPasswordScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(22),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text("Forgot Password?", style: TextStyles.w400s30),
-            Gap(10),
-            Text(
-              "Don't worry! It occurs. Please enter the email address linked with your account.",
-              style: TextStyles.w400s16.copyWith(color: AppColors.grayColor),
-            ),
-            Gap(30),
-            CustomTextFormField(hint: "Enter Your Email"),
-            Gap(40),
-            MainButton(text: "Send Code", onPressed: () {}),
-          ],
+        child: Form(
+          key: formKey,
+          autovalidateMode: AutovalidateMode.onUnfocus,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("Forgot Password?", style: TextStyles.w400s30),
+              Gap(10),
+              Text(
+                "Don't worry! It occurs. Please enter the email address linked with your account.",
+                style: TextStyles.w400s16.copyWith(color: AppColors.grayColor),
+              ),
+              Gap(30),
+              CustomTextFormField(
+                hint: "Enter Your Email",
+                validator: (input) {
+                  if (input == null || input.isEmpty) {
+                    return "Enter Your Email";
+                  } else if (!isEmailValid(input)) {
+                    return "Please Enter The Right Email";
+                  }
+                  return null;
+                },
+              ),
+              Gap(40),
+              MainButton(
+                text: "Send Code",
+                onPressed: () {
+                  if (formKey.currentState!.validate()) {
+                    pushTo(OtpVerificationScreen(), context);
+                  }
+                },
+              ),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: AuthFooter(
