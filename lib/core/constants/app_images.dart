@@ -8,4 +8,5 @@ abstract class AppImages {
   static const String backIconsvg = "assets/icons/back.svg";
   static const String googleIconSvg = "assets/icons/google.svg";
   static const String appleIconSvg = "assets/icons/apple.svg";
+  static const String successSvg = "assets/images/success.svg";
 }
