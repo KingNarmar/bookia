@@ -4,6 +4,7 @@ A Flutter authentication flow implementation based on the provided Figma design.
 Developed as part of **Session 15 Task** in the Flutter course.
 
 This project focuses on:
+
 - Clean folder structure (Feature-based architecture)
 - Reusable UI components
 - Form validation
@@ -48,21 +49,22 @@ lib/
 
 ## 🟢 Splash Screen
 
-<img src="screenshots/splash_screen.png" width="300"/>
+<img src="screen_shots/splash_screen.png" width="300"/>
 
 ---
 
 ## 🟢 Welcome Screen
 
-<img src="screenshots/welcome_screen.png" width="300"/>
+<img src="screen_shots/welcome_screen.png" width="300"/>
 
 ---
 
 ## 🟢 Login Screen
 
-<img src="screenshots/login_screen.png" width="300"/>
+<img src="screen_shots/Login_screen.png" width="300"/>
 
 **Features:**
+
 - Email & Password fields
 - Password visibility toggle
 - Form validation
@@ -73,9 +75,10 @@ lib/
 
 ## 🟢 Register Screen
 
-<img src="screenshots/register_screen.png" width="300"/>
+<img src="screen_shots/register_screen.png" width="300"/>
 
 **Features:**
+
 - Username validation
 - Email validation
 - Password & Confirm Password
@@ -86,9 +89,10 @@ lib/
 
 ## 🟢 Forgot Password Screen
 
-<img src="screenshots/forget_password_screen.png" width="300"/>
+<img src="screen_shots/forget_password_screen.png" width="300"/>
 
 **Features:**
+
 - Email input
 - Send verification code
 
@@ -96,9 +100,10 @@ lib/
 
 ## 🟢 OTP Verification Screen
 
-<img src="screenshots/otp_verification_screen.png" width="300"/>
+<img src="screen_shots/otp_verification_screen.png" width="300"/>
 
 **Features:**
+
 - PIN code input (OTP)
 - Verification button
 - Resend option
@@ -107,9 +112,10 @@ lib/
 
 ## 🟢 Create New Password Screen
 
-<img src="screenshots/create_new_password_screen.png" width="300"/>
+<img src="screen_shots/create_new_password_screen.png" width="300"/>
 
 **Features:**
+
 - New password field
 - Confirm password field
 - Validation
@@ -119,9 +125,10 @@ lib/
 
 ## 🟢 Password Changed Screen
 
-<img src="screenshots/password_changed_screen.png" width="300"/>
+<img src="screen_shots/password_cahnged_screen.png" width="300"/>
 
 **Features:**
+
 - Success state UI
 - Back to Login navigation
 
