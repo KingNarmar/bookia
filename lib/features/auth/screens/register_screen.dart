@@ -4,7 +4,7 @@ import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/core/widgets/custom_text_form_field.dart';
 import 'package:bookia/core/widgets/main_button.dart';
 import 'package:bookia/core/widgets/password_text_form_field.dart';
-import 'package:bookia/features/auth/functions/validators.dart';
+import 'package:bookia/features/auth/functions/app_validators.dart';
 import 'package:bookia/features/auth/widgets/auth_footer.dart';
 import 'package:bookia/features/home/screens/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +20,8 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   final formKey = GlobalKey<FormState>();
-  String _password = "";
+  final passwordController = TextEditingController();
+  final confirmController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,49 +48,26 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 Gap(32),
                 CustomTextFormField(
                   hint: "Username",
-                  validator: (input) {
-                    if (input == null || input.isEmpty) {
-                      return "Please Enter the User Name ";
-                    } else if (!isNameValid(input) || input.length < 3) {
-                      return "Please Enter Valid Name More than 3 Chr";
-                    }
-                    return null;
-                  },
+                  validator: AppValidators.name,
                 ),
                 Gap(11),
                 CustomTextFormField(
                   hint: "Email",
-                  validator: (input) {
-                    if (input == null || input.isEmpty) {
-                      return "Enter Your Email";
-                    } else if (!isEmailValid(input)) {
-                      return "Enter Your Correct Email";
-                    }
-                    return null;
-                  },
+                  validator: AppValidators.email,
                 ),
                 Gap(11),
                 PasswordTextFormField(
                   hint: "Password",
-                  validator: (input) {
-                    if (input == null || input.isEmpty) {
-                      return "Create Your Password";
-                    } else if (!isPasswordValid(input)) {
-                      return "Password Should Be (6+ chars, upper, lower, digit)";
-                    }
-                    _password = input;
-                    return null;
-                  },
+                  validator: AppValidators.password(),
+                  passwordController: passwordController,
                 ),
                 Gap(11),
                 PasswordTextFormField(
                   hint: "Confirm Password",
-                  validator: (input) {
-                    if (input != _password || input == null || input.isEmpty) {
-                      return "password not matching";
-                    }
-                    return null;
-                  },
+                  validator: AppValidators.confirmPassword(
+                    passwordProvider: () => passwordController.text,
+                  ),
+                  passwordController: confirmController,
                 ),
                 Gap(30),
                 MainButton(

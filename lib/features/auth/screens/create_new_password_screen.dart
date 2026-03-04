@@ -4,7 +4,7 @@ import 'package:bookia/core/styles/app_colors.dart';
 import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/core/widgets/main_button.dart';
 import 'package:bookia/core/widgets/password_text_form_field.dart';
-import 'package:bookia/features/auth/functions/validators.dart';
+import 'package:bookia/features/auth/functions/app_validators.dart';
 import 'package:bookia/features/auth/screens/password_changed_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -20,7 +20,7 @@ class CreateNewPasswordScreen extends StatefulWidget {
 
 class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
   final formKey = GlobalKey<FormState>();
-  String _password = "";
+  final passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,25 +47,16 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
               Gap(32),
               PasswordTextFormField(
                 hint: "New Password",
-                validator: (input) {
-                  if (input == null || input.isEmpty) {
-                    return "Create Your Password";
-                  } else if (!isPasswordValid(input)) {
-                    return "Password Should Be (6+ chars, upper, lower, digit)";
-                  }
-                  _password = input;
-                  return null;
-                },
+                validator: AppValidators.password(),
+                passwordController: passwordController,
               ),
+
               Gap(15),
               PasswordTextFormField(
                 hint: "Confirm Password",
-                validator: (input) {
-                  if (input != _password || input == null || input.isEmpty) {
-                    return "password not matching";
-                  }
-                  return null;
-                },
+                validator: AppValidators.confirmPassword(
+                  passwordProvider: () => passwordController.text,
+                ),
               ),
               Gap(38),
               MainButton(

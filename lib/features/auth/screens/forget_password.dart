@@ -4,21 +4,16 @@ import 'package:bookia/core/styles/app_colors.dart';
 import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/core/widgets/custom_text_form_field.dart';
 import 'package:bookia/core/widgets/main_button.dart';
-import 'package:bookia/features/auth/functions/validators.dart';
+import 'package:bookia/features/auth/functions/app_validators.dart';
 import 'package:bookia/features/auth/screens/otp_verification_screen.dart';
 import 'package:bookia/features/auth/widgets/auth_footer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 
-class ForgetPasswordScreen extends StatefulWidget {
-  const ForgetPasswordScreen({super.key});
+class ForgetPasswordScreen extends StatelessWidget {
+  ForgetPasswordScreen({super.key});
 
-  @override
-  State<ForgetPasswordScreen> createState() => _ForgetPasswordScreenState();
-}
-
-class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   final formKey = GlobalKey<FormState>();
 
   @override
@@ -49,14 +44,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
               Gap(30),
               CustomTextFormField(
                 hint: "Enter Your Email",
-                validator: (input) {
-                  if (input == null || input.isEmpty) {
-                    return "Enter Your Email";
-                  } else if (!isEmailValid(input)) {
-                    return "Please Enter The Right Email";
-                  }
-                  return null;
-                },
+                validator: AppValidators.email,
               ),
               Gap(40),
               MainButton(

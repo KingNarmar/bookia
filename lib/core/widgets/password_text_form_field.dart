@@ -7,10 +7,12 @@ class PasswordTextFormField extends StatefulWidget {
     super.key,
     this.validator,
     this.hint = "Enter Your Password",
+    this.passwordController,
   });
 
   final String? Function(String?)? validator;
   final String? hint;
+  final TextEditingController? passwordController;
   @override
   State<PasswordTextFormField> createState() => _PasswordTextFormFieldState();
 }
@@ -21,6 +23,7 @@ class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: widget.passwordController,
       obscureText: ishide,
       keyboardType: TextInputType.emailAddress,
       onTapOutside: (event) {
