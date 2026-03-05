@@ -5,11 +5,11 @@ import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/core/widgets/custom_text_form_field.dart';
 import 'package:bookia/core/widgets/main_button.dart';
 import 'package:bookia/core/widgets/password_text_form_field.dart';
-import 'package:bookia/features/auth/functions/app_validators.dart';
-import 'package:bookia/features/auth/screens/forget_password.dart';
-import 'package:bookia/features/auth/screens/register_screen.dart';
-import 'package:bookia/features/auth/widgets/auth_footer.dart';
-import 'package:bookia/features/auth/widgets/social_auth_button.dart';
+import 'package:bookia/features/auth/presentation/functions/app_validators.dart';
+import 'package:bookia/features/auth/presentation/screens/forget_password.dart';
+import 'package:bookia/features/auth/presentation/screens/register_screen.dart';
+import 'package:bookia/features/auth/presentation/widgets/auth_footer.dart';
+import 'package:bookia/features/auth/presentation/widgets/social_auth_button.dart';
 import 'package:bookia/features/home/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -49,7 +49,11 @@ class LoginScreen extends StatelessWidget {
                   validator: AppValidators.email,
                 ),
                 Gap(15),
-                PasswordTextFormField(validator: AppValidators.password(emptyMessage: "Enter Your Password")),
+                PasswordTextFormField(
+                  validator: AppValidators.password(
+                    emptyMessage: "Enter Your Password",
+                  ),
+                ),
                 Gap(15),
                 TextButton(
                   onPressed: () {},

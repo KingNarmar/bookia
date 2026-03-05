@@ -37,6 +37,7 @@ dependencies:
   flutter_svg: ^2.2.3
   gap: ^3.0.1
   pinput: ^6.0.2
+  dio: ^5.9.2
 
 dev_dependencies:
   flutter_test:

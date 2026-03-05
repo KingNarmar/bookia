@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 
 class PinCodeSection extends StatelessWidget {
-  const PinCodeSection({
-    super.key,
-  });
+  const PinCodeSection({super.key});
 
   @override
   Widget build(BuildContext context) {
