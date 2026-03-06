@@ -1,15 +1,18 @@
 # 📚 Bookia
 
 A Flutter authentication flow implementation based on the provided Figma design.  
-Developed as part of **Session 15 Task** in the Flutter course.
+Developed as part of **Session 16 Task** in the Flutter course.
 
 This project focuses on:
 
-- Clean folder structure (Feature-based architecture)
+- Clean folder structure (**Feature-based architecture**)
 - Reusable UI components
 - Form validation
 - Custom widgets
+- API integration using **Dio**
+- State management using **Cubit**
 - OTP verification flow
+- Reset password flow connected to backend
 - Consistent design system
 
 ---
@@ -25,14 +28,21 @@ lib/
 ├── core/
 │   ├── constants/
 │   ├── functions/
+│   ├── services/
 │   ├── styles/
 │   └── widgets/
 │
 ├── features/
 │   ├── auth/
-│   │   ├── functions/
-│   │   ├── screens/
-│   │   └── widgets/
+│   │   ├── data/
+│   │   │   ├── models/
+│   │   │   └── repo/
+│   │   │
+│   │   ├── presentation/
+│   │   │   ├── cubit/
+│   │   │   ├── functions/
+│   │   │   ├── screens/
+│   │   │   └── widgets/
 │   │
 │   ├── home/
 │   │   └── screens/
@@ -69,6 +79,8 @@ lib/
 - Password visibility toggle
 - Form validation
 - Social authentication buttons
+- Connected to backend login endpoint
+- State handling using Cubit
 - Navigation to Register / Forgot Password
 
 ---
@@ -84,6 +96,8 @@ lib/
 - Password & Confirm Password
 - Custom reusable password field
 - Form validation handling
+- Connected to backend register endpoint
+- State handling using Cubit
 
 ---
 
@@ -94,7 +108,10 @@ lib/
 **Features:**
 
 - Email input
-- Send verification code
+- Form validation
+- Connected to **Forget Password API**
+- Loading and error handling
+- Navigation to OTP screen after successful request
 
 ---
 
@@ -106,7 +123,9 @@ lib/
 
 - PIN code input (OTP)
 - Verification button
-- Resend option
+- Resend option UI
+- OTP stored using Cubit controller
+- Navigation to Create New Password screen
 
 ---
 
@@ -119,7 +138,9 @@ lib/
 - New password field
 - Confirm password field
 - Validation
-- Reset password action
+- Connected to **Reset Password API**
+- Uses OTP + New Password + Confirm Password
+- Loading, success, and error state handling with Cubit
 
 ---
 
@@ -131,6 +152,44 @@ lib/
 
 - Success state UI
 - Back to Login navigation
+- Clean completion of reset password flow
+
+---
+
+# 🔌 API Integration
+
+The authentication flow is connected to backend endpoints using **Dio**.
+
+## Implemented Endpoints
+
+- `POST /login`
+- `POST /register`
+- `POST /forget-password`
+- `POST /reset-password`
+
+## API Layer Includes
+
+- `DioProvider`
+- API endpoint constants
+- Repository pattern in `AuthRepo`
+- Request models for API parameters
+- Response model parsing
+
+---
+
+# 🧠 State Management
+
+This project uses **Flutter Bloc / Cubit** for handling authentication states.
+
+## AuthCubit Responsibilities
+
+- Login handling
+- Register handling
+- Forget Password requests
+- Reset Password requests
+- TextEditingControllers management
+- Form validation
+- Handling loading / success / error states
 
 ---
 
@@ -142,3 +201,48 @@ lib/
 - `SocialAuthButton`
 - `AuthFooter`
 - `PinCodeSection`
+
+---
+
+# ✅ Improvements Added in This Task
+
+Compared to the initial UI-only implementation, the following improvements were introduced:
+
+- Connected authentication screens to real backend APIs
+- Added Dio-based API service layer
+- Implemented repository pattern for authentication requests
+- Created request models such as:
+  - `ForgetPasswordParams`
+  - `ResetPasswordParams`
+- Added Cubit methods for:
+  - `login()`
+  - `register()`
+  - `forgetPassword()`
+  - `resetPassword()`
+- Passed data across reset password flow screens using the same Cubit instance
+- Implemented loading dialogs and error dialogs
+- Completed the full password reset flow from email submission to success confirmation screen
+
+---
+
+# 🛠 Tech Stack
+
+- Flutter
+- Dart
+- Flutter Bloc / Cubit
+- Dio
+- SVG Support
+- Reusable Custom Widgets
+
+---
+
+# 🚀 Notes
+
+This project was built to practice:
+
+- Clean UI implementation from Figma
+- Feature-based project structure
+- Flutter form validation
+- API integration
+- State management with Cubit
+- Building a complete authentication flow connected to backend services
