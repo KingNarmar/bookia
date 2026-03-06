@@ -11,8 +11,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 
 class OtpVerificationScreen extends StatelessWidget {
-  const OtpVerificationScreen({super.key});
-
+  const OtpVerificationScreen({super.key, this.pinController});
+  final TextEditingController? pinController;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +36,7 @@ class OtpVerificationScreen extends StatelessWidget {
               style: TextStyles.w400s16.copyWith(color: AppColors.grayColor),
             ),
             Gap(35),
-            PinCodeSection(),
+            PinCodeSection(controller: pinController),
             Gap(35),
             MainButton(
               text: "Verify",

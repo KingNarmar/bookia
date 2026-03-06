@@ -9,11 +9,13 @@ class CustomTextFormField extends StatelessWidget {
     this.keyboardType,
     this.validator,
     this.icon,
+    this.controller,
   });
   final String hint;
   final TextInputType? keyboardType;
   final String? Function(String?)? validator;
   final IconButton? icon;
+  final TextEditingController? controller;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -21,6 +23,7 @@ class CustomTextFormField extends StatelessWidget {
       onTapOutside: (event) {
         FocusManager.instance.primaryFocus?.unfocus();
       },
+      controller: controller,
       decoration: InputDecoration(
         filled: true,
         fillColor: AppColors.accentColor,

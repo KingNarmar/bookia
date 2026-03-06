@@ -12,9 +12,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 
 class ForgetPasswordScreen extends StatelessWidget {
-  ForgetPasswordScreen({super.key});
+  ForgetPasswordScreen({super.key, this.emailController});
 
   final formKey = GlobalKey<FormState>();
+  final TextEditingController? emailController;
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +46,7 @@ class ForgetPasswordScreen extends StatelessWidget {
               CustomTextFormField(
                 hint: "Enter Your Email",
                 validator: AppValidators.email,
+                controller: emailController,
               ),
               Gap(40),
               MainButton(

@@ -10,17 +10,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 
-class CreateNewPasswordScreen extends StatefulWidget {
-  const CreateNewPasswordScreen({super.key});
+class CreateNewPasswordScreen extends StatelessWidget {
+  CreateNewPasswordScreen({
+    super.key,
+    this.passwordController,
+    this.confirmPasswordController,
+  });
 
-  @override
-  State<CreateNewPasswordScreen> createState() =>
-      _CreateNewPasswordScreenState();
-}
-
-class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
   final formKey = GlobalKey<FormState>();
-  final passwordController = TextEditingController();
+
+  final TextEditingController? passwordController;
+  final TextEditingController? confirmPasswordController;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,8 +56,9 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
               PasswordTextFormField(
                 hint: "Confirm Password",
                 validator: AppValidators.confirmPassword(
-                  passwordProvider: () => passwordController.text,
+                  passwordProvider: () => passwordController!.text,
                 ),
+                passwordController: confirmPasswordController,
               ),
               Gap(38),
               MainButton(

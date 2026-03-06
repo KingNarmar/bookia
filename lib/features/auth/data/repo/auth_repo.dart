@@ -1,12 +1,12 @@
-import 'dart:nativewrappers/_internal/vm/lib/developer.dart';
+import 'dart:developer';
 
 import 'package:bookia/core/services/api/api.dart';
 import 'package:bookia/core/services/api/dio_provider.dart';
-import 'package:bookia/features/auth/data/models/register_params.dart';
 import 'package:bookia/features/auth/data/models/auth_response/auth_response.dart';
+import 'package:bookia/features/auth/data/models/register_params.dart';
 
 abstract class AuthRepo {
-  Future<AuthResponse?> register(RegisterParams params) async {
+  static Future<AuthResponse?> register(RegisterParams params) async {
     try {
       var response = await DioProvider.post(
         endPoint: Apis.register,
@@ -26,7 +26,7 @@ abstract class AuthRepo {
     }
   }
 
-Future<AuthResponse?> login(RegisterParams params) async {
+  static Future<AuthResponse?> login(RegisterParams params) async {
     try {
       var response = await DioProvider.post(
         endPoint: Apis.login,
@@ -45,7 +45,4 @@ Future<AuthResponse?> login(RegisterParams params) async {
       return null;
     }
   }
-
 }
-
-

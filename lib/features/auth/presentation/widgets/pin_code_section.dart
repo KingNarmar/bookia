@@ -4,11 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 
 class PinCodeSection extends StatelessWidget {
-  const PinCodeSection({super.key});
-
+  const PinCodeSection({super.key, this.controller});
+  final TextEditingController? controller;
   @override
   Widget build(BuildContext context) {
     return Pinput(
+      controller: controller,
       length: 6,
       focusedPinTheme: PinTheme(
         height: 60,
