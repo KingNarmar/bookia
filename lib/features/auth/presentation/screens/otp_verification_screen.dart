@@ -3,18 +3,21 @@ import 'package:bookia/core/functions/navigations.dart';
 import 'package:bookia/core/styles/app_colors.dart';
 import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/core/widgets/main_button.dart';
+import 'package:bookia/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:bookia/features/auth/presentation/screens/create_new_password_screen.dart';
 import 'package:bookia/features/auth/presentation/widgets/auth_footer.dart';
 import 'package:bookia/features/auth/presentation/widgets/pin_code_section.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 
 class OtpVerificationScreen extends StatelessWidget {
-  const OtpVerificationScreen({super.key, this.pinController});
-  final TextEditingController? pinController;
+  const OtpVerificationScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<AuthCubit>();
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -36,12 +39,20 @@ class OtpVerificationScreen extends StatelessWidget {
               style: TextStyles.w400s16.copyWith(color: AppColors.grayColor),
             ),
             Gap(35),
-            PinCodeSection(controller: pinController),
+            PinCodeSection(controller: cubit.otpController),
             Gap(35),
             MainButton(
               text: "Verify",
               onPressed: () {
-                pushTo(CreateNewPasswordScreen(), context);
+                if (cubit.otpController.text.trim().length == 6) {
+                  pushTo(
+                    BlocProvider.value(
+                      value: cubit,
+                      child: CreateNewPasswordScreen(),
+                    ),
+                    context,
+                  );
+                }
               },
             ),
           ],

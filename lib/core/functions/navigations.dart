@@ -14,3 +14,11 @@ void pushTo(Widget nextPage, BuildContext context) {
 void pop(BuildContext context) {
   Navigator.pop(context);
 }
+
+void pushAndClearStack(Widget nextPage, BuildContext context) {
+  Navigator.pushAndRemoveUntil(
+    context,
+    MaterialPageRoute(builder: (context) => nextPage),
+    (route) => false,
+  );
+}

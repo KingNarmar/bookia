@@ -37,7 +37,13 @@ class ForgetPasswordScreen extends StatelessWidget {
               showLoadingDialog(context);
             } else if (state is AuthSuccessState) {
               pop(context);
-              pushTo(OtpVerificationScreen(), context);
+              pushTo(
+                BlocProvider.value(
+                  value: context.read<AuthCubit>(),
+                  child: OtpVerificationScreen(),
+                ),
+                context,
+              );
             } else if (state is AuthErrorState) {
               pop(context);
               showErrorDialog(context, state.message);

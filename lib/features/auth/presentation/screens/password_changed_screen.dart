@@ -37,7 +37,7 @@ class PasswordChangedScreen extends StatelessWidget {
               MainButton(
                 text: "Back to Login",
                 onPressed: () {
-                  pushReplacment(LoginScreen(), context);
+                  pushAndClearStack(LoginScreen(), context);
                 },
               ),
             ],

@@ -1,5 +1,6 @@
 import 'package:bookia/features/auth/data/models/forget_password_params.dart';
 import 'package:bookia/features/auth/data/models/register_params.dart';
+import 'package:bookia/features/auth/data/models/reset_password_params.dart';
 import 'package:bookia/features/auth/data/repo/auth_repo.dart';
 import 'package:bookia/features/auth/presentation/cubit/auth_state.dart';
 import 'package:flutter/material.dart';
@@ -58,6 +59,28 @@ class AuthCubit extends Cubit<AuthState> {
         emit(AuthSuccessState());
       } else {
         emit(AuthErrorState(message: "Wrong Email"));
+      }
+    } catch (e) {
+      emit(AuthErrorState(message: e.toString()));
+    }
+  }
+
+  Future<void> resetPassword() async {
+    emit(AuthLoadingState());
+
+    try {
+      final params = ResetPasswordParams(
+        verifyCode: otpController.text,
+        newPassword: passwordController.text,
+        confirmPassword: confirmController.text,
+      );
+
+      final response = await AuthRepo.resetPassword(params);
+
+      if (response != null) {
+        emit(AuthSuccessState());
+      } else {
+        emit(AuthErrorState(message: "Reset password failed"));
       }
     } catch (e) {
       emit(AuthErrorState(message: e.toString()));
