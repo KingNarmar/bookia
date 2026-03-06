@@ -4,4 +4,6 @@ abstract class Apis {
   //auth
   static const String register = "register";
   static const String login = "login";
+  static const String forgetPassword = "forget-password";
+  static const String resetPassword = "reset-password";
 }
