@@ -1,12 +1,12 @@
-import 'package:bookia/core/constants/app_images.dart';
 import 'package:bookia/core/styles/app_colors.dart';
 import 'package:bookia/core/styles/text_styles.dart';
+import 'package:bookia/features/home/data/models/product_model/product.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class BookCard extends StatelessWidget {
-  const BookCard({super.key});
-
+  final Product product;
+  const BookCard({super.key, required this.product});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,19 +23,19 @@ class BookCard extends StatelessWidget {
           Expanded(
             child: ClipRRect(
               borderRadius: BorderRadiusGeometry.circular(10),
-              child: Image.asset(
-                AppImages.welcome,
+              child: Image.network(
+                product.image ?? "",
                 width: double.infinity,
                 fit: BoxFit.cover,
               ),
             ),
           ),
-          Text("The Republic", style: TextStyles.w400s18),
+          Text(product.name ?? "", style: TextStyles.w400s18),
           Gap(24),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("₹285", style: TextStyles.w400s16),
+              Text("${product.price}", style: TextStyles.w400s16),
               Container(
                 height: 28,
                 width: 73,

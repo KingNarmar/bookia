@@ -1,6 +1,6 @@
 import 'package:bookia/core/styles/app_colors.dart';
-import 'package:bookia/features/home/presentation/cubit/home_cubit.dart';
-import 'package:bookia/features/home/presentation/cubit/home_state.dart';
+import 'package:bookia/features/home/presentation/cubits/home_cubit/home_cubit.dart';
+import 'package:bookia/features/home/presentation/cubits/home_cubit/home_state.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

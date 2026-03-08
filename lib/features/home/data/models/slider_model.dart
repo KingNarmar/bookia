@@ -4,6 +4,6 @@ class SliderModel {
   const SliderModel({required this.image});
 
   factory SliderModel.fromJson(Map<String, dynamic> json) {
-    return SliderModel(image: json["image"]?? "");
+    return SliderModel(image: json["image"] ?? "");
   }
 }
