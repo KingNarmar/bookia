@@ -5,9 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class BookCard extends StatelessWidget {
-  const BookCard({
-    super.key,
-  });
+  const BookCard({super.key});
 
   @override
   Widget build(BuildContext context) {

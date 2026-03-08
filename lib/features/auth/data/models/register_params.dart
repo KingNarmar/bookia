@@ -11,8 +11,6 @@ class RegisterParams {
     this.passwordConfirmation,
   });
 
-  
-
   Map<String, dynamic> toJson() => {
     'name': name,
     'email': email,

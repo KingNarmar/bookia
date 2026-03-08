@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    
+
     String? token = SharedPref.getToken();
     Future.delayed(Duration(seconds: 3), () {
       if (!mounted) return;

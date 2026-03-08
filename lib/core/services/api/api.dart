@@ -6,4 +6,5 @@ abstract class Apis {
   static const String login = "login";
   static const String forgetPassword = "forget-password";
   static const String resetPassword = "reset-password";
+  static const String sliders = "sliders";
 }
