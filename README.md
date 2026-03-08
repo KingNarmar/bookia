@@ -39,99 +39,99 @@ In this task, the project was expanded beyond authentication screens to include 
 lib/
 │
 ├── app_root/
-│   └── app_root.dart
+│ └── app_root.dart
 │
 ├── core/
-│   ├── constants/
-│   │   ├── app_fonts.dart
-│   │   └── app_images.dart
-│   │
-│   ├── functions/
-│   │   └── navigations.dart
-│   │
-│   ├── services/
-│   │   ├── api/
-│   │   │   ├── api.dart
-│   │   │   └── dio_provider.dart
-│   │   │
-│   │   └── local/
-│   │       └── shared_pref.dart
-│   │
-│   ├── styles/
-│   │   ├── app_colors.dart
-│   │   └── text_styles.dart
-│   │
-│   └── widgets/
-│       ├── custom_text_form_field.dart
-│       ├── dialogs.dart
-│       ├── main_button.dart
-│       └── password_text_form_field.dart
+│ ├── constants/
+│ │ ├── app_fonts.dart
+│ │ └── app_images.dart
+│ │
+│ ├── functions/
+│ │ └── navigations.dart
+│ │
+│ ├── services/
+│ │ ├── api/
+│ │ │ ├── api.dart
+│ │ │ └── dio_provider.dart
+│ │ │
+│ │ └── local/
+│ │ └── shared_pref.dart
+│ │
+│ ├── styles/
+│ │ ├── app_colors.dart
+│ │ └── text_styles.dart
+│ │
+│ └── widgets/
+│ ├── custom_text_form_field.dart
+│ ├── dialogs.dart
+│ ├── main_button.dart
+│ └── password_text_form_field.dart
 │
 ├── features/
-│   ├── auth/
-│   │   ├── data/
-│   │   │   ├── models/
-│   │   │   │   ├── forget_password_params.dart
-│   │   │   │   ├── register_params.dart
-│   │   │   │   └── reset_password_params.dart
-│   │   │   │
-│   │   │   └── repo/
-│   │   │       └── auth_repo.dart
-│   │   │
-│   │   └── presentation/
-│   │       ├── cubit/
-│   │       │   ├── auth_cubit.dart
-│   │       │   └── auth_state.dart
-│   │       │
-│   │       ├── functions/
-│   │       │   └── app_validators.dart
-│   │       │
-│   │       ├── screens/
-│   │       │   ├── create_new_password_screen.dart
-│   │       │   ├── forget_password.dart
-│   │       │   ├── login_screen.dart
-│   │       │   ├── otp_verification_screen.dart
-│   │       │   ├── password_changed_screen.dart
-│   │       │   └── register_screen.dart
-│   │       │
-│   │       └── widgets/
-│   │           ├── auth_footer.dart
-│   │           ├── pin_code_section.dart
-│   │           └── social_auth_button.dart
+│ ├── auth/
+│ │ ├── data/
+│ │ │ ├── models/
+│ │ │ │ ├── forget_password_params.dart
+│ │ │ │ ├── register_params.dart
+│ │ │ │ └── reset_password_params.dart
+│ │ │ │
+│ │ │ └── repo/
+│ │ │ └── auth_repo.dart
+│ │ │
+│ │ └── presentation/
+│ │ ├── cubit/
+│ │ │ ├── auth_cubit.dart
+│ │ │ └── auth_state.dart
+│ │ │
+│ │ ├── functions/
+│ │ │ └── app_validators.dart
+│ │ │
+│ │ ├── screens/
+│ │ │ ├── create_new_password_screen.dart
+│ │ │ ├── forget_password.dart
+│ │ │ ├── login_screen.dart
+│ │ │ ├── otp_verification_screen.dart
+│ │ │ ├── password_changed_screen.dart
+│ │ │ └── register_screen.dart
+│ │ │
+│ │ └── widgets/
+│ │ ├── auth_footer.dart
+│ │ ├── pin_code_section.dart
+│ │ └── social_auth_button.dart
 │
 ├── home/
-│   ├── data/
-│   │   ├── models/
-│   │   │   ├── product_model/
-│   │   │   │   ├── data.dart
-│   │   │   │   ├── product.dart
-│   │   │   │   └── product_model.dart
-│   │   │   │
-│   │   │   └── slider_model.dart
-│   │   │
-│   │   └── repo/
-│   │       └── home_repo.dart
-│   │
-│   └── presentation/
-│       ├── cubits/
-│       │   └── home_cubit/
-│       │       ├── home_cubit.dart
-│       │       └── home_state.dart
-│       │
-│       ├── screens/
-│       │   └── home_screen.dart
-│       │
-│       └── widgets/
-│           ├── book_card.dart
-│           └── home_slider.dart
+│ ├── data/
+│ │ ├── models/
+│ │ │ ├── product_model/
+│ │ │ │ ├── data.dart
+│ │ │ │ ├── product.dart
+│ │ │ │ └── product_model.dart
+│ │ │ │
+│ │ │ └── slider_model.dart
+│ │ │
+│ │ └── repo/
+│ │ └── home_repo.dart
+│ │
+│ └── presentation/
+│ ├── cubits/
+│ │ └── home_cubit/
+│ │ ├── home_cubit.dart
+│ │ └── home_state.dart
+│ │
+│ ├── screens/
+│ │ └── home_screen.dart
+│ │
+│ └── widgets/
+│ ├── book_card.dart
+│ └── home_slider.dart
 │
 ├── main/
-│   └── main_app_screen.dart
+│ └── main_app_screen.dart
 │
 ├── welcome/
-│   └── screens/
-│       ├── splash_screen.dart
-│       └── welcome_screen.dart
+│ └── screens/
+│ ├── splash_screen.dart
+│ └── welcome_screen.dart
 │
 └── main.dart
 
