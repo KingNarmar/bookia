@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bookia/core/constants/app_images.dart';
 import 'package:bookia/core/functions/navigations.dart';
 import 'package:bookia/core/styles/text_styles.dart';
@@ -11,6 +9,7 @@ import 'package:bookia/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:bookia/features/auth/presentation/cubit/auth_state.dart';
 import 'package:bookia/features/auth/presentation/functions/app_validators.dart';
 import 'package:bookia/features/auth/presentation/widgets/auth_footer.dart';
+import 'package:bookia/features/main/main_app_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -35,7 +34,7 @@ class RegisterScreen extends StatelessWidget {
         body: BlocConsumer<AuthCubit, AuthState>(
           listener: (context, state) {
             if (state is AuthSuccessState) {
-              log("Success");
+              pushAndClearStack(MainAppScreen(), context);
             } else if (state is AuthErrorState) {
               pop(context);
               showErrorDialog(context, state.message);

@@ -1,6 +1,8 @@
 import 'package:bookia/core/constants/app_images.dart';
 import 'package:bookia/core/functions/navigations.dart';
+import 'package:bookia/core/services/local/shared_pref.dart';
 import 'package:bookia/core/styles/text_styles.dart';
+import 'package:bookia/features/main/main_app_screen.dart';
 import 'package:bookia/features/welcome/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -17,9 +19,15 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    
+    String? token = SharedPref.getToken();
     Future.delayed(Duration(seconds: 3), () {
       if (!mounted) return;
-      pushReplacment(WelcomeScreen(), context);
+      if (token != null && token.isNotEmpty) {
+        pushReplacment(MainAppScreen(), context);
+      } else {
+        pushReplacment(WelcomeScreen(), context);
+      }
     });
   }
 

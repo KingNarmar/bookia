@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bookia/core/constants/app_images.dart';
 import 'package:bookia/core/functions/navigations.dart';
 import 'package:bookia/core/styles/app_colors.dart';
@@ -15,6 +13,7 @@ import 'package:bookia/features/auth/presentation/screens/forget_password.dart';
 import 'package:bookia/features/auth/presentation/screens/register_screen.dart';
 import 'package:bookia/features/auth/presentation/widgets/auth_footer.dart';
 import 'package:bookia/features/auth/presentation/widgets/social_auth_button.dart';
+import 'package:bookia/features/main/main_app_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -39,7 +38,7 @@ class LoginScreen extends StatelessWidget {
         body: BlocConsumer<AuthCubit, AuthState>(
           listener: (context, state) {
             if (state is AuthSuccessState) {
-              log("Success");
+              pushAndClearStack(MainAppScreen(), context);
             } else if (state is AuthErrorState) {
               pop(context);
               showErrorDialog(context, state.message);
@@ -76,17 +75,15 @@ class LoginScreen extends StatelessWidget {
                       ),
                       Gap(15),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          pushTo(ForgetPasswordScreen(), context);
+                        },
                         child: Align(
                           alignment: AlignmentGeometry.centerRight,
-                          child: GestureDetector(
-                            onTap: () =>
-                                pushTo(ForgetPasswordScreen(), context),
-                            child: Text(
-                              "Forgot Password?",
-                              style: TextStyles.w400s14.copyWith(
-                                color: AppColors.darkGray,
-                              ),
+                          child: Text(
+                            "Forgot Password?",
+                            style: TextStyles.w400s14.copyWith(
+                              color: AppColors.darkGray,
                             ),
                           ),
                         ),
@@ -128,6 +125,7 @@ class LoginScreen extends StatelessWidget {
                       SocialAuthButton(
                         iconPath: AppImages.appleIconSvg,
                         text: "Sign in with Apple",
+                        onTap: () {},
                       ),
                     ],
                   ),
