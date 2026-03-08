@@ -1,25 +1,41 @@
 # 📚 Bookia
 
-A Flutter authentication flow implementation based on the provided Figma design.  
-Developed as part of **Session 16 Task** in the Flutter course.
+A Flutter bookstore application built from the provided Figma design.  
+Developed as part of **Session 17 Task** in the Flutter course.
 
-This project focuses on:
+This version extends the previous authentication flow by adding the **Home module** with real backend integration for:
 
-- Clean folder structure (**Feature-based architecture**)
-- Reusable UI components
-- Form validation
-- Custom widgets
+- Home slider banners
+- Best seller products
 - API integration using **Dio**
 - State management using **Cubit**
-- OTP verification flow
-- Reset password flow connected to backend
+- Clean feature-based architecture
+- Reusable UI components
 - Consistent design system
+
+---
+
+# ✨ What’s New in Session 17
+
+In this task, the project was expanded beyond authentication screens to include the **Home Screen** connected to backend APIs.
+
+## Added in this session:
+
+- Home screen UI implementation
+- Dynamic slider connected to backend
+- Best seller products grid connected to backend
+- `HomeCubit` for home data state management
+- `HomeRepo` for handling home API requests
+- `SliderModel` for slider parsing
+- Product model integration for best seller books
+- Reusable `BookCard` widget connected to API data
+- Reusable `HomeSlider` widget using `CarouselSlider`
+- Smooth page indicator for slider state
 
 ---
 
 # 🏗 Project Structure
 
-```text
 lib/
 │
 ├── app_root/
@@ -27,31 +43,97 @@ lib/
 │
 ├── core/
 │   ├── constants/
+│   │   ├── app_fonts.dart
+│   │   └── app_images.dart
+│   │
 │   ├── functions/
+│   │   └── navigations.dart
+│   │
 │   ├── services/
+│   │   ├── api/
+│   │   │   ├── api.dart
+│   │   │   └── dio_provider.dart
+│   │   │
+│   │   └── local/
+│   │       └── shared_pref.dart
+│   │
 │   ├── styles/
+│   │   ├── app_colors.dart
+│   │   └── text_styles.dart
+│   │
 │   └── widgets/
+│       ├── custom_text_form_field.dart
+│       ├── dialogs.dart
+│       ├── main_button.dart
+│       └── password_text_form_field.dart
 │
 ├── features/
 │   ├── auth/
 │   │   ├── data/
 │   │   │   ├── models/
+│   │   │   │   ├── forget_password_params.dart
+│   │   │   │   ├── register_params.dart
+│   │   │   │   └── reset_password_params.dart
+│   │   │   │
 │   │   │   └── repo/
+│   │   │       └── auth_repo.dart
 │   │   │
-│   │   ├── presentation/
-│   │   │   ├── cubit/
-│   │   │   ├── functions/
-│   │   │   ├── screens/
-│   │   │   └── widgets/
+│   │   └── presentation/
+│   │       ├── cubit/
+│   │       │   ├── auth_cubit.dart
+│   │       │   └── auth_state.dart
+│   │       │
+│   │       ├── functions/
+│   │       │   └── app_validators.dart
+│   │       │
+│   │       ├── screens/
+│   │       │   ├── create_new_password_screen.dart
+│   │       │   ├── forget_password.dart
+│   │       │   ├── login_screen.dart
+│   │       │   ├── otp_verification_screen.dart
+│   │       │   ├── password_changed_screen.dart
+│   │       │   └── register_screen.dart
+│   │       │
+│   │       └── widgets/
+│   │           ├── auth_footer.dart
+│   │           ├── pin_code_section.dart
+│   │           └── social_auth_button.dart
+│
+├── home/
+│   ├── data/
+│   │   ├── models/
+│   │   │   ├── product_model/
+│   │   │   │   ├── data.dart
+│   │   │   │   ├── product.dart
+│   │   │   │   └── product_model.dart
+│   │   │   │
+│   │   │   └── slider_model.dart
+│   │   │
+│   │   └── repo/
+│   │       └── home_repo.dart
 │   │
-│   ├── home/
-│   │   └── screens/
-│   │
-│   └── welcome/
-│       └── screens/
+│   └── presentation/
+│       ├── cubits/
+│       │   └── home_cubit/
+│       │       ├── home_cubit.dart
+│       │       └── home_state.dart
+│       │
+│       ├── screens/
+│       │   └── home_screen.dart
+│       │
+│       └── widgets/
+│           ├── book_card.dart
+│           └── home_slider.dart
+│
+├── main/
+│   └── main_app_screen.dart
+│
+├── welcome/
+│   └── screens/
+│       ├── splash_screen.dart
+│       └── welcome_screen.dart
 │
 └── main.dart
-```
 
 ---
 
@@ -73,7 +155,7 @@ lib/
 
 <img src="screen_shots/Login_screen.png" width="300"/>
 
-**Features:**
+Features:
 
 - Email & Password fields
 - Password visibility toggle
@@ -89,7 +171,7 @@ lib/
 
 <img src="screen_shots/register_screen.png" width="300"/>
 
-**Features:**
+Features:
 
 - Username validation
 - Email validation
@@ -105,11 +187,11 @@ lib/
 
 <img src="screen_shots/forget_password_screen.png" width="300"/>
 
-**Features:**
+Features:
 
 - Email input
 - Form validation
-- Connected to **Forget Password API**
+- Connected to Forget Password API
 - Loading and error handling
 - Navigation to OTP screen after successful request
 
@@ -119,7 +201,7 @@ lib/
 
 <img src="screen_shots/otp_verification_screen.png" width="300"/>
 
-**Features:**
+Features:
 
 - PIN code input (OTP)
 - Verification button
@@ -133,12 +215,12 @@ lib/
 
 <img src="screen_shots/create_new_password_screen.png" width="300"/>
 
-**Features:**
+Features:
 
 - New password field
 - Confirm password field
 - Validation
-- Connected to **Reset Password API**
+- Connected to Reset Password API
 - Uses OTP + New Password + Confirm Password
 - Loading, success, and error state handling with Cubit
 
@@ -148,7 +230,7 @@ lib/
 
 <img src="screen_shots/password_cahnged_screen.png" width="300"/>
 
-**Features:**
+Features:
 
 - Success state UI
 - Back to Login navigation
@@ -156,32 +238,56 @@ lib/
 
 ---
 
+## 🟢 Home Screen
+
+<img src="screen_shots/home_screen.png" width="300"/>
+
+Features:
+
+- Dynamic promotional slider from backend
+- Best seller books section
+- Grid layout for product cards
+- API integration using Dio
+- Home state handling using Cubit
+- Loading and error state support
+- Reusable HomeSlider and BookCard widgets
+- Smooth page indicator for slider banners
+
+---
+
 # 🔌 API Integration
 
-The authentication flow is connected to backend endpoints using **Dio**.
+The app is connected to backend endpoints using Dio.
 
-## Implemented Endpoints
+Implemented Authentication Endpoints:
 
-- `POST /login`
-- `POST /register`
-- `POST /forget-password`
-- `POST /reset-password`
+- POST /login
+- POST /register
+- POST /forget-password
+- POST /reset-password
 
-## API Layer Includes
+Implemented Home Endpoints:
 
-- `DioProvider`
+- GET /sliders
+- GET /products-bestseller
+
+API Layer Includes:
+
+- DioProvider
 - API endpoint constants
-- Repository pattern in `AuthRepo`
+- Repository pattern
+  - AuthRepo
+  - HomeRepo
 - Request models for API parameters
-- Response model parsing
+- Response model parsing for auth and home data
 
 ---
 
 # 🧠 State Management
 
-This project uses **Flutter Bloc / Cubit** for handling authentication states.
+This project uses Flutter Bloc / Cubit for handling app states.
 
-## AuthCubit Responsibilities
+AuthCubit Responsibilities:
 
 - Login handling
 - Register handling
@@ -191,37 +297,34 @@ This project uses **Flutter Bloc / Cubit** for handling authentication states.
 - Form validation
 - Handling loading / success / error states
 
+HomeCubit Responsibilities:
+
+- Fetching slider data from backend
+- Fetching best seller product data
+- Combining home screen requests in one flow
+- Emitting loading / success / error states for the Home module
+
 ---
 
 # 🧩 Reusable Components
 
-- `MainButton`
-- `CustomTextFormField`
-- `PasswordTextFormField`
-- `SocialAuthButton`
-- `AuthFooter`
-- `PinCodeSection`
+Core Reusable Widgets:
 
----
+- MainButton
+- CustomTextFormField
+- PasswordTextFormField
+- Dialogs
 
-# ✅ Improvements Added in This Task
+Auth Reusable Widgets:
 
-Compared to the initial UI-only implementation, the following improvements were introduced:
+- SocialAuthButton
+- AuthFooter
+- PinCodeSection
 
-- Connected authentication screens to real backend APIs
-- Added Dio-based API service layer
-- Implemented repository pattern for authentication requests
-- Created request models such as:
-  - `ForgetPasswordParams`
-  - `ResetPasswordParams`
-- Added Cubit methods for:
-  - `login()`
-  - `register()`
-  - `forgetPassword()`
-  - `resetPassword()`
-- Passed data across reset password flow screens using the same Cubit instance
-- Implemented loading dialogs and error dialogs
-- Completed the full password reset flow from email submission to success confirmation screen
+Home Reusable Widgets:
+
+- HomeSlider
+- BookCard
 
 ---
 
@@ -232,17 +335,35 @@ Compared to the initial UI-only implementation, the following improvements were 
 - Flutter Bloc / Cubit
 - Dio
 - SVG Support
+- Carousel Slider
+- Smooth Page Indicator
 - Reusable Custom Widgets
 
 ---
 
-# 🚀 Notes
+# 🚀 Learning Goals Practiced
 
 This project was built to practice:
 
 - Clean UI implementation from Figma
 - Feature-based project structure
 - Flutter form validation
-- API integration
+- API integration with Dio
 - State management with Cubit
-- Building a complete authentication flow connected to backend services
+- Repository pattern
+- JSON parsing into Dart models
+- Building a complete authentication flow
+- Building a home screen connected to backend services
+
+---
+
+# 📌 Notes
+
+This project started as a UI implementation task, then evolved into a more complete app structure by adding:
+
+- real backend integration
+- Cubit-based state management
+- reusable architecture
+- dynamic home content
+
+Session 17 mainly focused on moving from static UI into dynamic home data rendering using backend APIs.
