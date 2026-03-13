@@ -9,29 +9,129 @@
 A modern **Flutter bookstore application** built as part of the Flutter course sessions  
 (Session 15 → Session 19).
 
-The project demonstrates how to build a **real production-style Flutter architecture** including:
+The project demonstrates how to build a **production-style Flutter architecture** including:
 
 - Authentication Flow
 - API Integration
 - State Management
-- Feature-based Architecture
+- Feature-Based Architecture
 - Dynamic Home Screen
 - Shimmer Loading UI
 - Reusable Widgets
 
 ---
 
-# 📱 App Preview
+# 📱 App Screens Preview
 
-| Splash | Login | Home |
-|------|------|------|
-| <img src="screen_shots/splash_screen.png" width="200"/> | <img src="screen_shots/login_screen.png" width="200"/> | <img src="screen_shots/home_screen.png" width="200"/> |
+## Splash Screen
+
+<img src="screen_shots/splash_screen.png" width="300"/>
+
+---
+
+## Welcome Screen
+
+<img src="screen_shots/welcome_screen.png" width="300"/>
+
+---
+
+## Login Screen
+
+<img src="screen_shots/Login_screen.png" width="300"/>
+
+Features:
+
+- Email & Password fields
+- Password visibility toggle
+- Form validation
+- Social authentication buttons
+- Connected to backend login endpoint
+- State handling using Cubit
+
+---
+
+## Register Screen
+
+<img src="screen_shots/register_screen.png" width="300"/>
+
+Features:
+
+- Username validation
+- Email validation
+- Password confirmation
+- Custom reusable password field
+- Connected to backend register API
+
+---
+
+## Forgot Password Screen
+
+<img src="screen_shots/forget_password_screen.png" width="300"/>
+
+Features:
+
+- Email validation
+- Connected to Forget Password API
+- Loading and error handling
+- Navigation to OTP screen after successful request
+
+---
+
+## OTP Verification Screen
+
+<img src="screen_shots/otp_verification_screen.png" width="300"/>
+
+Features:
+
+- PIN code input
+- OTP verification
+- Resend code option
+- Navigation to Create New Password screen
+
+---
+
+## Create New Password Screen
+
+<img src="screen_shots/create_new_password_screen.png" width="300"/>
+
+Features:
+
+- New password input
+- Confirm password input
+- Validation handling
+- Connected to Reset Password API
+
+---
+
+## Password Changed Screen
+
+<img src="screen_shots/password_changed_screen.png" width="300"/>
+
+Features:
+
+- Success state UI
+- Navigation back to Login screen
+
+---
+
+## Home Screen
+
+<img src="screen_shots/home_screen.png" width="300"/>
+
+Features:
+
+- Dynamic promotional slider
+- Best seller books section
+- API integration using Dio
+- State management using Cubit
+- Reusable widgets
+- Loading shimmer placeholders
 
 ---
 
 # 🏗 Architecture
 
-The project follows a **Feature-Based Architecture**.
+The project follows **Feature-Based Architecture**.
 
 ```
 lib
@@ -54,52 +154,20 @@ lib
  └── main.dart
 ```
 
-Benefits of this architecture:
+Benefits:
 
-- Highly scalable
-- Easy to maintain
+- Clean structure
+- Scalable architecture
 - Feature isolation
-- Clean separation of concerns
+- Easy maintenance
 
 ---
 
-# ⚡ Key Features
+# ⚡ Shimmer Loading System
 
-## 🔐 Authentication System
+To improve user experience while waiting for API responses, a **Shimmer loading system** was implemented.
 
-Includes a complete authentication flow:
-
-- Login
-- Register
-- Forgot Password
-- OTP Verification
-- Reset Password
-
-All connected to backend APIs using **Dio**.
-
----
-
-## 🏠 Home Screen
-
-The Home screen fetches dynamic content from backend APIs including:
-
-- Promotional slider banners
-- Best seller books
-
-Features:
-
-- Grid layout
-- Dynamic data
-- Reusable widgets
-- Smooth slider indicator
-
----
-
-## ⚡ Shimmer Loading UI
-
-Skeleton loading was implemented to improve UX while waiting for API responses.
-
-Example shimmer widgets:
+Loading widgets include:
 
 ```
 SliderShimmer
@@ -109,13 +177,13 @@ TextShimmer
 ListShimmer
 ```
 
-This provides a **modern loading experience similar to production apps**.
+These components display skeleton UI placeholders until the real data is loaded.
 
 ---
 
 # 🔌 API Integration
 
-The app communicates with backend APIs using **Dio**.
+The application communicates with backend APIs using **Dio**.
 
 ### Authentication APIs
 
@@ -133,44 +201,57 @@ GET /sliders
 GET /products-bestseller
 ```
 
+Repositories used:
+
+```
+AuthRepo
+HomeRepo
+```
+
 ---
 
 # 🧠 State Management
 
-The application uses **Flutter Bloc / Cubit**.
+The project uses **Flutter Bloc / Cubit**.
 
 ### AuthCubit
 
-Responsible for:
+Handles:
 
 - Login
 - Register
 - Password reset
 - Form validation
-- Error handling
-
----
+- Error states
 
 ### HomeCubit
 
-Responsible for:
+Handles:
 
-- Fetching sliders
-- Fetching best sellers
-- Handling loading states
-- Handling errors
+- Fetch slider data
+- Fetch best seller products
+- Loading states
+- Error states
 
 ---
 
 # 🧩 Reusable Widgets
 
-Core reusable components include:
+Core widgets:
 
 ```
 MainButton
 CustomTextFormField
 PasswordTextFormField
 Dialogs
+```
+
+Auth widgets:
+
+```
+SocialAuthButton
+AuthFooter
+PinCodeSection
 ```
 
 Home widgets:
@@ -206,30 +287,14 @@ TextShimmer
 
 # 🎯 Learning Goals
 
-This project was built to practice:
+This project helped practice:
 
-- Clean UI implementation
+- Clean UI implementation from Figma
+- API integration with Dio
+- State management using Cubit
 - Feature-based architecture
-- API integration
-- State management
-- JSON parsing
-- Clean reusable widgets
-- Production-style Flutter architecture
-
----
-
-# 📌 Project Evolution
-
-The project started as a **simple UI task** and evolved into a **complete Flutter architecture** including:
-
-- backend API integration
-- state management
-- loading skeleton UI
-- modular structure
-
-Session 19 mainly focused on:
-
-- Shimmer loading UI
-- Improved API models
-- Centralized routing
-- Cleaner architecture
+- JSON parsing into Dart models
+- Building a complete authentication flow
+- Building dynamic home screens
+- Creating reusable widgets
+- Implementing shimmer loading UI
