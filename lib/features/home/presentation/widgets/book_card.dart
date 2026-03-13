@@ -11,8 +11,7 @@ class BookCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(11),
-      width: 163,
-      height: 281,
+
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: AppColors.secondaryColor,
@@ -30,12 +29,15 @@ class BookCard extends StatelessWidget {
               ),
             ),
           ),
-          Text(product.name ?? "", style: TextStyles.w400s18),
+          SizedBox(
+            height: 45,
+            child: Text(product.name ?? "", style: TextStyles.w400s18),
+          ),
           Gap(24),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("${product.price}", style: TextStyles.w400s16),
+              Text("\$ ${product.price}", style: TextStyles.w400s16),
               Container(
                 height: 28,
                 width: 73,

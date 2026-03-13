@@ -5,6 +5,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HomeSlider extends StatefulWidget {
@@ -14,20 +15,13 @@ class HomeSlider extends StatefulWidget {
   State<HomeSlider> createState() => _HomeSliderState();
 }
 
-class _HomeSliderState extends State<HomeSlider> {
-  int activeIndex = 0;
+int activeIndex = 0;
 
+class _HomeSliderState extends State<HomeSlider> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
-        if (state is HomeLoadingState) {
-          return const SizedBox(
-            height: 180,
-            child: Center(child: CircularProgressIndicator()),
-          );
-        }
-
         if (state is HomeErrorState) {
           return SizedBox(
             height: 180,
@@ -76,12 +70,12 @@ class _HomeSliderState extends State<HomeSlider> {
                   autoPlayCurve: Curves.fastOutSlowIn,
                   enlargeCenterPage: true,
                   enlargeFactor: 0.3,
+                  scrollDirection: Axis.horizontal,
                   onPageChanged: (index, reason) {
                     setState(() {
                       activeIndex = index;
                     });
                   },
-                  scrollDirection: Axis.horizontal,
                 ),
               ),
               const Gap(14),
@@ -97,7 +91,34 @@ class _HomeSliderState extends State<HomeSlider> {
           );
         }
 
-        return const SizedBox.shrink();
+        return Shimmer.fromColors(
+          baseColor: Colors.grey[300]!,
+          highlightColor: Colors.grey[100]!,
+          child: Column(
+            children: [
+              Container(
+                height: 150,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.white,
+                ),
+              ),
+              Gap(14),
+              AnimatedSmoothIndicator(
+                activeIndex: 0,
+                count: 3,
+                effect: ExpandingDotsEffect(
+                  dotHeight: 7,
+                  dotWidth: 7,
+                  activeDotColor: AppColors.primaryColor,
+                  dotColor: AppColors.borderColor,
+                  expansionFactor: 4,
+                ),
+              ),
+            ],
+          ),
+        );
       },
     );
   }

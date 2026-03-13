@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:bookia/core/constants/app_images.dart';
 import 'package:bookia/core/styles/text_styles.dart';
-import 'package:bookia/core/widgets/dialogs.dart';
+import 'package:bookia/core/widgets/shimmer/grid_shimmer.dart';
+import 'package:bookia/core/widgets/shimmer/text_shimmer.dart';
 import 'package:bookia/features/home/presentation/cubits/home_cubit/home_cubit.dart';
 import 'package:bookia/features/home/presentation/cubits/home_cubit/home_state.dart';
 import 'package:bookia/features/home/presentation/widgets/book_card.dart';
@@ -16,7 +19,11 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => HomeCubit()..getHomeData(),
+      create: (context) {
+        final cubit = HomeCubit();
+        Future.microtask(() => cubit.getHomeData());
+        return cubit;
+      },
       child: Scaffold(
         appBar: AppBar(
           title: SvgPicture.asset(AppImages.logoSvg, height: 30),
@@ -33,7 +40,7 @@ class HomeScreen extends StatelessWidget {
           child: BlocConsumer<HomeCubit, HomeState>(
             listener: (context, state) {
               if (state is HomeLoadingState) {
-                showLoadingDialog(context);
+                log("Loading home data...");
               }
 
               if (state is HomeSuccessState || state is HomeErrorState) {
@@ -45,13 +52,14 @@ class HomeScreen extends StatelessWidget {
                 return Center(child: Text(state.errorMsg));
               }
 
-              if (state is HomeSuccessState) {
-                return SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      HomeSlider(),
-                      const Gap(31),
+              return SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const HomeSlider(),
+                    const Gap(31),
+
+                    if (state is HomeSuccessState) ...[
                       Text("Best Seller", style: TextStyles.w400s24),
                       const Gap(15),
                       GridView.builder(
@@ -60,7 +68,7 @@ class HomeScreen extends StatelessWidget {
                               crossAxisCount: 2,
                               crossAxisSpacing: 11,
                               mainAxisSpacing: 11,
-                              childAspectRatio: 0.7,
+                              childAspectRatio: 0.5,
                             ),
                         itemBuilder: (context, index) {
                           return BookCard(product: state.products[index]);
@@ -69,12 +77,23 @@ class HomeScreen extends StatelessWidget {
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                       ),
-                    ],
-                  ),
-                );
-              }
-
-              return const SizedBox.shrink();
+                    ] else
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          TextShimmer(width: 100, height: 50),
+                          Gap(30),
+                          const GridShimmer(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 11,
+                            mainAxisSpacing: 11,
+                            childAspectRatio: 0.5,
+                          ),
+                        ],
+                      ),
+                  ],
+                ),
+              );
             },
           ),
         ),

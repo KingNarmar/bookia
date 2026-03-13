@@ -6,20 +6,30 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(HomeInialState());
+
   List<SliderModel> sliders = [];
   List<Product> products = [];
 
   Future<void> getHomeData() async {
     emit(HomeLoadingState());
-    final sliderRsponse = await HomeRepo.getSliders();
-    final productsResponse = await HomeRepo.getBestSellerProducts();
 
-    if (sliderRsponse != null && productsResponse != null) {
-      sliders = sliderRsponse;
-      products = productsResponse;
+    try {
+      final response = await Future.wait([
+        HomeRepo.getSliders(),
+        HomeRepo.getBestSellerProducts(),
+      ]);
+
+      sliders = response[0] as List<SliderModel>;
+      products = response[1] as List<Product>;
+
+      if (sliders.isEmpty && products.isEmpty) {
+        emit(HomeErrorState(errorMsg: "Failed to load home data"));
+        return;
+      }
+
       emit(HomeSuccessState(products: products, sliders: sliders));
-    } else {
-      emit(HomeErrorState(errorMsg: "Faild To load Home Data"));
+    } catch (e) {
+      emit(HomeErrorState(errorMsg: "Failed to load home data"));
     }
   }
 }

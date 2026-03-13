@@ -12,17 +12,13 @@ class HomeRepo {
 
       if (response.statusCode == 200) {
         final List slidersJson = response.data["data"]["sliders"];
-        final List<SliderModel> sliders = slidersJson
-            .map((e) => SliderModel.fromJson(e))
-            .toList();
-
-        return sliders;
+        return slidersJson.map((e) => SliderModel.fromJson(e)).toList();
       } else {
-        return null;
+        return [];
       }
     } on Exception catch (e) {
       log(e.toString());
-      return null;
+      return [];
     }
   }
 
@@ -32,13 +28,9 @@ class HomeRepo {
 
       if (response.statusCode == 200) {
         final List bestSellerJson = response.data["data"]["products"];
-        final List<Product> bestSellerBooks = bestSellerJson
-            .map((e) => Product.fromJson(e))
-            .toList();
-
-        return bestSellerBooks;
+        return bestSellerJson.map((e) => Product.fromJson(e)).toList();
       } else {
-        return null;
+        return [];
       }
     } on Exception catch (e) {
       log(e.toString());
