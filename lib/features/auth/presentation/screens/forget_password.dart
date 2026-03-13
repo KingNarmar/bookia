@@ -1,5 +1,6 @@
 import 'package:bookia/core/constants/app_images.dart';
 import 'package:bookia/core/functions/navigations.dart';
+import 'package:bookia/core/routes/routes.dart';
 import 'package:bookia/core/styles/app_colors.dart';
 import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/core/widgets/custom_text_form_field.dart';
@@ -8,7 +9,6 @@ import 'package:bookia/core/widgets/main_button.dart';
 import 'package:bookia/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:bookia/features/auth/presentation/cubit/auth_state.dart';
 import 'package:bookia/features/auth/presentation/functions/app_validators.dart';
-import 'package:bookia/features/auth/presentation/screens/otp_verification_screen.dart';
 import 'package:bookia/features/auth/presentation/widgets/auth_footer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,11 +38,9 @@ class ForgetPasswordScreen extends StatelessWidget {
             } else if (state is AuthSuccessState) {
               pop(context);
               pushTo(
-                BlocProvider.value(
-                  value: context.read<AuthCubit>(),
-                  child: OtpVerificationScreen(),
-                ),
+                Routes.otpScreen,
                 context,
+                extra: context.read<AuthCubit>(),
               );
             } else if (state is AuthErrorState) {
               pop(context);

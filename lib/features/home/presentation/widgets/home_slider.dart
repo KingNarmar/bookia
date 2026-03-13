@@ -1,11 +1,11 @@
 import 'package:bookia/core/styles/app_colors.dart';
+import 'package:bookia/core/widgets/shimmer/slider_shimmer.dart';
 import 'package:bookia/features/home/presentation/cubits/home_cubit/home_cubit.dart';
 import 'package:bookia/features/home/presentation/cubits/home_cubit/home_state.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HomeSlider extends StatefulWidget {
@@ -91,34 +91,7 @@ class _HomeSliderState extends State<HomeSlider> {
           );
         }
 
-        return Shimmer.fromColors(
-          baseColor: Colors.grey[300]!,
-          highlightColor: Colors.grey[100]!,
-          child: Column(
-            children: [
-              Container(
-                height: 150,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.white,
-                ),
-              ),
-              Gap(14),
-              AnimatedSmoothIndicator(
-                activeIndex: 0,
-                count: 3,
-                effect: ExpandingDotsEffect(
-                  dotHeight: 7,
-                  dotWidth: 7,
-                  activeDotColor: AppColors.primaryColor,
-                  dotColor: AppColors.borderColor,
-                  expansionFactor: 4,
-                ),
-              ),
-            ],
-          ),
-        );
+        return SliderShimmer();
       },
     );
   }

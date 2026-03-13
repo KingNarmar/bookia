@@ -1,5 +1,6 @@
 import 'package:bookia/core/constants/app_images.dart';
 import 'package:bookia/core/functions/navigations.dart';
+import 'package:bookia/core/routes/routes.dart';
 import 'package:bookia/core/styles/app_colors.dart';
 import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/core/widgets/dialogs.dart';
@@ -8,7 +9,6 @@ import 'package:bookia/core/widgets/password_text_form_field.dart';
 import 'package:bookia/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:bookia/features/auth/presentation/cubit/auth_state.dart';
 import 'package:bookia/features/auth/presentation/functions/app_validators.dart';
-import 'package:bookia/features/auth/presentation/screens/password_changed_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -25,16 +25,8 @@ class CreateNewPasswordScreen extends StatelessWidget {
         if (state is AuthLoadingState) {
           showLoadingDialog(context);
         } else if (state is AuthSuccessState) {
-          pop(context);
-          pushReplacment(
-            BlocProvider.value(
-              value: cubit,
-              child: const PasswordChangedScreen(),
-            ),
-            context,
-          );
+          pushReplacment(Routes.passwordChanged, context, extra: cubit);
         } else if (state is AuthErrorState) {
-          pop(context);
           showErrorDialog(context, state.message);
         }
       },

@@ -1,10 +1,10 @@
 import 'package:bookia/core/constants/app_images.dart';
 import 'package:bookia/core/functions/navigations.dart';
+import 'package:bookia/core/routes/routes.dart';
 import 'package:bookia/core/styles/app_colors.dart';
 import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/core/widgets/main_button.dart';
 import 'package:bookia/features/auth/presentation/cubit/auth_cubit.dart';
-import 'package:bookia/features/auth/presentation/screens/create_new_password_screen.dart';
 import 'package:bookia/features/auth/presentation/widgets/auth_footer.dart';
 import 'package:bookia/features/auth/presentation/widgets/pin_code_section.dart';
 import 'package:flutter/material.dart';
@@ -46,11 +46,9 @@ class OtpVerificationScreen extends StatelessWidget {
               onPressed: () {
                 if (cubit.otpController.text.trim().length == 6) {
                   pushTo(
-                    BlocProvider.value(
-                      value: cubit,
-                      child: CreateNewPasswordScreen(),
-                    ),
+                    Routes.createNewPassword,
                     context,
+                    extra: cubit,
                   );
                 }
               },

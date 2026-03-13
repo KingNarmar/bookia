@@ -1,24 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
-void pushReplacment(Widget nextPage, BuildContext context) {
-  Navigator.pushReplacement(
-    context,
-    MaterialPageRoute(builder: (context) => nextPage),
-  );
+void pushReplacment(String route, BuildContext context, {Object? extra}) {
+  GoRouter.of(context).pushReplacement(route, extra: extra);
 }
 
-void pushTo(Widget nextPage, BuildContext context) {
-  Navigator.push(context, MaterialPageRoute(builder: (context) => nextPage));
+void pushTo(String route, BuildContext context, {Object? extra}) {
+  GoRouter.of(context).push(route, extra: extra);
 }
 
 void pop(BuildContext context) {
-  Navigator.pop(context);
+  GoRouter.of(context).pop();
 }
 
-void pushAndClearStack(Widget nextPage, BuildContext context) {
-  Navigator.pushAndRemoveUntil(
-    context,
-    MaterialPageRoute(builder: (context) => nextPage),
-    (route) => false,
-  );
+void pushAndClearStack(String route, BuildContext context, {Object? extra}) {
+  GoRouter.of(context).go(route, extra: extra);
 }
