@@ -5,6 +5,7 @@ import 'package:bookia/features/auth/presentation/screens/login_screen.dart';
 import 'package:bookia/features/auth/presentation/screens/otp_verification_screen.dart';
 import 'package:bookia/features/auth/presentation/screens/password_changed_screen.dart';
 import 'package:bookia/features/auth/presentation/screens/register_screen.dart';
+import 'package:bookia/features/book_details/presentation/screens/book_details_screen.dart';
 import 'package:bookia/features/home/presentation/screens/home_screen.dart';
 import 'package:bookia/features/main/main_app_screen.dart';
 import 'package:bookia/features/welcome/screens/splash_screen.dart';
@@ -23,6 +24,7 @@ class Routes {
   static const String passwordChanged = "/password-changed";
   static const String otpScreen = "/otpScreen";
   static const String createNewPassword = "/create-new-password";
+  static const String bookDetails = "/book-details";
 
   static var routs = GoRouter(
     routes: [
@@ -89,6 +91,11 @@ class Routes {
       GoRoute(
         path: Routes.forgetPassword,
         builder: (context, state) => const ForgetPasswordScreen(),
+      ),
+
+      GoRoute(
+        path: Routes.bookDetails,
+        builder: (context, state) => const BookDetailsScreen(),
       ),
     ],
   );
