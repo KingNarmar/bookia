@@ -13,56 +13,60 @@ class BookCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        pushTo(Routes.bookDetails, context);
+        pushTo(Routes.bookDetails, context, extra: product);
       },
-      child: Container(
-        padding: EdgeInsets.all(11),
+      child: Hero(
+        tag: product.id?.toInt() ?? 0,
 
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: AppColors.secondaryColor,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: ClipRRect(
-                borderRadius: BorderRadiusGeometry.circular(10),
-                child: Image.network(
-                  product.image ?? "",
-                  width: double.infinity,
-                  fit: BoxFit.cover,
+        child: Container(
+          padding: EdgeInsets.all(11),
+
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: AppColors.secondaryColor,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: ClipRRect(
+                  borderRadius: BorderRadiusGeometry.circular(10),
+                  child: Image.network(
+                    product.image ?? "",
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: 45,
-              child: Text(product.name ?? "", style: TextStyles.w400s18),
-            ),
-            Gap(24),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text("\$ ${product.price}", style: TextStyles.w400s16),
-                Container(
-                  height: 28,
-                  width: 73,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(4),
-                    color: AppColors.darkColor,
-                  ),
-                  child: Center(
-                    child: Text(
-                      "Buy",
-                      style: TextStyles.w400s14.copyWith(
-                        color: AppColors.bgColor,
+              SizedBox(
+                height: 45,
+                child: Text(product.name ?? "", style: TextStyles.w400s18),
+              ),
+              Gap(24),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("\$ ${product.price}", style: TextStyles.w400s16),
+                  Container(
+                    height: 28,
+                    width: 73,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4),
+                      color: AppColors.darkColor,
+                    ),
+                    child: Center(
+                      child: Text(
+                        "Buy",
+                        style: TextStyles.w400s14.copyWith(
+                          color: AppColors.bgColor,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
