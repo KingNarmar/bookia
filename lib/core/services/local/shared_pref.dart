@@ -1,12 +1,14 @@
 import 'dart:convert';
 
 import 'package:bookia/features/auth/data/models/auth_response/user.dart';
+import 'package:bookia/features/home/data/models/product_model/product.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class SharedPref {
   static late SharedPreferences pref;
   static const String kToken = "token";
   static const String kUser = "user";
+  static const String kWishListIds = "wishListIds";
 
   static Future<void> init() async {
     pref = await SharedPreferences.getInstance();
@@ -35,6 +37,16 @@ abstract class SharedPref {
     var stringToJson = jsonDecode(cachedString);
     var jsonToObject = User.fromJson(stringToJson);
     return jsonToObject;
+  }
+
+  static void cashWishListIds(List<Product> items) {
+    var ids = items.map((item) => item.id.toString()).toList();
+    cacheData(kWishListIds, ids);
+  }
+
+  static List<int> getWishListIds() {
+    final ids = pref.getStringList(kWishListIds) ?? [];
+    return ids.map((id) => int.tryParse(id) ?? 0).toList();
   }
 
   static Future<void> cacheData(String key, dynamic value) async {

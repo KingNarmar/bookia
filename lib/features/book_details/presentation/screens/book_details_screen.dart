@@ -5,6 +5,7 @@ import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/core/widgets/dialogs.dart';
 import 'package:bookia/features/book_details/presentation/cubit/book_details_cubit.dart';
 import 'package:bookia/features/book_details/presentation/cubit/book_details_state.dart';
+import 'package:bookia/features/book_details/presentation/widgets/wish_list_icon.dart';
 import 'package:bookia/features/home/data/models/product_model/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -42,12 +43,7 @@ class BookDetailsScreen extends StatelessWidget {
           ),
           automaticallyImplyLeading: false,
           actions: [
-            IconButton(
-              onPressed: () {
-                context.read<BookDetailsCubit>().addToWishList(product.id ?? 0);
-              },
-              icon: SvgPicture.asset(AppImages.bookMarkIconSvg),
-            ),
+            WishListIcon(product: product),
             const SizedBox(width: 16),
           ],
         ),
