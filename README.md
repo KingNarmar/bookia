@@ -141,6 +141,35 @@ In **Session 20**, the project was extended with new e-commerce style functional
 - State management using Cubit
 - Reusable widgets
 - Loading shimmer placeholders
+- Navigation to Book Details screen
+
+---
+
+## Wishlist Screen
+
+<img src="screen_shots/wish_list_screen.png" width="300"/>
+
+### Features:
+- Displays all wishlisted books
+- Grid layout for saved items
+- Remove item from wishlist
+- Empty state handling
+- Loading shimmer while fetching data
+- Integrated inside bottom navigation
+
+---
+
+## Book Details Screen
+
+<img src="screen_shots/details_screen.png" width="300"/>
+
+### Features:
+- Large book cover preview
+- Book title and category display
+- Detailed description section
+- Add to wishlist action
+- Hero animation from product card
+- Bottom action area with price and buy button
 
 ---
 
