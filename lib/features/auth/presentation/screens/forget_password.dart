@@ -44,7 +44,7 @@ class ForgetPasswordScreen extends StatelessWidget {
               );
             } else if (state is AuthErrorState) {
               pop(context);
-              showErrorDialog(context, state.message);
+              showMyDialog(context, state.message);
             }
           },
           builder: (context, state) {

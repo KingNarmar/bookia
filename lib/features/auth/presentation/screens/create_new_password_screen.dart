@@ -27,7 +27,7 @@ class CreateNewPasswordScreen extends StatelessWidget {
         } else if (state is AuthSuccessState) {
           pushReplacment(Routes.passwordChanged, context, extra: cubit);
         } else if (state is AuthErrorState) {
-          showErrorDialog(context, state.message);
+          showMyDialog(context, state.message);
         }
       },
       builder: (context, state) {

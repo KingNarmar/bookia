@@ -45,11 +45,7 @@ class OtpVerificationScreen extends StatelessWidget {
               text: "Verify",
               onPressed: () {
                 if (cubit.otpController.text.trim().length == 6) {
-                  pushTo(
-                    Routes.createNewPassword,
-                    context,
-                    extra: cubit,
-                  );
+                  pushTo(Routes.createNewPassword, context, extra: cubit);
                 }
               },
             ),

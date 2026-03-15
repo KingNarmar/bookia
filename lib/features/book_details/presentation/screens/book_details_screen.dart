@@ -2,8 +2,12 @@ import 'package:bookia/core/constants/app_images.dart';
 import 'package:bookia/core/functions/navigations.dart';
 import 'package:bookia/core/styles/app_colors.dart';
 import 'package:bookia/core/styles/text_styles.dart';
+import 'package:bookia/core/widgets/dialogs.dart';
+import 'package:bookia/features/book_details/presentation/cubit/book_details_cubit.dart';
+import 'package:bookia/features/book_details/presentation/cubit/book_details_state.dart';
 import 'package:bookia/features/home/data/models/product_model/product.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 
@@ -12,27 +16,44 @@ class BookDetailsScreen extends StatelessWidget {
   final Product product;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: IconButton(
-          onPressed: () {
-            pop(context);
-          },
-          icon: SvgPicture.asset(AppImages.backIconsvg),
-        ),
-        automaticallyImplyLeading: false,
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: SvgPicture.asset(AppImages.bookMarkIconSvg),
+    return BlocListener<BookDetailsCubit, BookDetailsState>(
+      listener: (context, state) {
+        if (state is BookDetailsSuccessState) {
+          pop(context);
+          showMyDialog(
+            context,
+            "Added to wish list successfully",
+            type: DialogType.success,
+          );
+        } else if (state is BookDetailsErrorState) {
+          pop(context);
+          showMyDialog(context, "Failed to add to wish list");
+        } else if (state is BookDetailsLoadingState) {
+          showLoadingDialog(context);
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: IconButton(
+            onPressed: () {
+              pop(context);
+            },
+            icon: SvgPicture.asset(AppImages.backIconsvg),
           ),
-          const SizedBox(width: 16),
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: SingleChildScrollView(
-          child: Center(
+          automaticallyImplyLeading: false,
+          actions: [
+            IconButton(
+              onPressed: () {
+                context.read<BookDetailsCubit>().addToWishList(product.id ?? 0);
+              },
+              icon: SvgPicture.asset(AppImages.bookMarkIconSvg),
+            ),
+            const SizedBox(width: 16),
+          ],
+        ),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: SingleChildScrollView(
             child: Column(
               children: [
                 Gap(30),
@@ -65,36 +86,36 @@ class BookDetailsScreen extends StatelessWidget {
             ),
           ),
         ),
-      ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text("\$ 258", style: TextStyles.w400s24),
-            GestureDetector(
-              onTap: () {
-                // Handle buy button tap
-              },
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("\$ 258", style: TextStyles.w400s24),
+              GestureDetector(
+                onTap: () {
+                  // Handle buy button tap
+                },
 
-              child: Container(
-                height: 56,
-                width: 212,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: AppColors.darkColor,
-                ),
-                child: Center(
-                  child: Text(
-                    "Buy",
-                    style: TextStyles.w400s14.copyWith(
-                      color: AppColors.bgColor,
+                child: Container(
+                  height: 56,
+                  width: 212,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: AppColors.darkColor,
+                  ),
+                  child: Center(
+                    child: Text(
+                      "Buy",
+                      style: TextStyles.w400s14.copyWith(
+                        color: AppColors.bgColor,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

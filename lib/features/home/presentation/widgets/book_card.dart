@@ -8,7 +8,14 @@ import 'package:gap/gap.dart';
 
 class BookCard extends StatelessWidget {
   final Product product;
-  const BookCard({super.key, required this.product});
+  final bool isInWishList;
+  final void Function()? onRemoveFromWishList;
+  const BookCard({
+    super.key,
+    required this.product,
+    this.isInWishList = false,
+    this.onRemoveFromWishList,
+  });
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -46,23 +53,31 @@ class BookCard extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("\$ ${product.price}", style: TextStyles.w400s16),
-                  Container(
-                    height: 28,
-                    width: 73,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4),
-                      color: AppColors.darkColor,
-                    ),
-                    child: Center(
-                      child: Text(
-                        "Buy",
-                        style: TextStyles.w400s14.copyWith(
-                          color: AppColors.bgColor,
-                        ),
-                      ),
-                    ),
+                  Text(
+                    "\$ ${product.priceAfterDiscount ?? product.price}",
+                    style: TextStyles.w400s16,
                   ),
+                  isInWishList
+                      ? IconButton(
+                          onPressed: onRemoveFromWishList,
+                          icon: Icon(Icons.delete, color: AppColors.errorColor),
+                        )
+                      : Container(
+                          height: 28,
+                          width: 73,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(4),
+                            color: AppColors.darkColor,
+                          ),
+                          child: Center(
+                            child: Text(
+                              "Buy",
+                              style: TextStyles.w400s14.copyWith(
+                                color: AppColors.bgColor,
+                              ),
+                            ),
+                          ),
+                        ),
                 ],
               ),
             ],

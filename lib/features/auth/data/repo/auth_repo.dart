@@ -19,6 +19,7 @@ abstract class AuthRepo {
       if (response.statusCode == 201) {
         var data = AuthResponse.fromJson(response.data);
         SharedPref.setToken(data.data?.token ?? "");
+
         SharedPref.setUserInfo(data.data!.user);
         return data;
       } else {

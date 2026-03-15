@@ -1,12 +1,10 @@
-
-
 import 'package:bookia/core/widgets/shimmer/book_card_shimmer.dart';
 import 'package:flutter/material.dart';
 
 class GridShimmer extends StatelessWidget {
   const GridShimmer({
     super.key,
-    this.itemCount = 6,
+    this.itemCount = 4,
     this.crossAxisCount = 2,
     this.childAspectRatio = 0.65,
     this.crossAxisSpacing = 15,

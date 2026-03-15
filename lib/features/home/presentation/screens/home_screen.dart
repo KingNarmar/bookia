@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bookia/core/constants/app_images.dart';
 import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/core/widgets/shimmer/grid_shimmer.dart';
@@ -37,23 +35,10 @@ class HomeScreen extends StatelessWidget {
         ),
         body: Padding(
           padding: const EdgeInsets.all(20),
-          child: BlocConsumer<HomeCubit, HomeState>(
-            listener: (context, state) {
-              if (state is HomeLoadingState) {
-                log("Loading home data...");
-              }
-
-              if (state is HomeSuccessState || state is HomeErrorState) {
-                // pop(context);
-              }
-            },
-            builder: (context, state) {
-              if (state is HomeErrorState) {
-                return Center(child: Text(state.errorMsg));
-              }
-
-              return SingleChildScrollView(
-                child: Column(
+          child: SingleChildScrollView(
+            child: BlocBuilder<HomeCubit, HomeState>(
+              builder: (context, state) {
+                return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const HomeSlider(),
@@ -92,9 +77,9 @@ class HomeScreen extends StatelessWidget {
                         ],
                       ),
                   ],
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
         ),
       ),

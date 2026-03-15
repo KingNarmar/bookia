@@ -3,7 +3,13 @@ import 'package:bookia/core/styles/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-void showErrorDialog(BuildContext context, String errorMeg) {
+enum DialogType { error, success }
+
+void showMyDialog(
+  BuildContext context,
+  String errorMeg, {
+  DialogType type = DialogType.error,
+}) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       behavior: SnackBarBehavior.floating,
@@ -11,7 +17,9 @@ void showErrorDialog(BuildContext context, String errorMeg) {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadiusGeometry.circular(10),
       ),
-      backgroundColor: AppColors.errorColor,
+      backgroundColor: type == DialogType.error
+          ? AppColors.errorColor
+          : AppColors.primaryColor,
       content: Text(errorMeg),
     ),
   );

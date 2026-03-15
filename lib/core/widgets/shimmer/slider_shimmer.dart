@@ -5,9 +5,7 @@ import 'package:shimmer/shimmer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class SliderShimmer extends StatelessWidget {
-  const SliderShimmer({
-    super.key,
-  });
+  const SliderShimmer({super.key});
 
   @override
   Widget build(BuildContext context) {
