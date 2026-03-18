@@ -6,18 +6,16 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 
 class CartTile extends StatelessWidget {
-  const CartTile({
-    super.key,
-  });
+  const CartTile({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(20),
-      child: IntrinsicHeight(
+    return IntrinsicHeight(
+      child: Padding(
+        padding: const EdgeInsets.only(left: 20, right: 10, top: 50),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
-    
+
           children: [
             Center(
               child: ClipRRect(
@@ -38,9 +36,7 @@ class CartTile extends StatelessWidget {
                 children: [
                   Text(
                     "The Republic",
-                    style: TextStyles.w400s18.copyWith(
-                      color: AppColors.black3,
-                    ),
+                    style: TextStyles.w400s18.copyWith(color: AppColors.black3),
                   ),
                   Gap(9),
                   Text("₹285", style: TextStyles.w400s16),
