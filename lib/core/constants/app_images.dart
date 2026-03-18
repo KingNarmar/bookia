@@ -11,4 +11,7 @@ abstract class AppImages {
   static const String successSvg = "assets/images/success.svg";
   static const String loading = "assets/images/loading.json";
   static const String searchSvg = "assets/icons/search.svg";
+  static const String addIconSvg = "assets/icons/add_icon.svg";
+  static const String minusIconSvg = "assets/icons/minus_icon.svg";
+  static const String removeIconSvg = "assets/icons/remove_icon.svg";
 }
