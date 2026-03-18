@@ -11,66 +11,63 @@ class CartTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IntrinsicHeight(
-      child: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 10, top: 50),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
 
-          children: [
-            Center(
-              child: ClipRRect(
-                borderRadius: BorderRadiusGeometry.circular(12),
-                child: Image.asset(
-                  AppImages.welcome,
-                  height: 118,
-                  width: 100,
-                  fit: BoxFit.cover,
+        children: [
+          Center(
+            child: ClipRRect(
+              borderRadius: BorderRadiusGeometry.circular(12),
+              child: Image.asset(
+                AppImages.welcome,
+                height: 118,
+                width: 100,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          Gap(20),
+          Expanded(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "The Republic",
+                  style: TextStyles.w400s18.copyWith(color: AppColors.black3),
                 ),
-              ),
-            ),
-            Gap(20),
-            Expanded(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "The Republic",
-                    style: TextStyles.w400s18.copyWith(color: AppColors.black3),
-                  ),
-                  Gap(9),
-                  Text("₹285", style: TextStyles.w400s16),
-                  Gap(32),
-                  Row(
-                    children: [
-                      IconButton(
-                        onPressed: () {},
-                        icon: SvgPicture.asset(AppImages.addIconSvg),
+                Gap(9),
+                Text("₹285", style: TextStyles.w400s16),
+                Gap(32),
+                Row(
+                  children: [
+                    IconButton(
+                      onPressed: () {},
+                      icon: SvgPicture.asset(AppImages.addIconSvg),
+                    ),
+                    Gap(15),
+                    Text(
+                      "01",
+                      style: TextStyles.w400s18.copyWith(
+                        fontFamily: "Nunito Sans",
+                        fontWeight: FontWeight.w600,
                       ),
-                      Gap(15),
-                      Text(
-                        "01",
-                        style: TextStyles.w400s18.copyWith(
-                          fontFamily: "Nunito Sans",
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      Gap(15),
-                      IconButton(
-                        onPressed: () {},
-                        icon: SvgPicture.asset(AppImages.minusIconSvg),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                    Gap(15),
+                    IconButton(
+                      onPressed: () {},
+                      icon: SvgPicture.asset(AppImages.minusIconSvg),
+                    ),
+                  ],
+                ),
+              ],
             ),
-            IconButton(
-              onPressed: () {},
-              icon: SvgPicture.asset(AppImages.removeIconSvg),
-            ),
-          ],
-        ),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: SvgPicture.asset(AppImages.removeIconSvg),
+          ),
+        ],
       ),
     );
   }
