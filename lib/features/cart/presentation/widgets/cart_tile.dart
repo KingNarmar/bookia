@@ -1,15 +1,19 @@
 import 'package:bookia/core/constants/app_images.dart';
 import 'package:bookia/core/styles/app_colors.dart';
 import 'package:bookia/core/styles/text_styles.dart';
+import 'package:bookia/features/cart/data/models/cart_response/cart_item.dart';
+import 'package:bookia/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 
 class CartTile extends StatelessWidget {
-  const CartTile({super.key});
-
+  const CartTile({super.key, this.cartItem});
+  final CartItem? cartItem;
   @override
   Widget build(BuildContext context) {
+    var cubit = context.read<CartCubit>();
     return IntrinsicHeight(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -18,8 +22,8 @@ class CartTile extends StatelessWidget {
           Center(
             child: ClipRRect(
               borderRadius: BorderRadiusGeometry.circular(12),
-              child: Image.asset(
-                AppImages.welcome,
+              child: Image.network(
+                cartItem?.itemProductImage ?? '',
                 height: 118,
                 width: 100,
                 fit: BoxFit.cover,
@@ -33,11 +37,14 @@ class CartTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "The Republic",
+                  cartItem?.itemProductName ?? '',
                   style: TextStyles.w400s18.copyWith(color: AppColors.black3),
                 ),
                 Gap(9),
-                Text("₹285", style: TextStyles.w400s16),
+                Text(
+                  "₹${cartItem?.itemProductPrice ?? 0}",
+                  style: TextStyles.w400s16,
+                ),
                 Gap(32),
                 Row(
                   children: [
@@ -64,7 +71,9 @@ class CartTile extends StatelessWidget {
             ),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              cubit.removeFromCart(cartItem?.itemId ?? 0);
+            },
             icon: SvgPicture.asset(AppImages.removeIconSvg),
           ),
         ],

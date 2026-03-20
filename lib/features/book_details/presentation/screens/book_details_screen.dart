@@ -88,28 +88,37 @@ class BookDetailsScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text("\$ 258", style: TextStyles.w400s24),
-              GestureDetector(
-                onTap: () {
-                  // Handle buy button tap
-                },
-
-                child: Container(
-                  height: 56,
-                  width: 212,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: AppColors.darkColor,
-                  ),
-                  child: Center(
-                    child: Text(
-                      "Buy",
+              BookDetailsCubit().isInCart(product.id ?? 0)
+                  ? Text(
+                      "Already in Cart",
                       style: TextStyles.w400s14.copyWith(
-                        color: AppColors.bgColor,
+                        color: AppColors.primaryColor,
+                      ),
+                    )
+                  : GestureDetector(
+                      onTap: () {
+                        // Handle buy button tap
+                        context.read<BookDetailsCubit>().addToCart(
+                          product.id ?? 0,
+                        );
+                      },
+                      child: Container(
+                        height: 56,
+                        width: 212,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: AppColors.darkColor,
+                        ),
+                        child: Center(
+                          child: Text(
+                            "Add to Cart",
+                            style: TextStyles.w400s14.copyWith(
+                              color: AppColors.bgColor,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
-              ),
             ],
           ),
         ),

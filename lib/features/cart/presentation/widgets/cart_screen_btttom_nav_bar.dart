@@ -4,10 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class CartScreenBtttomNavBar extends StatelessWidget {
-  const CartScreenBtttomNavBar({
-    super.key,
-  });
+  const CartScreenBtttomNavBar({super.key, required this.onPressed});
 
+  final Function() onPressed;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -38,7 +37,7 @@ class CartScreenBtttomNavBar extends StatelessWidget {
             ],
           ),
           Gap(19),
-          MainButton(text: "Checkout", onPressed: () {}),
+          MainButton(text: "Checkout", onPressed: onPressed),
         ],
       ),
     );

@@ -10,6 +10,8 @@ import 'package:bookia/features/book_details/presentation/screens/book_details_s
 import 'package:bookia/features/home/data/models/product_model/product.dart';
 import 'package:bookia/features/home/presentation/screens/home_screen.dart';
 import 'package:bookia/features/main/main_app_screen.dart';
+import 'package:bookia/features/place_order/presentation/screens/congrats_screen.dart';
+import 'package:bookia/features/place_order/presentation/screens/place_order_screen.dart';
 import 'package:bookia/features/welcome/screens/splash_screen.dart';
 import 'package:bookia/features/welcome/screens/welcome_screen.dart';
 import 'package:bookia/features/wish_list/presentation/screens/wish_list_screen.dart';
@@ -29,6 +31,8 @@ class Routes {
   static const String createNewPassword = "/create-new-password";
   static const String bookDetails = "/book-details";
   static const String wishList = "/wish-list";
+  static const String placeOrder = "/place-order";
+  static const String congrats = "/congrats";
 
   static var routs = GoRouter(
     routes: [
@@ -108,6 +112,15 @@ class Routes {
       GoRoute(
         path: Routes.wishList,
         builder: (context, state) => const WishlistScreen(),
+      ),
+
+      GoRoute(
+        path: Routes.placeOrder,
+        builder: (context, state) => const PlaceOrderScreen(),
+      ),
+      GoRoute(
+        path: Routes.congrats,
+        builder: (context, state) => const CongratsScreen(),
       ),
     ],
   );
