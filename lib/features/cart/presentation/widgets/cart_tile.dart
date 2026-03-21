@@ -49,7 +49,7 @@ class _CartTileState extends State<CartTile> {
                 ),
                 Gap(9),
                 Text(
-                  "₹${widget.cartItem?.itemProductPriceAfterDiscount ?? 0}",
+                  "\$ ${widget.cartItem?.itemProductPriceAfterDiscount ?? 0}",
                   style: TextStyles.w400s16,
                 ),
                 Gap(32),

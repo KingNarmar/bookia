@@ -14,4 +14,6 @@ abstract class AppImages {
   static const String addIconSvg = "assets/icons/add_icon.svg";
   static const String minusIconSvg = "assets/icons/minus_icon.svg";
   static const String removeIconSvg = "assets/icons/remove_icon.svg";
+  static const String logoutIconSvg = "assets/icons/logout.svg";
+  static const String forwordIconSvg = "assets/icons/forword.svg";
 }

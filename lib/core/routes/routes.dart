@@ -12,6 +12,8 @@ import 'package:bookia/features/home/presentation/screens/home_screen.dart';
 import 'package:bookia/features/main/main_app_screen.dart';
 import 'package:bookia/features/place_order/presentation/screens/congrats_screen.dart';
 import 'package:bookia/features/place_order/presentation/screens/place_order_screen.dart';
+import 'package:bookia/features/profile/presentation/screens/edit_profile_screen.dart';
+import 'package:bookia/features/profile/presentation/screens/profile_screen.dart';
 import 'package:bookia/features/welcome/screens/splash_screen.dart';
 import 'package:bookia/features/welcome/screens/welcome_screen.dart';
 import 'package:bookia/features/wish_list/presentation/screens/wish_list_screen.dart';
@@ -33,6 +35,8 @@ class Routes {
   static const String wishList = "/wish-list";
   static const String placeOrder = "/place-order";
   static const String congrats = "/congrats";
+  static const String profile = "/profile";
+  static const String editProfile = "/edit-profile";
 
   static var routs = GoRouter(
     routes: [
@@ -121,6 +125,14 @@ class Routes {
       GoRoute(
         path: Routes.congrats,
         builder: (context, state) => const CongratsScreen(),
+      ),
+      GoRoute(
+        path: Routes.profile,
+        builder: (context, state) => ProfileScreen(),
+      ),
+      GoRoute(
+        path: Routes.editProfile,
+        builder: (context, state) => EditProfileScreen(),
       ),
     ],
   );
