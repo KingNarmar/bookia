@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:bookia/features/auth/data/models/auth_response/user.dart';
+import 'package:bookia/features/cart/data/models/cart_response/cart_item.dart';
 import 'package:bookia/features/home/data/models/product_model/product.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -9,6 +10,7 @@ abstract class SharedPref {
   static const String kToken = "token";
   static const String kUser = "user";
   static const String kWishListIds = "wishListIds";
+  static const String kCartListIds = "cartListIds";
 
   static Future<void> init() async {
     pref = await SharedPreferences.getInstance();
@@ -46,6 +48,18 @@ abstract class SharedPref {
 
   static List<int> getWishListIds() {
     final ids = pref.getStringList(kWishListIds) ?? [];
+    return ids.map((id) => int.tryParse(id) ?? 0).toList();
+  }
+
+  static void cashCartListIds(List<CartItem?> items) {
+    var ids = items
+        .map((item) => item?.itemProductId.toString() ?? '')
+        .toList();
+    cacheData(kCartListIds, ids);
+  }
+
+  static List<int> getCartListIds() {
+    final ids = pref.getStringList(kCartListIds) ?? [];
     return ids.map((id) => int.tryParse(id) ?? 0).toList();
   }
 

@@ -8,12 +8,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 
-class CartTile extends StatelessWidget {
+class CartTile extends StatefulWidget {
   const CartTile({super.key, this.cartItem});
   final CartItem? cartItem;
+
+  @override
+  State<CartTile> createState() => _CartTileState();
+}
+
+class _CartTileState extends State<CartTile> {
   @override
   Widget build(BuildContext context) {
     var cubit = context.read<CartCubit>();
+
     return IntrinsicHeight(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -23,7 +30,7 @@ class CartTile extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadiusGeometry.circular(12),
               child: Image.network(
-                cartItem?.itemProductImage ?? '',
+                widget.cartItem?.itemProductImage ?? '',
                 height: 118,
                 width: 100,
                 fit: BoxFit.cover,
@@ -37,24 +44,26 @@ class CartTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  cartItem?.itemProductName ?? '',
+                  widget.cartItem?.itemProductName ?? '',
                   style: TextStyles.w400s18.copyWith(color: AppColors.black3),
                 ),
                 Gap(9),
                 Text(
-                  "₹${cartItem?.itemProductPrice ?? 0}",
+                  "₹${widget.cartItem?.itemProductPriceAfterDiscount ?? 0}",
                   style: TextStyles.w400s16,
                 ),
                 Gap(32),
                 Row(
                   children: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        cubit.increaseQuantity(widget.cartItem?.itemId ?? 0);
+                      },
                       icon: SvgPicture.asset(AppImages.addIconSvg),
                     ),
                     Gap(15),
                     Text(
-                      "01",
+                      "${widget.cartItem?.itemQuantity ?? 1}",
                       style: TextStyles.w400s18.copyWith(
                         fontFamily: "Nunito Sans",
                         fontWeight: FontWeight.w600,
@@ -62,7 +71,9 @@ class CartTile extends StatelessWidget {
                     ),
                     Gap(15),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        cubit.decreaseQuantity(widget.cartItem?.itemId ?? 0);
+                      },
                       icon: SvgPicture.asset(AppImages.minusIconSvg),
                     ),
                   ],
@@ -72,7 +83,7 @@ class CartTile extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {
-              cubit.removeFromCart(cartItem?.itemId ?? 0);
+              cubit.removeFromCart(widget.cartItem?.itemId ?? 0);
             },
             icon: SvgPicture.asset(AppImages.removeIconSvg),
           ),

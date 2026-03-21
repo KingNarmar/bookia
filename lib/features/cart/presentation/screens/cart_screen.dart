@@ -14,41 +14,44 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("My Cart", style: TextStyles.w400s24),
-        centerTitle: true,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 10, top: 50),
-        child: BlocBuilder<CartCubit, CartState>(
-          builder: (context, state) {
-            final cubit = context.read<CartCubit>();
+    return BlocBuilder<CartCubit, CartState>(
+      builder: (context, state) {
+        final cubit = context.read<CartCubit>();
 
-            if (state is CartLoadingState) {
-              return const ListShimmer();
-            }
+        return Scaffold(
+          appBar: AppBar(
+            title: Text("My Cart", style: TextStyles.w400s24),
+            centerTitle: true,
+          ),
+          body: Padding(
+            padding: const EdgeInsets.only(left: 20, right: 10, top: 50),
+            child: () {
+              if (state is CartLoadingState) {
+                return const ListShimmer();
+              }
 
-            if (state is CartErrorState) {
-              return const Center(child: Text("Failed to load cart"));
-            }
+              if (state is CartErrorState) {
+                return const Center(child: Text("Failed to load cart"));
+              }
 
-            if (cubit.cartItems.isEmpty) {
-              return const Center(child: Text("Your cart is empty"));
-            }
+              if (cubit.cartItems.isEmpty) {
+                return const Center(child: Text("Your cart is empty"));
+              }
 
-            return ListView.separated(
-              itemCount: cubit.cartItems.length,
-              separatorBuilder: (context, index) => const Divider(),
-              itemBuilder: (context, index) =>
-                  CartTile(cartItem: cubit.cartItems[index]),
-            );
-          },
-        ),
-      ),
-      bottomNavigationBar: CartScreenBtttomNavBar(
-        onPressed: () => pushTo(Routes.placeOrder, context),
-      ),
+              return ListView.separated(
+                itemCount: cubit.cartItems.length,
+                separatorBuilder: (context, index) => const Divider(),
+                itemBuilder: (context, index) =>
+                    CartTile(cartItem: cubit.cartItems[index]),
+              );
+            }(),
+          ),
+          bottomNavigationBar: CartScreenBtttomNavBar(
+            onPressed: () => pushTo(Routes.placeOrder, context),
+            totalPrice: cubit.totalPrice,
+          ),
+        );
+      },
     );
   }
 }

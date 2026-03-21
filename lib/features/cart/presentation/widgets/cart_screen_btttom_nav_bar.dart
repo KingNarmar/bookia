@@ -4,8 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class CartScreenBtttomNavBar extends StatelessWidget {
-  const CartScreenBtttomNavBar({super.key, required this.onPressed});
-
+  const CartScreenBtttomNavBar({
+    super.key,
+    required this.onPressed,
+    this.totalPrice = 0,
+  });
+  final double totalPrice;
   final Function() onPressed;
   @override
   Widget build(BuildContext context) {
@@ -27,7 +31,7 @@ class CartScreenBtttomNavBar extends StatelessWidget {
                 ),
               ),
               Text(
-                "\$ 95.00",
+                "\$ ${totalPrice.toStringAsFixed(2)}",
                 style: TextStyle(
                   fontFamily: "Nunito Sans",
                   fontSize: 20,
