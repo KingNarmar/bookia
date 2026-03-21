@@ -8,38 +8,45 @@
 ![Navigation](https://img.shields.io/badge/Navigation-GoRouter-red)
 ![Storage](https://img.shields.io/badge/Local%20Storage-SharedPreferences-yellow)
 
-A modern **Flutter bookstore application** built as part of the Flutter course sessions  
-**Session 15 → Session 20**.
+A modern **Flutter bookstore application** built as part of the Flutter course sessions.  
+This version reflects the progress of the project up to **Session 21**.
 
-The project demonstrates how to build a **production-style Flutter app** with:
+The app demonstrates how to build a **production-style Flutter application** with:
 
-- Authentication Flow
-- API Integration with Dio
-- State Management using Cubit
-- Feature-Based Architecture
-- Dynamic Home Screen
-- Wishlist System
-- Book Details Screen
-- SharedPreferences Local Caching
-- Reusable Widgets
-- Shimmer Loading UI
-- GoRouter Navigation
+- Authentication flow
+- API integration using Dio
+- State management using Cubit
+- Feature-based architecture
+- Reusable widgets
+- Dynamic home screen
+- Wishlist functionality
+- Book details screen
+- Cart system
+- Checkout flow
+- Profile module
+- SharedPreferences local caching
+- GoRouter navigation
+- Shimmer loading states
 
 ---
 
-# ✨ What’s New in Session 20
+# ✨ What Was Added in Session 21
 
-In **Session 20**, the project was extended with new e-commerce style functionality:
+In **Session 21**, the project was extended beyond the previous authentication, home, and wishlist flows by adding new e-commerce and profile-related modules.
 
-- Added **Wishlist Screen**
-- Added **Book Details Screen**
-- Added **Add to Wishlist** functionality
-- Added **Remove from Wishlist** functionality
-- Added **Wishlist API integration**
-- Added **local caching for wishlist IDs** using `SharedPreferences`
-- Added **Hero animation** between product card and details screen
-- Added **bottom navigation integration** for Wishlist
-- Added **wishlist state handling** using `Cubit`
+### Added in this session:
+- Cart screen
+- Quantity control inside cart items
+- Dynamic total price calculation
+- Remove item from cart
+- Place order screen
+- Order success screen
+- Profile screen
+- Edit profile screen
+- Reset password screen
+- My orders screen
+- Cart IDs local caching using `SharedPreferences`
+- Extended main navigation flow
 
 ---
 
@@ -49,25 +56,36 @@ In **Session 20**, the project was extended with new e-commerce style functional
 
 <img src="screen_shots/splash_screen.png" width="300"/>
 
+### Features:
+- App starting screen
+- Branding presentation
+- Entry point into the app flow
+
 ---
 
 ## Welcome Screen
 
 <img src="screen_shots/welcome_screen.png" width="300"/>
 
+### Features:
+- Intro screen for users
+- Navigation to Login
+- Navigation to Register
+- Clean onboarding layout
+
 ---
 
 ## Login Screen
 
-<img src="screen_shots/Login_screen.png" width="300"/>
+<img src="screen_shots/login_screen.png" width="300"/>
 
 ### Features:
-- Email & Password fields
+- Email and password fields
 - Password visibility toggle
 - Form validation
-- Social authentication buttons
-- Connected to backend login endpoint
-- State handling using Cubit
+- Social login buttons UI
+- Connected to backend login API
+- Managed using Cubit states
 
 ---
 
@@ -76,23 +94,23 @@ In **Session 20**, the project was extended with new e-commerce style functional
 <img src="screen_shots/register_screen.png" width="300"/>
 
 ### Features:
-- Username validation
-- Email validation
-- Password confirmation
-- Custom reusable password field
+- Full registration form
+- Input validation
+- Confirm password field
+- Reusable custom form fields
 - Connected to backend register API
 
 ---
 
-## Forgot Password Screen
+## Forget Password Screen
 
 <img src="screen_shots/forget_password_screen.png" width="300"/>
 
 ### Features:
-- Email validation
-- Connected to Forget Password API
-- Loading and error handling
-- Navigation to OTP screen after successful request
+- Email input
+- Validation handling
+- Connected to forget password API
+- Navigation to OTP verification screen
 
 ---
 
@@ -101,10 +119,10 @@ In **Session 20**, the project was extended with new e-commerce style functional
 <img src="screen_shots/otp_verification_screen.png" width="300"/>
 
 ### Features:
-- PIN code input
-- OTP verification
-- Resend code option
-- Navigation to Create New Password screen
+- OTP code input
+- Verification flow
+- Resend code action
+- Navigation to create new password screen
 
 ---
 
@@ -113,20 +131,21 @@ In **Session 20**, the project was extended with new e-commerce style functional
 <img src="screen_shots/create_new_password_screen.png" width="300"/>
 
 ### Features:
-- New password input
-- Confirm password input
-- Validation handling
-- Connected to Reset Password API
+- New password field
+- Confirm password field
+- Input validation
+- Password reset continuation flow
 
 ---
 
 ## Password Changed Screen
 
-<img src="screen_shots/password_changed_screen.png" width="300"/>
+<img src="screen_shots/password_cahnged_screen.png" width="300"/>
 
 ### Features:
-- Success state UI
-- Navigation back to Login screen
+- Success confirmation UI
+- Indicates password update completion
+- Navigation back to login flow
 
 ---
 
@@ -138,24 +157,10 @@ In **Session 20**, the project was extended with new e-commerce style functional
 - Dynamic promotional slider
 - Best seller books section
 - API integration using Dio
-- State management using Cubit
-- Reusable widgets
-- Loading shimmer placeholders
-- Navigation to Book Details screen
-
----
-
-## Wishlist Screen
-
-<img src="screen_shots/wish_list_screen.png" width="300"/>
-
-### Features:
-- Displays all wishlisted books
-- Grid layout for saved items
-- Remove item from wishlist
-- Empty state handling
-- Loading shimmer while fetching data
-- Integrated inside bottom navigation
+- Cubit state management
+- Reusable book cards
+- Shimmer loading placeholders
+- Navigation to book details screen
 
 ---
 
@@ -164,239 +169,319 @@ In **Session 20**, the project was extended with new e-commerce style functional
 <img src="screen_shots/details_screen.png" width="300"/>
 
 ### Features:
-- Large book cover preview
-- Book title and category display
-- Detailed description section
+- Book image preview
+- Book title and category
+- Description section
 - Add to wishlist action
-- Hero animation from product card
-- Bottom action area with price and buy button
+- Add to cart action
+- Price display
+- Bottom action bar
+- Hero-style product transition feel
 
 ---
 
-# 🏗 Architecture
+## Wishlist Screen
 
-The project follows **Feature-Based Architecture** for better scalability and maintainability.
+<img src="screen_shots/wish_list_screen.png" width="300"/>
+
+### Features:
+- Shows wishlist items
+- Remove item from wishlist
+- Empty state support
+- Loading shimmer while fetching data
+- Integrated with main app navigation
+
+---
+
+## Cart Screen
+
+<img src="screen_shots/cart_screen.png" width="300"/>
+
+### Features:
+- Displays cart items
+- Increase item quantity
+- Decrease item quantity
+- Remove item from cart
+- Dynamic total price calculation
+- Checkout button
+- Local cart interaction support
+
+---
+
+## Place Order Screen
+
+<img src="screen_shots/place_order_screen.png" width="300"/>
+
+### Features:
+- Checkout form UI
+- Full name field
+- Email field
+- Address field
+- Phone field
+- Dropdown field
+- Continue order flow action
+
+---
+
+## Order Success Screen
+
+<img src="screen_shots/Order_success_screen.png" width="300"/>
+
+### Features:
+- Order success confirmation UI
+- Success feedback message
+- Continue shopping / back to app action
+
+---
+
+## Profile Screen
+
+<img src="screen_shots/Profile_screen.png" width="300"/>
+
+### Features:
+- User profile summary section
+- Navigation to profile-related options
+- My Orders shortcut
+- Edit Profile shortcut
+- Reset Password shortcut
+- FAQ / Contact / Privacy style options
+- Logout UI action
+
+---
+
+## Edit Profile Screen
+
+<img src="screen_shots/edit_profile_screen.png" width="300"/>
+
+### Features:
+- Edit profile image section
+- Full name field
+- Phone field
+- Address field
+- Update button
+
+---
+
+## Reset Password Screen
+
+<img src="screen_shots/reset_password_screen.png" width="300"/>
+
+### Features:
+- Current password field
+- New password field
+- Confirm password field
+- Password update UI flow
+
+---
+
+## My Orders Screen
+
+<img src="screen_shots/my_orders_screen.png" width="300"/>
+
+### Features:
+- Orders list UI
+- Order number display
+- Order date display
+- Total amount display
+- Reusable order item design
+
+---
+
+# 🏗 Project Architecture
+
+The project follows a **Feature-Based Architecture** to keep the code organized, scalable, and maintainable.
 
 ```text
-lib
-├── app_root
+lib/
+├── app_root/
 │   └── app_root.dart
 │
-├── core
-│   ├── constants
-│   ├── functions
-│   ├── routes
-│   ├── services
-│   │   ├── api
-│   │   └── local
-│   ├── styles
-│   └── widgets
-│       └── shimmer
+├── core/
+│   ├── constants/
+│   ├── functions/
+│   ├── routes/
+│   ├── services/
+│   │   ├── api/
+│   │   └── local/
+│   ├── styles/
+│   └── widgets/
+│       └── shimmer/
 │
-├── features
-│   ├── auth
-│   │   ├── data
-│   │   └── presentation
-│   │
-│   ├── home
-│   │   ├── data
-│   │   └── presentation
-│   │
-│   ├── book_details
-│   │   └── presentation
-│   │
-│   ├── wish_list
-│   │   ├── data
-│   │   └── presentation
-│   │
-│   ├── main
-│   │   └── main_app_screen.dart
-│   │
-│   └── welcome
-│       └── screens
+├── features/
+│   ├── auth/
+│   ├── home/
+│   ├── book_details/
+│   ├── wish_list/
+│   ├── cart/
+│   ├── place_order/
+│   ├── profile/
+│   ├── edit_profile/
+│   ├── reset_password/
+│   ├── my_orders/
+│   ├── main/
+│   └── welcome/
 │
 └── main.dart
 ```
 
-### Benefits:
-- Clean structure
-- Feature isolation
+### Why this structure?
+- Better separation of features
 - Easier maintenance
-- Better scalability
-- Reusable business logic
-
----
-
-# ⚡ Shimmer Loading System
-
-To improve user experience while waiting for API responses, a **Shimmer loading system** was implemented.
-
-### Loading widgets include:
-
-```dart
-SliderShimmer
-GridShimmer
-BookCardShimmer
-TextShimmer
-ListShimmer
-```
-
-These components display skeleton placeholders until the real API data is loaded.
+- Cleaner code organization
+- Better scalability for future sessions
+- More reusable logic and UI components
 
 ---
 
 # 🔌 API Integration
 
-The application communicates with backend APIs using **Dio**.
+The app communicates with backend services using **Dio**.
 
 ## Authentication APIs
-
-```http
-POST /register
-POST /login
-POST /forget-password
-POST /reset-password
-```
+- Register
+- Login
+- Forget Password
+- Reset Password
 
 ## Home APIs
-
-```http
-GET /sliders
-GET /products-bestseller
-```
+- Sliders endpoint
+- Best seller products endpoint
 
 ## Wishlist APIs
+- Get wishlist items
+- Add item to wishlist
+- Remove item from wishlist
 
-```http
-GET /wishlist
-POST /add-to-wishlist
-POST /remove-from-wishlist
-```
-
-### Repositories used:
-
-```dart
-AuthRepo
-HomeRepo
-WishListRepo
-```
+## Cart APIs
+- Get cart items
+- Add item to cart
+- Remove item from cart
 
 ---
 
 # 🧠 State Management
 
-The project uses **Flutter Bloc / Cubit** for managing UI state and API communication.
+The project uses **Flutter Bloc / Cubit** for state management.
 
-## AuthCubit
+## Cubits used in the project include:
+
+### AuthCubit
 Handles:
 - Login
 - Register
 - Forget password
-- OTP verification flow
-- Reset password
+- OTP verification
+- Reset password flow
 - Loading / success / error states
 
-## HomeCubit
+### HomeCubit
 Handles:
-- Fetch slider data
-- Fetch best seller products
+- Fetching sliders
+- Fetching best seller books
 - Loading / success / error states
 
-## WishListCubit
+### WishListCubit
 Handles:
-- Fetch wishlist items
-- Remove item from wishlist
-- Cache wishlist IDs locally
-- Loading / success / error states
+- Fetching wishlist items
+- Removing wishlist items
+- Updating local cached wishlist IDs
 
-## BookDetailsCubit
+### BookDetailsCubit
 Handles:
-- Add item to wishlist
-- Check if item already exists in wishlist
-- Update local cached wishlist IDs
+- Add to wishlist
+- Add to cart
+- Check item existence in local cache
+- Sync local IDs with UI state
+
+### CartCubit
+Handles:
+- Fetching cart items
+- Removing cart items
+- Quantity changes in UI
+- Total cart price calculation
+- Local cart IDs caching
 
 ---
 
 # 💾 Local Storage
 
-The project uses **SharedPreferences** for lightweight local persistence.
+The app uses **SharedPreferences** for lightweight local persistence.
 
-### Stored data includes:
+## Cached data includes:
 - User token
-- User info
+- User information
 - Wishlist item IDs
+- Cart item IDs
 
-This helps with:
-- Keeping user session data
-- Quickly checking if a product is already in wishlist
-- Reducing unnecessary UI inconsistency
+### Benefits:
+- Keeps user session available
+- Supports quick wishlist/cart checks
+- Reduces unnecessary repeated checks
+- Helps preserve state consistency across screens
 
 ---
 
 # 🧭 Navigation
 
-The app uses **GoRouter** for navigation between screens.
+The app uses **GoRouter** for navigation.
 
-### Main routes include:
+## Main routes include:
+- Splash
+- Welcome
+- Login
+- Register
+- Forget Password
+- OTP Verification
+- Create New Password
+- Password Changed
+- Main App Screen
+- Home
+- Book Details
+- Wishlist
+- Cart
+- Place Order
+- Order Success
+- Profile
+- Edit Profile
+- Reset Password
+- My Orders
 
-```dart
-/
- /welcome
- /login
- /register
- /mainApp
- /home
- /forget-password
- /otpScreen
- /create-new-password
- /password-changed
- /book-details
- /wish-list
-```
+---
+
+# ⚡ Shimmer Loading
+
+To improve the user experience while waiting for API responses, the project uses shimmer loading widgets.
+
+## Examples:
+- Slider shimmer
+- Grid shimmer
+- Book card shimmer
+- List shimmer
+- Text shimmer
+
+These placeholders make the UI feel smoother and more responsive while data is loading.
 
 ---
 
 # 🧩 Reusable Widgets
 
-## Core widgets
+The project includes reusable widgets across multiple modules.
 
-```dart
-MainButton
-CustomTextFormField
-PasswordTextFormField
-Dialogs
-```
+## Examples:
+- Main button
+- Custom text form field
+- Password text field
+- Social auth button
+- OTP / PIN code widgets
+- Home slider
+- Book card
+- Wishlist icon
+- Cart tile
+- Profile tile
+- Order item
+- Custom dropdown form field
 
-## Auth widgets
-
-```dart
-SocialAuthButton
-AuthFooter
-PinCodeSection
-```
-
-## Home widgets
-
-```dart
-HomeSlider
-BookCard
-```
-
-## Book Details widgets
-
-```dart
-WishListIcon
-```
-
-## Loading widgets
-
-```dart
-SliderShimmer
-GridShimmer
-BookCardShimmer
-TextShimmer
-ListShimmer
-```
+Using reusable widgets keeps the code cleaner and easier to maintain.
 
 ---
 
@@ -408,52 +493,75 @@ ListShimmer
 - Flutter Bloc / Cubit
 - GoRouter
 - SharedPreferences
+- Flutter SVG
 - Carousel Slider
 - Smooth Page Indicator
-- SVG Support
-- Shimmer Loading UI
+- Shimmer
+- Gap
 
 ---
 
-# 🎯 Learning Goals
+# 🎯 Learning Outcomes
 
-This project helped practice:
+Through this project, the following concepts were practiced:
 
-- Building clean UI from Figma
+- Building UI from Figma design
 - Creating a complete authentication flow
-- Handling API integration using Dio
-- Managing state with Cubit
-- Organizing code using feature-based architecture
-- Parsing JSON into Dart models
-- Building dynamic home screens
-- Implementing wishlist functionality
-- Caching data locally using SharedPreferences
-- Navigating using GoRouter
+- Connecting Flutter app with backend APIs
+- Working with Dio for HTTP requests
+- Managing UI state with Cubit
+- Structuring app using feature-based architecture
 - Creating reusable widgets
-- Implementing shimmer loading for better UX
+- Handling wishlist flow
+- Handling cart flow
+- Using SharedPreferences for local caching
+- Navigating with GoRouter
+- Showing shimmer loading states
+- Organizing a multi-screen e-commerce app
 
 ---
 
 # 🚀 Current App Modules
 
-- Splash & Welcome
+- Splash
+- Welcome
 - Authentication
 - Home
 - Book Details
 - Wishlist
+- Cart
+- Place Order
+- Order Success
+- Profile
+- Edit Profile
+- Reset Password
+- My Orders
 - Main Navigation
 
 ---
 
-# 📌 Notes
+# 📌 Session Summary
 
-- The app is built step by step across multiple course sessions.
-- Session 20 focused on **Wishlist** and **Book Details** features.
-- The architecture is designed to make it easier to add upcoming modules such as:
-  - Cart
-  - Profile
-  - Search
-  - Checkout
+### Session 15 → Session 20 included:
+- Authentication flow
+- API integration basics
+- Home screen
+- Slider
+- Best seller products
+- Wishlist
+- Book details
+
+### Session 21 added:
+- Cart system
+- Quantity controls
+- Total price calculation
+- Place order flow
+- Order success screen
+- Profile module
+- Edit profile screen
+- Reset password screen
+- My orders screen
+- SharedPreferences support for cart IDs
 
 ---
 
@@ -461,4 +569,4 @@ This project helped practice:
 
 **Mina Adly**
 
-Flutter trainee building scalable and clean Flutter applications with modern architecture, Cubit state management, and API integration.
+Flutter trainee focused on building clean, scalable Flutter applications using modern architecture, Cubit state management, API integration, and reusable UI components.
