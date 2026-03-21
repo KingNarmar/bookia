@@ -10,5 +10,6 @@ abstract class TextStyles {
   static const w400s16 = TextStyle(fontWeight: FontWeight.w400, fontSize: 16);
   static const w400s15 = TextStyle(fontWeight: FontWeight.w400, fontSize: 15);
   static const w400s14 = TextStyle(fontWeight: FontWeight.w400, fontSize: 14);
+  
   static const w400s12 = TextStyle(fontWeight: FontWeight.w400, fontSize: 12);
 }

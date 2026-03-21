@@ -51,7 +51,10 @@ class ProfileScreen extends StatelessWidget {
               ],
             ),
             Gap(35),
-            ProfileTile(title: "My Orders"),
+            ProfileTile(
+              title: "My Orders",
+              onTap: () => pushTo(Routes.myOrders, context),
+            ),
             Gap(10),
             ProfileTile(
               title: "Edit Profile",

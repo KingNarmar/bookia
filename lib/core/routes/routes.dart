@@ -7,12 +7,13 @@ import 'package:bookia/features/auth/presentation/screens/password_changed_scree
 import 'package:bookia/features/auth/presentation/screens/register_screen.dart';
 import 'package:bookia/features/book_details/presentation/cubit/book_details_cubit.dart';
 import 'package:bookia/features/book_details/presentation/screens/book_details_screen.dart';
+import 'package:bookia/features/edit_profile/presentation/screens/edit_profile_screen.dart';
 import 'package:bookia/features/home/data/models/product_model/product.dart';
 import 'package:bookia/features/home/presentation/screens/home_screen.dart';
 import 'package:bookia/features/main/main_app_screen.dart';
+import 'package:bookia/features/my_orders/presentation/screens/my_orders_screen.dart';
 import 'package:bookia/features/place_order/presentation/screens/congrats_screen.dart';
 import 'package:bookia/features/place_order/presentation/screens/place_order_screen.dart';
-import 'package:bookia/features/edit_profile/presentation/screens/edit_profile_screen.dart';
 import 'package:bookia/features/profile/presentation/screens/profile_screen.dart';
 import 'package:bookia/features/reset_password/presentation/reset_password_screen.dart';
 import 'package:bookia/features/welcome/screens/splash_screen.dart';
@@ -39,6 +40,7 @@ class Routes {
   static const String profile = "/profile";
   static const String editProfile = "/edit-profile";
   static const String resetPassword = "/reset-password";
+  static const String myOrders = "/my-orders";
 
   static var routs = GoRouter(
     routes: [
@@ -140,6 +142,11 @@ class Routes {
       GoRoute(
         path: Routes.resetPassword,
         builder: (context, state) => ResetPasswordScreen(),
+      ),
+
+      GoRoute(
+        path: Routes.myOrders,
+        builder: (context, state) => const MyOrdersScreen(),
       ),
     ],
   );
