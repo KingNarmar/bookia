@@ -77,7 +77,7 @@ In **Session 21**, the project was extended beyond the previous authentication, 
 
 ## Login Screen
 
-<img src="screen_shots/login_screen.png" width="300"/>
+<img src="screen_shots/Login_screen.png" width="300"/>
 
 ### Features:
 - Email and password fields
