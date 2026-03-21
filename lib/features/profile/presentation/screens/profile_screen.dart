@@ -60,7 +60,10 @@ class ProfileScreen extends StatelessWidget {
               },
             ),
             Gap(10),
-            ProfileTile(title: "Reset Password"),
+            ProfileTile(
+              title: "Reset Password",
+              onTap: () => pushTo(Routes.resetPassword, context),
+            ),
             Gap(10),
             ProfileTile(title: "FAQ"),
             Gap(10),
