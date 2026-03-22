@@ -32,10 +32,10 @@ class BookDetailsCubit extends Cubit<BookDetailsState> {
   void addToCart(int productId) async {
     emit(AddToCartLoadingState());
 
-    var data = await CartRepo.addToCart(productId);
+    final data = await CartRepo.addToCart(productId);
 
-    if (data.isNotEmpty) {
-      cartItems = data;
+    if (data != null) {
+      cartItems = data.cartItems ?? [];
       SharedPref.cashCartListIds(cartItems);
       emit(AddToCartSuccessState());
     } else {

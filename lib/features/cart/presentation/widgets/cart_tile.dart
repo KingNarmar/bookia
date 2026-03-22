@@ -8,71 +8,76 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 
-class CartTile extends StatefulWidget {
+class CartTile extends StatelessWidget {
   const CartTile({super.key, this.cartItem});
+
   final CartItem? cartItem;
 
   @override
-  State<CartTile> createState() => _CartTileState();
-}
-
-class _CartTileState extends State<CartTile> {
-  @override
   Widget build(BuildContext context) {
-    var cubit = context.read<CartCubit>();
+    final cubit = context.read<CartCubit>();
+    final quantity = cartItem?.itemQuantity ?? 1;
 
     return IntrinsicHeight(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
-
         children: [
           Center(
             child: ClipRRect(
-              borderRadius: BorderRadiusGeometry.circular(12),
+              borderRadius: BorderRadius.circular(12),
               child: Image.network(
-                widget.cartItem?.itemProductImage ?? '',
+                cartItem?.itemProductImage ?? '',
                 height: 118,
                 width: 100,
                 fit: BoxFit.cover,
               ),
             ),
           ),
-          Gap(20),
+          const Gap(20),
           Expanded(
             child: Column(
-              mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  widget.cartItem?.itemProductName ?? '',
+                  cartItem?.itemProductName ?? '',
                   style: TextStyles.w400s18.copyWith(color: AppColors.black3),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                 ),
-                Gap(9),
+                const Gap(9),
                 Text(
-                  "\$ ${widget.cartItem?.itemProductPriceAfterDiscount ?? 0}",
+                  '\$ ${cartItem?.itemProductPriceAfterDiscount ?? 0}',
                   style: TextStyles.w400s16,
                 ),
-                Gap(32),
+                const Gap(32),
                 Row(
                   children: [
                     IconButton(
                       onPressed: () {
-                        cubit.increaseQuantity(widget.cartItem?.itemId ?? 0);
+                        cubit.updateCartQuantity(
+                          itemId: cartItem?.itemId ?? 0,
+                          quantity: quantity + 1,
+                        );
                       },
                       icon: SvgPicture.asset(AppImages.addIconSvg),
                     ),
-                    Gap(15),
+                    const Gap(15),
                     Text(
-                      "${widget.cartItem?.itemQuantity ?? 1}",
+                      '$quantity',
                       style: TextStyles.w400s18.copyWith(
                         fontFamily: "Nunito Sans",
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    Gap(15),
+                    const Gap(15),
                     IconButton(
                       onPressed: () {
-                        cubit.decreaseQuantity(widget.cartItem?.itemId ?? 0);
+                        if (quantity > 1) {
+                          cubit.updateCartQuantity(
+                            itemId: cartItem?.itemId ?? 0,
+                            quantity: quantity - 1,
+                          );
+                        }
                       },
                       icon: SvgPicture.asset(AppImages.minusIconSvg),
                     ),
@@ -83,7 +88,7 @@ class _CartTileState extends State<CartTile> {
           ),
           IconButton(
             onPressed: () {
-              cubit.removeFromCart(widget.cartItem?.itemId ?? 0);
+              cubit.removeFromCart(cartItem?.itemId ?? 0);
             },
             icon: SvgPicture.asset(AppImages.removeIconSvg),
           ),
