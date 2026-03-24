@@ -23,7 +23,7 @@ class CustomTextFormField extends StatelessWidget {
       onTapOutside: (event) {
         FocusManager.instance.primaryFocus?.unfocus();
       },
-      
+
       controller: controller,
       decoration: InputDecoration(
         filled: true,

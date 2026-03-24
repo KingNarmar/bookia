@@ -7,10 +7,12 @@ class CartScreenBtttomNavBar extends StatelessWidget {
   const CartScreenBtttomNavBar({
     super.key,
     required this.onPressed,
-    this.totalPrice = 0,
+    required this.totalPrice,
+    required this.text,
   });
   final double totalPrice;
   final Function() onPressed;
+  final String text;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -29,7 +31,7 @@ class CartScreenBtttomNavBar extends StatelessWidget {
               ),
             ),
             Text(
-              "\$ ${totalPrice.toStringAsFixed(2)}",
+              "\$ $totalPrice",
               style: TextStyle(
                 fontFamily: "Nunito Sans",
                 fontSize: 20,
@@ -39,7 +41,7 @@ class CartScreenBtttomNavBar extends StatelessWidget {
           ],
         ),
         Gap(19),
-        MainButton(text: "Checkout", onPressed: onPressed),
+        MainButton(text: text, onPressed: onPressed),
       ],
     );
   }

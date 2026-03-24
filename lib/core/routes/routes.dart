@@ -19,6 +19,7 @@ import 'package:bookia/features/reset_password/presentation/reset_password_scree
 import 'package:bookia/features/welcome/screens/splash_screen.dart';
 import 'package:bookia/features/welcome/screens/welcome_screen.dart';
 import 'package:bookia/features/wish_list/presentation/screens/wish_list_screen.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -61,18 +62,23 @@ class Routes {
         builder: (context, state) => const RegisterScreen(),
       ),
       GoRoute(
-        path: Routes.mainApp,
-        builder: (context, state) => const MainAppScreen(),
-      ),
+  path: Routes.mainApp,
+  builder: (context, state) {
+    final extra = state.extra as Map<String, dynamic>?;
+    final initialIndex = extra?['index'] as int? ?? 0;
+    final refreshId = extra?['refreshId'] as int? ?? 0;
+
+    return MainAppScreen(
+      key: ValueKey(refreshId),
+      initialIndex: initialIndex,
+    );
+  },
+),
       GoRoute(
         path: Routes.home,
         builder: (context, state) => const HomeScreen(),
       ),
 
-      GoRoute(
-        path: Routes.passwordChanged,
-        builder: (context, state) => const PasswordChangedScreen(),
-      ),
       GoRoute(
         path: Routes.otpScreen,
         builder: (context, state) {
@@ -124,7 +130,10 @@ class Routes {
 
       GoRoute(
         path: Routes.placeOrder,
-        builder: (context, state) => const PlaceOrderScreen(),
+        builder: (context, state) {
+          final totalPrice = state.extra as double? ?? 0.0;
+          return PlaceOrderScreen(totalPrice: totalPrice);
+        },
       ),
       GoRoute(
         path: Routes.congrats,
@@ -132,7 +141,9 @@ class Routes {
       ),
       GoRoute(
         path: Routes.profile,
-        builder: (context, state) => ProfileScreen(),
+        builder: (context, state) {
+          return ProfileScreen();
+        },
       ),
       GoRoute(
         path: Routes.editProfile,

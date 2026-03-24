@@ -34,7 +34,14 @@ class CongratsScreen extends StatelessWidget {
             MainButton(
               text: "Go To Home",
               onPressed: () {
-                pushAndClearStack(Routes.mainApp, context);
+                pushAndClearStack(
+                  Routes.mainApp,
+                  context,
+                  extra: {
+                    'index': 0,
+                    'refreshId': DateTime.now().microsecondsSinceEpoch,
+                  },
+                );
               },
             ),
           ],

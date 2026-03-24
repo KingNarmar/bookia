@@ -52,8 +52,31 @@ class CartScreen extends StatelessWidget {
                       ),
                     ),
                     CartScreenBtttomNavBar(
-                      onPressed: () {
-                        pushTo(Routes.placeOrder, context);
+                      text: "Checkout",
+                      onPressed: () async {
+                        final currentTotal = cubit.totalPrice;
+
+                        final isSuccess = await cubit.checkout();
+
+                        if (!context.mounted) return;
+
+                        if (isSuccess) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text("Checkout successful"),
+                            ),
+                          );
+
+                          pushTo(
+                            Routes.placeOrder,
+                            context,
+                            extra: currentTotal,
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text("Checkout failed")),
+                          );
+                        }
                       },
                       totalPrice: cubit.totalPrice,
                     ),

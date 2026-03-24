@@ -2,6 +2,7 @@ import 'package:bookia/core/services/api/api.dart';
 import 'package:bookia/core/services/api/dio_provider.dart';
 import 'package:bookia/core/services/local/shared_pref.dart';
 import 'package:bookia/features/cart/data/models/cart_response/data.dart';
+import 'package:bookia/features/cart/data/models/checkout_response/checkout_data.dart';
 
 class CartRepo {
   static Future<Data?> getCartItems() async {
@@ -66,6 +67,22 @@ class CartRepo {
 
       if (response.statusCode! >= 200 && response.statusCode! < 300) {
         return Data.fromJson(response.data["data"]);
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
+  static Future<CheckoutData?> checkout() async {
+    try {
+      var response = await DioProvider.get(
+        endPoint: Apis.checkout,
+        headers: {"Authorization": "Bearer ${SharedPref.getToken()}"},
+      );
+      if (response.statusCode! >= 200 && response.statusCode! < 300) {
+        return CheckoutData.fromJson(response.data["data"]);
       } else {
         return null;
       }

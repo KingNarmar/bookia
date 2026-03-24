@@ -5,10 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class BookDetailsBody extends StatelessWidget {
-  const BookDetailsBody({
-    super.key,
-    required this.product,
-  });
+  const BookDetailsBody({super.key, required this.product});
 
   final Product product;
 
@@ -25,16 +22,11 @@ class BookDetailsBody extends StatelessWidget {
           ),
         ),
         const Gap(10),
-        Text(
-          product.name ?? 'Unknown Title',
-          style: TextStyles.w400s30,
-        ),
+        Text(product.name ?? 'Unknown Title', style: TextStyles.w400s30),
         const Gap(10),
         Text(
           product.category ?? 'Unknown Author',
-          style: TextStyles.w400s30.copyWith(
-            color: AppColors.primaryColor,
-          ),
+          style: TextStyles.w400s30.copyWith(color: AppColors.primaryColor),
         ),
         const Gap(16),
         Text(

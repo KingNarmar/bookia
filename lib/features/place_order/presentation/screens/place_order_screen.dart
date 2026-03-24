@@ -11,10 +11,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 
 class PlaceOrderScreen extends StatelessWidget {
-  const PlaceOrderScreen({super.key});
-
+  const PlaceOrderScreen({super.key, required this.totalPrice});
+  final double totalPrice;
   @override
   Widget build(BuildContext context) {
+    final formKey = GlobalKey<FormState>();
+
     return Scaffold(
       appBar: AppBar(
         title: IconButton(
@@ -25,34 +27,49 @@ class PlaceOrderScreen extends StatelessWidget {
         ),
         automaticallyImplyLeading: false,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text("Place Your Order", style: TextStyles.w400s30),
-            Gap(10),
-            Text(
-              "Don't worry! It occurs. Please enter the email address linked with your account.",
-              style: TextStyles.w400s16.copyWith(color: AppColors.grayColor),
+      body: Form(
+        key: formKey,
+
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Place Your Order", style: TextStyles.w400s30),
+                Gap(10),
+                Text(
+                  "Don't worry! It occurs. Please enter the email address linked with your account.",
+                  style: TextStyles.w400s16.copyWith(
+                    color: AppColors.grayColor,
+                  ),
+                ),
+                Gap(25),
+                CustomTextFormField(hint: "Full Name"),
+                Gap(12),
+                CustomTextFormField(hint: "Email"),
+                Gap(12),
+                CustomTextFormField(hint: "Address"),
+                Gap(12),
+                CustomTextFormField(hint: "Phone Number"),
+                Gap(12),
+                CustomDropDownBtnFormField(),
+              ],
             ),
-            Gap(25),
-            CustomTextFormField(hint: "Full Name"),
-            Gap(12),
-            CustomTextFormField(hint: "Email"),
-            Gap(12),
-            CustomTextFormField(hint: "Address"),
-            Gap(12),
-            CustomTextFormField(hint: "Phone Number"),
-            Gap(12),
-            CustomDropDownBtnFormField(),
-          ],
+          ),
         ),
       ),
-      bottomNavigationBar: CartScreenBtttomNavBar(
-        onPressed: () {
-          pushTo(Routes.congrats, context);
-        },
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
+        child: CartScreenBtttomNavBar(
+          text: "Place Order",
+          totalPrice: totalPrice,
+          onPressed: () {
+            if (formKey.currentState!.validate()) {
+              pushTo(Routes.congrats, context);
+            }
+          },
+        ),
       ),
     );
   }

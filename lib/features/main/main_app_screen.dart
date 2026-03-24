@@ -11,14 +11,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 class MainAppScreen extends StatefulWidget {
-  const MainAppScreen({super.key});
-
+  const MainAppScreen({super.key, this.initialIndex = 0});
+  final int initialIndex;
   @override
   State<MainAppScreen> createState() => _MainAppScreenState();
 }
 
 class _MainAppScreenState extends State<MainAppScreen> {
-  int selectedIndex = 0;
+  late int selectedIndex;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedIndex = widget.initialIndex;
+  }
+
   List<Widget> screens = [
     HomeScreen(),
     BlocProvider(
