@@ -16,6 +16,8 @@ abstract class AppValidators {
 
   static final RegExp _egyNumberRegex = RegExp(r'^01[0125][0-9]{8}$');
 
+  static final RegExp _phoneRegex = RegExp(r'^[0-9]{8,15}$');
+
   // ------------------- Checks -------------------
   static bool isEmailValid(String email) => _emailRegex.hasMatch(email);
 
@@ -68,5 +70,21 @@ abstract class AppValidators {
       if (confirm != password) return "password not matching";
       return null;
     };
+  }
+
+  static String? address(String? input) {
+    final value = input?.trim() ?? '';
+    if (value.isEmpty) return "Please Enter Your Address";
+    if (value.length < 5) return "Address is too short";
+    return null;
+  }
+
+  static String? phone(String? input) {
+    final value = input?.trim() ?? '';
+    if (value.isEmpty) return "Please Enter Your Phone Number";
+    if (!_phoneRegex.hasMatch(value)) {
+      return "Please Enter Valid Phone Number";
+    }
+    return null;
   }
 }

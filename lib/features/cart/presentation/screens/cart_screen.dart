@@ -54,8 +54,6 @@ class CartScreen extends StatelessWidget {
                     CartScreenBtttomNavBar(
                       text: "Checkout",
                       onPressed: () async {
-                        final currentTotal = cubit.totalPrice;
-
                         final isSuccess = await cubit.checkout();
 
                         if (!context.mounted) return;
@@ -70,7 +68,7 @@ class CartScreen extends StatelessWidget {
                           pushTo(
                             Routes.placeOrder,
                             context,
-                            extra: currentTotal,
+                            extra: cubit.checkoutData,
                           );
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(

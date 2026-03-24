@@ -7,11 +7,13 @@ import 'package:bookia/features/auth/presentation/screens/password_changed_scree
 import 'package:bookia/features/auth/presentation/screens/register_screen.dart';
 import 'package:bookia/features/book_details/presentation/cubit/book_details_cubit.dart';
 import 'package:bookia/features/book_details/presentation/screens/book_details_screen.dart';
+import 'package:bookia/features/cart/data/models/checkout_response/checkout_data.dart';
 import 'package:bookia/features/edit_profile/presentation/screens/edit_profile_screen.dart';
 import 'package:bookia/features/home/data/models/product_model/product.dart';
 import 'package:bookia/features/home/presentation/screens/home_screen.dart';
 import 'package:bookia/features/main/main_app_screen.dart';
 import 'package:bookia/features/my_orders/presentation/screens/my_orders_screen.dart';
+import 'package:bookia/features/place_order/presentation/cubit/place_order_cubit.dart';
 import 'package:bookia/features/place_order/presentation/screens/congrats_screen.dart';
 import 'package:bookia/features/place_order/presentation/screens/place_order_screen.dart';
 import 'package:bookia/features/profile/presentation/screens/profile_screen.dart';
@@ -62,18 +64,18 @@ class Routes {
         builder: (context, state) => const RegisterScreen(),
       ),
       GoRoute(
-  path: Routes.mainApp,
-  builder: (context, state) {
-    final extra = state.extra as Map<String, dynamic>?;
-    final initialIndex = extra?['index'] as int? ?? 0;
-    final refreshId = extra?['refreshId'] as int? ?? 0;
+        path: Routes.mainApp,
+        builder: (context, state) {
+          final extra = state.extra as Map<String, dynamic>?;
+          final initialIndex = extra?['index'] as int? ?? 0;
+          final refreshId = extra?['refreshId'] as int? ?? 0;
 
-    return MainAppScreen(
-      key: ValueKey(refreshId),
-      initialIndex: initialIndex,
-    );
-  },
-),
+          return MainAppScreen(
+            key: ValueKey(refreshId),
+            initialIndex: initialIndex,
+          );
+        },
+      ),
       GoRoute(
         path: Routes.home,
         builder: (context, state) => const HomeScreen(),
@@ -128,13 +130,17 @@ class Routes {
         builder: (context, state) => const WishlistScreen(),
       ),
 
-      GoRoute(
-        path: Routes.placeOrder,
-        builder: (context, state) {
-          final totalPrice = state.extra as double? ?? 0.0;
-          return PlaceOrderScreen(totalPrice: totalPrice);
-        },
-      ),
+     GoRoute(
+  path: Routes.placeOrder,
+  builder: (context, state) {
+    final checkoutData = state.extra as CheckoutData;
+
+    return BlocProvider(
+      create: (context) => PlaceOrderCubit()..getGovernorates(),
+      child: PlaceOrderScreen(checkoutData: checkoutData),
+    );
+  },
+),
       GoRoute(
         path: Routes.congrats,
         builder: (context, state) => const CongratsScreen(),
