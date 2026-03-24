@@ -21,4 +21,36 @@ class PlaceOrderRepo {
       return [];
     }
   }
+
+  static Future<int?> placeOrder({
+    required int governorateId,
+    required String name,
+    required String phone,
+    required String address,
+    required String email,
+  }) async {
+    try {
+      final response = await DioProvider.post(
+        endPoint: Apis.placeOrder,
+        data: {
+          "governorate_id": governorateId,
+          "name": name,
+          "phone": phone,
+          "address": address,
+          "email": email,
+        },
+        headers: {"Authorization": "Bearer ${SharedPref.getToken()}"},
+      );
+
+      if (response.statusCode! >= 200 && response.statusCode! < 300) {
+        final orderId = response.data["data"]?["id"];
+        if (orderId is int) return orderId;
+        return int.tryParse(orderId?.toString() ?? '');
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return null;
+    }
+  }
 }

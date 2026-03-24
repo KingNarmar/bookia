@@ -11,3 +11,17 @@ class PlaceOrderGovernoratesErrorState extends PlaceOrderState {
 
   PlaceOrderGovernoratesErrorState({required this.message});
 }
+
+class PlaceOrderSubmittingState extends PlaceOrderState {}
+
+class PlaceOrderSuccessState extends PlaceOrderState {
+  final int orderId;
+
+  PlaceOrderSuccessState({required this.orderId});
+}
+
+class PlaceOrderErrorState extends PlaceOrderState {
+  final String message;
+
+  PlaceOrderErrorState({required this.message});
+}

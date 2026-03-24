@@ -8,10 +8,13 @@ class MainButton extends StatelessWidget {
     required this.text,
     required this.onPressed,
     this.color = AppColors.primaryColor,
+    this.isLoading = false,
   });
+
   final String text;
-  final Function() onPressed;
+  final VoidCallback onPressed;
   final Color? color;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -27,15 +30,21 @@ class MainButton extends StatelessWidget {
               : BorderSide.none,
         ),
       ),
-      onPressed: onPressed,
-      child: Text(
-        text,
-        style: TextStyles.w400s15.copyWith(
-          color: color != AppColors.primaryColor
-              ? AppColors.darkColor
-              : AppColors.bgColor,
-        ),
-      ),
+      onPressed: isLoading ? null : onPressed,
+      child: isLoading
+          ? const SizedBox(
+              height: 22,
+              width: 22,
+              child: CircularProgressIndicator(strokeWidth: 2),
+            )
+          : Text(
+              text,
+              style: TextStyles.w400s15.copyWith(
+                color: color != AppColors.primaryColor
+                    ? AppColors.darkColor
+                    : AppColors.bgColor,
+              ),
+            ),
     );
   }
 }

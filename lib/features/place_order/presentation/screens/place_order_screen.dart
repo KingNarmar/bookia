@@ -9,6 +9,7 @@ import 'package:bookia/features/cart/data/models/checkout_response/checkout_data
 import 'package:bookia/features/cart/presentation/widgets/cart_screen_btttom_nav_bar.dart';
 import 'package:bookia/features/place_order/data/models/governorates_response/governorate_model.dart';
 import 'package:bookia/features/place_order/presentation/cubit/place_order_cubit.dart';
+import 'package:bookia/features/place_order/presentation/cubit/place_order_state.dart';
 import 'package:bookia/features/place_order/presentation/widgets/governorates_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -42,17 +43,13 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
     final user = widget.checkoutData.user;
 
     _nameController = TextEditingController(text: user?.userName ?? '');
-
     _emailController = TextEditingController(text: user?.userEmail ?? '');
-
     _addressController = TextEditingController(
       text: user?.address?.toString() ?? '',
     );
-
     _phoneController = TextEditingController(
       text: user?.phone?.toString() ?? '',
     );
-
     _governorateController = TextEditingController();
   }
 
@@ -66,109 +63,139 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
     super.dispose();
   }
 
- Future<void> _showGovernoratesBottomSheet() async {
-  final cubit = context.read<PlaceOrderCubit>();
+  Future<void> _showGovernoratesBottomSheet() async {
+    final cubit = context.read<PlaceOrderCubit>();
 
-  final result = await showModalBottomSheet<GovernorateModel>(
-    context: context,
-    isScrollControlled: true,
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-    ),
-    builder: (_) {
-      return BlocProvider.value(
-        value: cubit,
-        child: const GovernoratesBottomSheet(),
-      );
-    },
-  );
+    final result = await showModalBottomSheet<GovernorateModel>(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (_) {
+        return BlocProvider.value(
+          value: cubit,
+          child: const GovernoratesBottomSheet(),
+        );
+      },
+    );
 
-  if (!mounted) return;
+    if (!mounted) return;
 
-  if (result != null) {
-    cubit.selectGovernorate(result);
-    _governorateController.text = result.governorateNameEn!;
+    if (result != null) {
+      cubit.selectGovernorate(result);
+      _governorateController.text = result.governorateNameEn ?? '';
+    }
   }
-}
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: IconButton(
-          onPressed: () {
-            pop(context);
-          },
-          icon: SvgPicture.asset(AppImages.backIconsvg),
-        ),
-        automaticallyImplyLeading: false,
-      ),
-      body: Form(
-        key: formKey,
-        autovalidateMode: AutovalidateMode.onUnfocus,
+    final cubit = context.read<PlaceOrderCubit>();
 
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("Place Your Order", style: TextStyles.w400s30),
-                Gap(10),
-                Text(
-                  "Don't worry! It occurs. Please enter the email address linked with your account.",
-                  style: TextStyles.w400s16.copyWith(
-                    color: AppColors.grayColor,
-                  ),
+    return BlocConsumer<PlaceOrderCubit, PlaceOrderState>(
+      listener: (context, state) {
+        if (state is PlaceOrderSuccessState) {
+          pushReplacment(Routes.congrats, context);
+        }
+
+        if (state is PlaceOrderErrorState) {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.message)));
+        }
+      },
+      builder: (context, state) {
+        return Scaffold(
+          appBar: AppBar(
+            title: IconButton(
+              onPressed: () {
+                pop(context);
+              },
+              icon: SvgPicture.asset(AppImages.backIconsvg),
+            ),
+            automaticallyImplyLeading: false,
+          ),
+          body: Form(
+            key: formKey,
+            autovalidateMode: AutovalidateMode.onUnfocus,
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Place Your Order", style: TextStyles.w400s30),
+                    const Gap(10),
+                    Text(
+                      "Please enter your order details below.",
+                      style: TextStyles.w400s16.copyWith(
+                        color: AppColors.grayColor,
+                      ),
+                    ),
+                    const Gap(25),
+                    CustomTextFormField(
+                      hint: "Full Name",
+                      controller: _nameController,
+                      validator: AppValidators.name,
+                    ),
+                    const Gap(12),
+                    CustomTextFormField(
+                      hint: "Email",
+                      controller: _emailController,
+                      validator: AppValidators.email,
+                      keyboardType: TextInputType.emailAddress,
+                    ),
+                    const Gap(12),
+                    CustomTextFormField(
+                      hint: "Address",
+                      controller: _addressController,
+                      validator: AppValidators.address,
+                    ),
+                    const Gap(12),
+                    CustomTextFormField(
+                      hint: "Phone Number",
+                      controller: _phoneController,
+                      validator: AppValidators.phone,
+                      keyboardType: TextInputType.phone,
+                    ),
+                    const Gap(12),
+                    CustomTextFormField(
+                      hint: "Governorate",
+                      controller: _governorateController,
+                      readOnly: true,
+                      onTap: _showGovernoratesBottomSheet,
+                      validator: (value) {
+                        if (value == null || value.trim().isEmpty) {
+                          return "Please select governorate";
+                        }
+                        return null;
+                      },
+                    ),
+                  ],
                 ),
-                Gap(25),
-                CustomTextFormField(
-                  hint: "Full Name",
-                  controller: _nameController,
-                  validator: AppValidators.name,
-                ),
-                Gap(12),
-                CustomTextFormField(
-                  hint: "Email",
-                  controller: _emailController,
-                  validator: AppValidators.email,
-                ),
-                Gap(12),
-                CustomTextFormField(
-                  hint: "Address",
-                  controller: _addressController,
-                  validator: AppValidators.address,
-                ),
-                Gap(12),
-                CustomTextFormField(
-                  hint: "Phone Number",
-                  controller: _phoneController,
-                  validator: AppValidators.phone,
-                ),
-                Gap(12),
-                CustomTextFormField(
-                  hint: "Governorate",
-                  controller: _governorateController,
-                  readOnly: true,
-                  onTap: _showGovernoratesBottomSheet,
-                ),
-              ],
+              ),
             ),
           ),
-        ),
-      ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
-        child: CartScreenBtttomNavBar(
-          text: "Place Order",
-          totalPrice: totalPrice,
-          onPressed: () {
-            if (formKey.currentState!.validate()) {
-              pushTo(Routes.congrats, context);
-            }
-          },
-        ),
-      ),
+          bottomNavigationBar: Padding(
+            padding: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
+            child: CartScreenBtttomNavBar(
+              text: "Place Order",
+              totalPrice: totalPrice,
+              isLoading: state is PlaceOrderSubmittingState,
+              onPressed: () {
+                if (!formKey.currentState!.validate()) return;
+
+                cubit.placeOrder(
+                  name: _nameController.text.trim(),
+                  email: _emailController.text.trim(),
+                  address: _addressController.text.trim(),
+                  phone: _phoneController.text.trim(),
+                );
+              },
+            ),
+          ),
+        );
+      },
     );
   }
 }

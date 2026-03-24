@@ -35,4 +35,32 @@ class PlaceOrderCubit extends Cubit<PlaceOrderState> {
     selectedGovernorate = governorate;
     emit(PlaceOrderGovernoratesSuccessState());
   }
+
+  Future<void> placeOrder({
+    required String name,
+    required String phone,
+    required String address,
+    required String email,
+  }) async {
+    if (selectedGovernorate?.id == null) {
+      emit(PlaceOrderErrorState(message: "Please select governorate"));
+      return;
+    }
+
+    emit(PlaceOrderSubmittingState());
+
+    final orderId = await PlaceOrderRepo.placeOrder(
+      governorateId: selectedGovernorate!.id!,
+      name: name,
+      phone: phone,
+      address: address,
+      email: email,
+    );
+
+    if (orderId != null) {
+      emit(PlaceOrderSuccessState(orderId: orderId));
+    } else {
+      emit(PlaceOrderErrorState(message: "Failed to place order"));
+    }
+  }
 }

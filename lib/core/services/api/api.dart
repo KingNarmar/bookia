@@ -16,4 +16,5 @@ abstract class Apis {
   static const String updateCart = "update-cart";
   static const String checkout = "checkout";
   static const String governorates = "governorates";
+  static const String placeOrder = "place-order";
 }

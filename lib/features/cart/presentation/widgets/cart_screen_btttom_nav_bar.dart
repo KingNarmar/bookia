@@ -9,10 +9,14 @@ class CartScreenBtttomNavBar extends StatelessWidget {
     required this.onPressed,
     required this.totalPrice,
     required this.text,
+    this.isLoading = false,
   });
+
   final double totalPrice;
-  final Function() onPressed;
+  final VoidCallback onPressed;
   final String text;
+  final bool isLoading;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -41,7 +45,7 @@ class CartScreenBtttomNavBar extends StatelessWidget {
           ],
         ),
         Gap(19),
-        MainButton(text: text, onPressed: onPressed),
+        MainButton(text: text, onPressed: onPressed, isLoading: isLoading),
       ],
     );
   }
