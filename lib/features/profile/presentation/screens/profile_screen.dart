@@ -1,9 +1,11 @@
 import 'package:bookia/core/constants/app_images.dart';
 import 'package:bookia/core/functions/navigations.dart';
 import 'package:bookia/core/routes/routes.dart';
+import 'package:bookia/core/services/local/shared_pref.dart';
 import 'package:bookia/core/styles/app_colors.dart';
 import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/features/profile/presentation/widgets/profile_tile.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
@@ -13,6 +15,7 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var profileData = SharedPref.getUserInfo();
     return Scaffold(
       appBar: AppBar(
         title: Text("Profile", style: TextStyles.w400s24),
@@ -32,16 +35,19 @@ class ProfileScreen extends StatelessWidget {
             Row(
               children: [
                 CircleAvatar(
-                  backgroundImage: AssetImage(AppImages.welcome),
+                  backgroundImage: CachedNetworkImageProvider(
+                    profileData?.image ?? "",
+                    
+                  ),
                   radius: 40,
                 ),
                 Gap(13),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Sayed Abdul-Aziz", style: TextStyles.w400s20),
+                    Text(profileData?.name ?? "", style: TextStyles.w400s20),
                     Text(
-                      "sayed@gmail.com",
+                      profileData?.email ?? "",
                       style: TextStyles.w400s14.copyWith(
                         color: AppColors.grayColor,
                       ),
