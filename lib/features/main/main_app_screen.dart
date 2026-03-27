@@ -3,7 +3,7 @@ import 'package:bookia/core/styles/app_colors.dart';
 import 'package:bookia/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:bookia/features/cart/presentation/screens/cart_screen.dart';
 import 'package:bookia/features/home/presentation/screens/home_screen.dart';
-import 'package:bookia/features/profile/presentation/screens/profile_screen.dart';
+import 'package:bookia/features/profile_folder/profile/presentation/screens/profile_screen.dart';
 import 'package:bookia/features/wish_list/presentation/cubit/wish_list_cubit.dart';
 import 'package:bookia/features/wish_list/presentation/screens/wish_list_screen.dart';
 import 'package:flutter/material.dart';

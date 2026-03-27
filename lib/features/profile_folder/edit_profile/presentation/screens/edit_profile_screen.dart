@@ -3,7 +3,7 @@ import 'package:bookia/core/functions/navigations.dart';
 import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/core/widgets/custom_text_form_field.dart';
 import 'package:bookia/core/widgets/main_button.dart';
-import 'package:bookia/features/edit_profile/presentation/widgets/edit_profile_pic_section.dart';
+import 'package:bookia/features/profile_folder/edit_profile/presentation/widgets/edit_profile_pic_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
