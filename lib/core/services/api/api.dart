@@ -18,4 +18,5 @@ abstract class Apis {
   static const String governorates = "governorates";
   static const String placeOrder = "place-order";
   static const String editProfile = "update-profile";
+  static const String updatePassword = "update-password";
 }

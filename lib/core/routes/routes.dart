@@ -18,7 +18,8 @@ import 'package:bookia/features/place_order/presentation/screens/place_order_scr
 import 'package:bookia/features/profile_folder/edit_profile/presentation/cubit/edit_profile_cubit.dart';
 import 'package:bookia/features/profile_folder/edit_profile/presentation/screens/edit_profile_screen.dart';
 import 'package:bookia/features/profile_folder/profile/presentation/screens/profile_screen.dart';
-import 'package:bookia/features/profile_folder/reset_password/presentation/reset_password_screen.dart';
+import 'package:bookia/features/profile_folder/reset_password/presentation/cubit/reset_password_cubit.dart';
+import 'package:bookia/features/profile_folder/reset_password/presentation/screens/reset_password_screen.dart';
 import 'package:bookia/features/welcome/screens/splash_screen.dart';
 import 'package:bookia/features/welcome/screens/welcome_screen.dart';
 import 'package:bookia/features/wish_list/presentation/screens/wish_list_screen.dart';
@@ -162,7 +163,10 @@ class Routes {
 
       GoRoute(
         path: Routes.resetPassword,
-        builder: (context, state) => ResetPasswordScreen(),
+        builder: (context, state) => BlocProvider(
+          create: (context) => ResetPasswordCubit(),
+          child: const ResetPasswordScreen(),
+        ),
       ),
 
       GoRoute(

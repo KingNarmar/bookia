@@ -42,10 +42,7 @@ class EditProfileCubit extends Cubit<EditProfileState> {
     params.phone = phoneController.text;
     params.address = addressController.text;
 
-    var response = await EditProfileRepo.editProfile(
-      params,
-      image: localImage,
-    );
+    var response = await EditProfileRepo.editProfile(params, image: localImage);
 
     if (response != null) {
       emit(EditProfileUpdated());
