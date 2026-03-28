@@ -11,6 +11,7 @@ import 'package:bookia/features/cart/data/models/checkout_response/checkout_data
 import 'package:bookia/features/home/data/models/product_model/product.dart';
 import 'package:bookia/features/home/presentation/screens/home_screen.dart';
 import 'package:bookia/features/main/main_app_screen.dart';
+import 'package:bookia/features/my_orders/presentation/cubit/my_order_cubit.dart';
 import 'package:bookia/features/my_orders/presentation/screens/my_orders_screen.dart';
 import 'package:bookia/features/place_order/presentation/cubit/place_order_cubit.dart';
 import 'package:bookia/features/place_order/presentation/screens/congrats_screen.dart';
@@ -171,7 +172,10 @@ class Routes {
 
       GoRoute(
         path: Routes.myOrders,
-        builder: (context, state) => const MyOrdersScreen(),
+        builder: (context, state) => BlocProvider(
+          create: (context) => MyOrderCubit(),
+          child: const MyOrdersScreen(),
+        ),
       ),
     ],
   );

@@ -8,16 +8,15 @@ import 'package:bookia/features/profile_folder/reset_password/data/models/reset_
 
 abstract class ResetPasswordRepo {
   static Future<ResetPasswordResponse?> updatePassword(
-      ResetPasswordParams params) async {
+    ResetPasswordParams params,
+  ) async {
     try {
       final token = SharedPref.getToken();
 
       var response = await DioProvider.post(
         endPoint: Apis.updatePassword,
         data: params.toJson(),
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
+        headers: {'Authorization': 'Bearer $token'},
       );
 
       if (response.statusCode == 200) {

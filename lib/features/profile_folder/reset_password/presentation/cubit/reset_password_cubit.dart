@@ -26,7 +26,13 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
     if (response != null && response.message != null) {
       emit(ResetPasswordSuccess(message: response.message!));
     } else {
-      emit(ResetPasswordError(message: response?.message ?? "Failed to update password. Please try again."));
+      emit(
+        ResetPasswordError(
+          message:
+              response?.message ??
+              "Failed to update password. Please try again.",
+        ),
+      );
     }
   }
 }
