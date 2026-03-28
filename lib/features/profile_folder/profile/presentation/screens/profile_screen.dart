@@ -10,9 +10,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     var profileData = SharedPref.getUserInfo();
@@ -37,7 +42,6 @@ class ProfileScreen extends StatelessWidget {
                 CircleAvatar(
                   backgroundImage: CachedNetworkImageProvider(
                     profileData?.image ?? "",
-                    
                   ),
                   radius: 40,
                 ),
@@ -64,8 +68,10 @@ class ProfileScreen extends StatelessWidget {
             Gap(10),
             ProfileTile(
               title: "Edit Profile",
-              onTap: () {
-                pushTo(Routes.editProfile, context);
+              onTap: () async {
+                await pushTo(Routes.editProfile, context);
+                // Rebuild with updated SharedPref data after returning
+                setState(() {});
               },
             ),
             Gap(10),
