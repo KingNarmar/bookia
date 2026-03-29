@@ -1,5 +1,6 @@
 import 'package:bookia/core/constants/app_images.dart';
 import 'package:bookia/core/functions/navigations.dart';
+import 'package:bookia/core/localization/app_localizations.dart';
 import 'package:bookia/core/routes/routes.dart';
 import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/core/widgets/custom_text_form_field.dart';
@@ -52,40 +53,39 @@ class RegisterScreen extends StatelessWidget {
                   autovalidateMode: AutovalidateMode.onUnfocus,
                   child: Column(
                     children: [
-                      const Text(
-                        "Hello! Register to get started",
+                      Text(
+                        context.translate("hello"),
                         style: TextStyles.w400s30,
                       ),
                       const Gap(32),
                       CustomTextFormField(
-                        hint: "Username",
+                        hint: context.translate("username_hint"),
                         validator: AppValidators.name,
                         controller: cubit.userNameController,
                       ),
                       const Gap(11),
                       CustomTextFormField(
-                        hint: "Email",
+                        hint: context.translate("email_hint"),
                         validator: AppValidators.email,
                         controller: cubit.emailController,
                       ),
                       const Gap(11),
                       PasswordTextFormField(
-                        hint: "Password",
+                        hint: context.translate("password_hint"),
                         validator: AppValidators.password(),
                         passwordController: cubit.passwordController,
                       ),
                       const Gap(11),
                       PasswordTextFormField(
-                        hint: "Confirm Password",
+                        hint: context.translate("confirm_password"),
                         validator: AppValidators.confirmPassword(
                           passwordProvider: () => cubit.passwordController.text,
                         ),
                         passwordController: cubit.confirmController,
                       ),
                       const Gap(30),
-
                       MainButton(
-                        text: "Register",
+                        text: context.translate("register"),
                         onPressed: () {
                           if (cubit.formKey.currentState!.validate()) {
                             cubit.register();
@@ -100,8 +100,8 @@ class RegisterScreen extends StatelessWidget {
           },
         ),
         bottomNavigationBar: AuthFooter(
-          text: "Already have an account?",
-          textButton: "Login Now",
+          text: context.translate("already_have_account"),
+          textButton: context.translate("login_now"),
           onPressed: () => pop(context),
         ),
       ),

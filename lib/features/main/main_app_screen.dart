@@ -1,4 +1,5 @@
 import 'package:bookia/core/constants/app_images.dart';
+import 'package:bookia/core/localization/app_localizations.dart';
 import 'package:bookia/core/styles/app_colors.dart';
 import 'package:bookia/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:bookia/features/cart/presentation/screens/cart_screen.dart';
@@ -53,6 +54,10 @@ class _MainAppScreenState extends State<MainAppScreen> {
           selectedIndex = value;
         });
       },
+      showSelectedLabels: true,
+      showUnselectedLabels: true,
+      selectedItemColor: AppColors.primaryColor,
+      unselectedItemColor: AppColors.darkGray,
       type: BottomNavigationBarType.fixed,
       currentIndex: selectedIndex,
       items: [
@@ -65,7 +70,7 @@ class _MainAppScreenState extends State<MainAppScreen> {
               BlendMode.srcIn,
             ),
           ),
-          label: "",
+          label: context.translate("home"),
         ),
         BottomNavigationBarItem(
           icon: SvgPicture.asset(AppImages.bookMarkIconSvg),
@@ -76,7 +81,7 @@ class _MainAppScreenState extends State<MainAppScreen> {
               BlendMode.srcIn,
             ),
           ),
-          label: "",
+          label: context.translate("wishlist"),
         ),
         BottomNavigationBarItem(
           icon: SvgPicture.asset(AppImages.cartIconSvg),
@@ -87,7 +92,7 @@ class _MainAppScreenState extends State<MainAppScreen> {
               BlendMode.srcIn,
             ),
           ),
-          label: "",
+          label: context.translate("cart"),
         ),
         BottomNavigationBarItem(
           icon: SvgPicture.asset(AppImages.profileIconSvg),
@@ -98,7 +103,7 @@ class _MainAppScreenState extends State<MainAppScreen> {
               BlendMode.srcIn,
             ),
           ),
-          label: "",
+          label: context.translate("profile"),
         ),
       ],
     );

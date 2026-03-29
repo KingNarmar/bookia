@@ -1,5 +1,6 @@
 import 'package:bookia/core/constants/app_images.dart';
 import 'package:bookia/core/functions/navigations.dart';
+import 'package:bookia/core/localization/app_localizations.dart';
 import 'package:bookia/core/routes/routes.dart';
 import 'package:bookia/core/services/local/shared_pref.dart';
 import 'package:bookia/core/styles/app_colors.dart';
@@ -26,7 +27,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Profile", style: TextStyles.w400s24),
+        title: Text(context.translate("profile"), style: TextStyles.w400s24),
         centerTitle: true,
         actions: [
           IconButton(
@@ -60,7 +61,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   radius: 40,
                   backgroundImage:
                       (profileData?.image != null &&
-                          profileData!.image!.isNotEmpty)
+                           profileData!.image!.isNotEmpty)
                       ? CachedNetworkImageProvider(profileData.image!)
                       : null,
                 ),
@@ -81,12 +82,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             const Gap(35),
             ProfileTile(
-              title: "My Orders",
+              title: context.translate("my_orders"),
               onTap: () => pushTo(Routes.myOrders, context),
             ),
             const Gap(10),
             ProfileTile(
-              title: "Edit Profile",
+              title: context.translate("edit_profile"),
               onTap: () async {
                 await pushTo(Routes.editProfile, context);
 
@@ -97,15 +98,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             const Gap(10),
             ProfileTile(
-              title: "Reset Password",
+              title: context.translate("reset_password"),
               onTap: () => pushTo(Routes.resetPassword, context),
             ),
             const Gap(10),
-            const ProfileTile(title: "FAQ"),
+            ProfileTile(title: context.translate("faq")),
             const Gap(10),
-            const ProfileTile(title: "Contact Us"),
+            ProfileTile(title: context.translate("contact_us")),
             const Gap(10),
-            const ProfileTile(title: "Privacy & Terms"),
+            ProfileTile(title: context.translate("privacy_terms")),
             const Gap(10),
           ],
         ),

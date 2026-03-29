@@ -11,6 +11,7 @@ abstract class SharedPref {
   static const String kUser = "user";
   static const String kWishListIds = "wishListIds";
   static const String kCartListIds = "cartListIds";
+  static const String kLanguage = "language";
 
   static Future<void> init() async {
     pref = await SharedPreferences.getInstance();
@@ -87,5 +88,13 @@ abstract class SharedPref {
 
   static Future<void> clear() async {
     await pref.clear();
+  }
+
+  static Future<void> setLanguage(String value) async {
+    await pref.setString(kLanguage, value);
+  }
+
+  static String getLanguage() {
+    return pref.getString(kLanguage) ?? "en";
   }
 }

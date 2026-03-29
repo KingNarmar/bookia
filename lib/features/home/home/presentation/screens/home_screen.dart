@@ -1,4 +1,6 @@
 import 'package:bookia/core/constants/app_images.dart';
+import 'package:bookia/core/cubits/app_cubit/app_cubit.dart';
+import 'package:bookia/core/localization/app_localizations.dart';
 import 'package:bookia/core/functions/navigations.dart';
 import 'package:bookia/core/routes/routes.dart';
 import 'package:bookia/core/styles/text_styles.dart';
@@ -26,6 +28,12 @@ class HomeScreen extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+            onPressed: () {
+              context.read<AppCubit>().changeLanguage();
+            },
+            icon: const Icon(Icons.language),
+          ),
           title: SvgPicture.asset(AppImages.logoSvg, height: 30),
           titleSpacing: 13,
           actions: [
@@ -49,16 +57,17 @@ class HomeScreen extends StatelessWidget {
                     const Gap(31),
 
                     if (state is HomeSuccessState) ...[
-                      const Text("Best Seller", style: TextStyles.w400s24),
+                      Text(context.translate("best_seller"),
+                          style: TextStyles.w400s24),
                       const Gap(15),
                       GridView.builder(
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              crossAxisSpacing: 11,
-                              mainAxisSpacing: 11,
-                              childAspectRatio: 0.5,
-                            ),
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 11,
+                          mainAxisSpacing: 11,
+                          childAspectRatio: 0.5,
+                        ),
                         itemBuilder: (context, index) {
                           return BookCard(product: state.products[index]);
                         },

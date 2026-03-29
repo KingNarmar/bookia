@@ -1,5 +1,6 @@
 import 'package:bookia/core/constants/app_images.dart';
 import 'package:bookia/core/functions/navigations.dart';
+import 'package:bookia/core/localization/app_localizations.dart';
 import 'package:bookia/core/routes/routes.dart';
 import 'package:bookia/core/styles/app_colors.dart';
 import 'package:bookia/core/styles/text_styles.dart';
@@ -54,20 +55,21 @@ class LoginScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(22),
                   child: Column(
                     children: [
-                      const Text(
-                        "Welcome back! Glad to see you, Again!",
+                      Text(
+                        context.translate("welcome_back"),
                         style: TextStyles.w400s30,
                       ),
                       const Gap(32),
                       CustomTextFormField(
-                        hint: "Enter your email",
+                        hint: context.translate("email_hint"),
                         validator: AppValidators.email,
                         controller: cubit.emailController,
                       ),
                       const Gap(15),
                       PasswordTextFormField(
+                        hint: context.translate("password_hint"),
                         validator: AppValidators.password(
-                          emptyMessage: "Enter Your Password",
+                          emptyMessage: context.translate("password_hint"),
                         ),
                         passwordController: cubit.passwordController,
                       ),
@@ -79,7 +81,7 @@ class LoginScreen extends StatelessWidget {
                         child: Align(
                           alignment: AlignmentGeometry.centerRight,
                           child: Text(
-                            "Forgot Password?",
+                            context.translate("forgot_password"),
                             style: TextStyles.w400s14.copyWith(
                               color: AppColors.darkGray,
                             ),
@@ -87,16 +89,14 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ),
                       const Gap(30),
-
                       MainButton(
-                        text: "Login",
+                        text: context.translate("login"),
                         onPressed: () {
                           if (cubit.formKey.currentState!.validate()) {
                             cubit.login();
                           }
                         },
                       ),
-
                       const Gap(30),
                       Row(
                         children: [
@@ -104,7 +104,7 @@ class LoginScreen extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 45),
                             child: Text(
-                              "Or",
+                              context.translate("or"),
                               style: TextStyles.w400s14.copyWith(
                                 color: AppColors.darkGray,
                               ),
@@ -116,13 +116,13 @@ class LoginScreen extends StatelessWidget {
                       const Gap(30),
                       SocialAuthButton(
                         iconPath: AppImages.googleIconSvg,
-                        text: "Sign in with Google",
+                        text: context.translate("google_auth"),
                         onTap: () {},
                       ),
                       const Gap(15),
                       SocialAuthButton(
                         iconPath: AppImages.appleIconSvg,
-                        text: "Sign in with Apple",
+                        text: context.translate("apple_auth"),
                         onTap: () {},
                       ),
                     ],
@@ -133,11 +133,12 @@ class LoginScreen extends StatelessWidget {
           },
         ),
         bottomNavigationBar: AuthFooter(
-          text: "Don’t have an account?",
-          textButton: "Register Now",
+          text: context.translate("no_account"),
+          textButton: context.translate("register_now"),
           onPressed: () => pushTo(Routes.register, context),
         ),
       ),
     );
   }
 }
+

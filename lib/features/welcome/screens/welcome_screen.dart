@@ -1,5 +1,6 @@
 import 'package:bookia/core/constants/app_images.dart';
 import 'package:bookia/core/functions/navigations.dart';
+import 'package:bookia/core/localization/app_localizations.dart';
 import 'package:bookia/core/routes/routes.dart';
 import 'package:bookia/core/styles/app_colors.dart';
 import 'package:bookia/core/styles/text_styles.dart';
@@ -29,17 +30,17 @@ class WelcomeScreen extends StatelessWidget {
                 const Spacer(flex: 1),
                 SvgPicture.asset(AppImages.logoSvg),
                 const Gap(30),
-                const Text("Order Your Book Now!", style: TextStyles.w400s20),
+                Text(context.translate("order_now"), style: TextStyles.w400s20),
                 const Spacer(flex: 4),
                 MainButton(
-                  text: "Login",
+                  text: context.translate("login"),
                   onPressed: () {
                     pushTo(Routes.login, context);
                   },
                 ),
                 const Gap(15),
                 MainButton(
-                  text: "Register",
+                  text: context.translate("register"),
                   onPressed: () {
                     pushTo(Routes.register, context);
                   },
