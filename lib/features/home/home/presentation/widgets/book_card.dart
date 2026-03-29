@@ -2,7 +2,7 @@ import 'package:bookia/core/functions/navigations.dart';
 import 'package:bookia/core/routes/routes.dart';
 import 'package:bookia/core/styles/app_colors.dart';
 import 'package:bookia/core/styles/text_styles.dart';
-import 'package:bookia/features/home/data/models/product_model/product.dart';
+import 'package:bookia/features/home/home/data/models/product_model/product.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -26,7 +26,7 @@ class BookCard extends StatelessWidget {
         tag: product.id?.toInt() ?? 0,
 
         child: Container(
-          padding: EdgeInsets.all(11),
+          padding: const EdgeInsets.all(11),
 
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
@@ -49,7 +49,7 @@ class BookCard extends StatelessWidget {
                 height: 45,
                 child: Text(product.name ?? "", style: TextStyles.w400s18),
               ),
-              Gap(24),
+              const Gap(24),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -60,7 +60,7 @@ class BookCard extends StatelessWidget {
                   isInWishList
                       ? IconButton(
                           onPressed: onRemoveFromWishList,
-                          icon: Icon(Icons.delete, color: AppColors.errorColor),
+                          icon: const Icon(Icons.delete, color: AppColors.errorColor),
                         )
                       : Container(
                           height: 28,

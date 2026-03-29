@@ -44,7 +44,7 @@ class EditProfilePicSection extends StatelessWidget {
                     onPressed: () {
                       showImagePickerPopup(context);
                     },
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.camera_alt_outlined,
                       size: 20,
                       color: AppColors.primaryColor,
@@ -75,7 +75,7 @@ class EditProfilePicSection extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
+              const Text(
                 "Choose Profile Picture",
                 style: TextStyle(
                   fontSize: 18,
@@ -99,7 +99,7 @@ class EditProfilePicSection extends StatelessWidget {
                           backgroundColor: AppColors.primaryColor.withValues(
                             alpha: 0.1,
                           ),
-                          child: Icon(
+                          child: const Icon(
                             Icons.camera_alt,
                             color: AppColors.primaryColor,
                             size: 30,
@@ -122,7 +122,7 @@ class EditProfilePicSection extends StatelessWidget {
                           backgroundColor: AppColors.primaryColor.withValues(
                             alpha: 0.1,
                           ),
-                          child: Icon(
+                          child: const Icon(
                             Icons.photo_library,
                             color: AppColors.primaryColor,
                             size: 30,

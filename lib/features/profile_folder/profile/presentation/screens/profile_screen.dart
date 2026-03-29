@@ -23,7 +23,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     var profileData = SharedPref.getUserInfo();
     return Scaffold(
       appBar: AppBar(
-        title: Text("Profile", style: TextStyles.w400s24),
+        title: const Text("Profile", style: TextStyles.w400s24),
         centerTitle: true,
         actions: [
           IconButton(
@@ -45,7 +45,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   radius: 40,
                 ),
-                Gap(13),
+                const Gap(13),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -60,12 +60,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ],
             ),
-            Gap(35),
+            const Gap(35),
             ProfileTile(
               title: "My Orders",
               onTap: () => pushTo(Routes.myOrders, context),
             ),
-            Gap(10),
+            const Gap(10),
             ProfileTile(
               title: "Edit Profile",
               onTap: () async {
@@ -74,18 +74,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 setState(() {});
               },
             ),
-            Gap(10),
+            const Gap(10),
             ProfileTile(
               title: "Reset Password",
               onTap: () => pushTo(Routes.resetPassword, context),
             ),
-            Gap(10),
-            ProfileTile(title: "FAQ"),
-            Gap(10),
-            ProfileTile(title: "Contact Us"),
-            Gap(10),
-            ProfileTile(title: "Privacy & Terms"),
-            Gap(10),
+            const Gap(10),
+            const ProfileTile(title: "FAQ"),
+            const Gap(10),
+            const ProfileTile(title: "Contact Us"),
+            const Gap(10),
+            const ProfileTile(title: "Privacy & Terms"),
+            const Gap(10),
           ],
         ),
       ),

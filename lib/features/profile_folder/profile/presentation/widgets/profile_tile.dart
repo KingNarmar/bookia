@@ -21,10 +21,10 @@ class ProfileTile extends StatelessWidget {
 
           boxShadow: [
             BoxShadow(
-              offset: Offset(0, 7),
+              offset: const Offset(0, 7),
               blurRadius: 40,
               spreadRadius: 0,
-              color: Color(0xFF8A959E).withValues(alpha: 0.2),
+              color: const Color(0xFF8A959E).withValues(alpha: 0.2),
             ),
           ],
         ),

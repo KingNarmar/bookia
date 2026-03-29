@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:bookia/features/auth/data/models/auth_response/user.dart';
 import 'package:bookia/features/cart/data/models/cart_response/cart_item.dart';
-import 'package:bookia/features/home/data/models/product_model/product.dart';
+import 'package:bookia/features/home/home/data/models/product_model/product.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class SharedPref {

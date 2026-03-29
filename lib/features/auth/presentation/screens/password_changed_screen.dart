@@ -21,8 +21,8 @@ class PasswordChangedScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SvgPicture.asset(AppImages.successSvg),
-              Gap(35),
-              Text("Password Changed!", style: TextStyles.w400s26),
+              const Gap(35),
+              const Text("Password Changed!", style: TextStyles.w400s26),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 53),
                 child: Text(
@@ -33,7 +33,7 @@ class PasswordChangedScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
               ),
-              Gap(40),
+              const Gap(40),
               MainButton(
                 text: "Back to Login",
                 onPressed: () {

@@ -22,8 +22,8 @@ class SliderShimmer extends StatelessWidget {
               color: Colors.white,
             ),
           ),
-          Gap(14),
-          AnimatedSmoothIndicator(
+          const Gap(14),
+          const AnimatedSmoothIndicator(
             activeIndex: 0,
             count: 3,
             effect: ExpandingDotsEffect(

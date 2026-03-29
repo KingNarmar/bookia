@@ -1,4 +1,4 @@
-import 'package:bookia/features/home/data/models/product_model/product.dart';
+import 'package:bookia/features/home/home/data/models/product_model/product.dart';
 
 class SearchState {}
 

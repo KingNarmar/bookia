@@ -48,22 +48,22 @@ class CreateNewPasswordScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Create new password", style: TextStyles.w400s30),
-                  Gap(10),
+                  const Text("Create new password", style: TextStyles.w400s30),
+                  const Gap(10),
                   Text(
                     "Your new password must be unique from those previously used.",
                     style: TextStyles.w400s16.copyWith(
                       color: AppColors.grayColor,
                     ),
                   ),
-                  Gap(32),
+                  const Gap(32),
                   PasswordTextFormField(
                     hint: "New Password",
                     validator: AppValidators.password(),
                     passwordController: cubit.passwordController,
                   ),
 
-                  Gap(15),
+                  const Gap(15),
                   PasswordTextFormField(
                     hint: "Confirm Password",
                     validator: AppValidators.confirmPassword(
@@ -71,7 +71,7 @@ class CreateNewPasswordScreen extends StatelessWidget {
                     ),
                     passwordController: cubit.confirmController,
                   ),
-                  Gap(38),
+                  const Gap(38),
                   MainButton(
                     text: "Reset Password",
                     onPressed: () {

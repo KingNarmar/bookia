@@ -54,24 +54,24 @@ class LoginScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(22),
                   child: Column(
                     children: [
-                      Text(
+                      const Text(
                         "Welcome back! Glad to see you, Again!",
                         style: TextStyles.w400s30,
                       ),
-                      Gap(32),
+                      const Gap(32),
                       CustomTextFormField(
                         hint: "Enter your email",
                         validator: AppValidators.email,
                         controller: cubit.emailController,
                       ),
-                      Gap(15),
+                      const Gap(15),
                       PasswordTextFormField(
                         validator: AppValidators.password(
                           emptyMessage: "Enter Your Password",
                         ),
                         passwordController: cubit.passwordController,
                       ),
-                      Gap(15),
+                      const Gap(15),
                       TextButton(
                         onPressed: () {
                           pushTo(Routes.forgetPassword, context);
@@ -86,7 +86,7 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Gap(30),
+                      const Gap(30),
 
                       MainButton(
                         text: "Login",
@@ -97,10 +97,10 @@ class LoginScreen extends StatelessWidget {
                         },
                       ),
 
-                      Gap(30),
+                      const Gap(30),
                       Row(
                         children: [
-                          Expanded(child: Divider()),
+                          const Expanded(child: Divider()),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 45),
                             child: Text(
@@ -110,16 +110,16 @@ class LoginScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          Expanded(child: Divider()),
+                          const Expanded(child: Divider()),
                         ],
                       ),
-                      Gap(30),
+                      const Gap(30),
                       SocialAuthButton(
                         iconPath: AppImages.googleIconSvg,
                         text: "Sign in with Google",
                         onTap: () {},
                       ),
-                      Gap(15),
+                      const Gap(15),
                       SocialAuthButton(
                         iconPath: AppImages.appleIconSvg,
                         text: "Sign in with Apple",

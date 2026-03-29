@@ -42,7 +42,7 @@ class GovernoratesBottomSheet extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 16),
-                Text("Select Governorate", style: TextStyles.w400s24),
+                const Text("Select Governorate", style: TextStyles.w400s24),
                 const SizedBox(height: 12),
                 Expanded(
                   child: ListView.separated(

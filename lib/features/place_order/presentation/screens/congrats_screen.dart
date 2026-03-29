@@ -20,9 +20,9 @@ class CongratsScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SvgPicture.asset(AppImages.successSvg),
-            Gap(50),
-            Text("SUCCESS!", style: TextStyles.w400s36),
-            Gap(22),
+            const Gap(50),
+            const Text("SUCCESS!", style: TextStyles.w400s36),
+            const Gap(22),
             Text(
               "Your order will be delivered soon.\nThank you for choosing our app!",
               style: TextStyles.w400s18.copyWith(
@@ -30,7 +30,7 @@ class CongratsScreen extends StatelessWidget {
                 fontFamily: "Nunito Sans",
               ),
             ),
-            Gap(51),
+            const Gap(51),
             MainButton(
               text: "Go To Home",
               onPressed: () {

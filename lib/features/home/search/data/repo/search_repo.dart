@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:bookia/core/services/api/api.dart';
 import 'package:bookia/core/services/api/dio_provider.dart';
-import 'package:bookia/features/home/data/models/product_model/product.dart';
+import 'package:bookia/features/home/home/data/models/product_model/product.dart';
 
 class SearchRepo {
   static Future<List<Product>?> getAllProducts() async {

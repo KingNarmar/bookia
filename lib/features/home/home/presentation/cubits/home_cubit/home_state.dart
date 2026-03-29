@@ -1,5 +1,5 @@
-import 'package:bookia/features/home/data/models/product_model/product.dart';
-import 'package:bookia/features/home/data/models/slider_model.dart';
+import 'package:bookia/features/home/home/data/models/product_model/product.dart';
+import 'package:bookia/features/home/home/data/models/slider_model.dart';
 
 class HomeState {}
 

@@ -124,7 +124,7 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Place Your Order", style: TextStyles.w400s30),
+                    const Text("Place Your Order", style: TextStyles.w400s30),
                     const Gap(10),
                     Text(
                       "Please enter your order details below.",

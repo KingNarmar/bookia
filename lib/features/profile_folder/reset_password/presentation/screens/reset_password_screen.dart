@@ -51,8 +51,8 @@ class ResetPasswordScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("New Password", style: TextStyles.w400s30),
-                  Gap(73),
+                  const Text("New Password", style: TextStyles.w400s30),
+                  const Gap(73),
                   PasswordTextFormField(
                     hint: "Current Password",
                     passwordController: cubit.currentPasswordController,
@@ -60,7 +60,7 @@ class ResetPasswordScreen extends StatelessWidget {
                       emptyMessage: "Enter Your Current Password",
                     ),
                   ),
-                  Gap(26),
+                  const Gap(26),
                   PasswordTextFormField(
                     hint: "New Password",
                     passwordController: cubit.newPasswordController,
@@ -68,7 +68,7 @@ class ResetPasswordScreen extends StatelessWidget {
                       emptyMessage: "Enter Your New Password",
                     ),
                   ),
-                  Gap(26),
+                  const Gap(26),
                   PasswordTextFormField(
                     hint: "Confirm Password",
                     passwordController: cubit.confirmPasswordController,

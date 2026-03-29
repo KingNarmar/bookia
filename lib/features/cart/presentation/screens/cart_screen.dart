@@ -22,7 +22,7 @@ class CartScreen extends StatelessWidget {
 
           return Scaffold(
             appBar: AppBar(
-              title: Text("My Cart", style: TextStyles.w400s24),
+              title: const Text("My Cart", style: TextStyles.w400s24),
               centerTitle: true,
             ),
             body: Padding(

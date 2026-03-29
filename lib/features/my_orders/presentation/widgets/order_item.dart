@@ -32,7 +32,7 @@ class OrderItem extends StatelessWidget {
               ),
             ],
           ),
-          Divider(),
+          const Divider(),
 
           Row(
             mainAxisAlignment: MainAxisAlignment.end,

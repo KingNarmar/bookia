@@ -20,7 +20,7 @@ class EditProfileScreen extends StatelessWidget {
     var cubit = context.read<EditProfileCubit>();
     return Scaffold(
       appBar: AppBar(
-        title: Text("Edit Profile", style: TextStyles.w400s24),
+        title: const Text("Edit Profile", style: TextStyles.w400s24),
         centerTitle: true,
         automaticallyImplyLeading: false,
         leading: Padding(
@@ -55,20 +55,20 @@ class EditProfileScreen extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    EditProfilePicSection(),
-                    Gap(54),
+                    const EditProfilePicSection(),
+                    const Gap(54),
                     CustomTextFormField(
                       hint: "Full Name",
                       controller: cubit.nameController,
                       validator: AppValidators.name,
                     ),
-                    Gap(20),
+                    const Gap(20),
                     CustomTextFormField(
                       hint: "Phone",
                       controller: cubit.phoneController,
                       validator: AppValidators.phone,
                     ),
-                    Gap(20),
+                    const Gap(20),
                     CustomTextFormField(
                       hint: "Address",
                       controller: cubit.addressController,

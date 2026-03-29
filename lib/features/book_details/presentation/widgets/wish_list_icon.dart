@@ -1,7 +1,7 @@
 import 'package:bookia/core/constants/app_images.dart';
 import 'package:bookia/features/book_details/presentation/cubit/book_details_cubit.dart';
 import 'package:bookia/features/book_details/presentation/cubit/book_details_state.dart';
-import 'package:bookia/features/home/data/models/product_model/product.dart';
+import 'package:bookia/features/home/home/data/models/product_model/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -17,7 +17,7 @@ class WishListIcon extends StatelessWidget {
       builder: (context, state) {
         var cubit = context.read<BookDetailsCubit>();
         return cubit.isInWishList(product.id ?? 0)
-            ? SizedBox()
+            ? const SizedBox()
             : IconButton(
                 onPressed: () {
                   cubit.addToWishList(product.id ?? 0);

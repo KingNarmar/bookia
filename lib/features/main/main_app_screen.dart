@@ -2,7 +2,7 @@ import 'package:bookia/core/constants/app_images.dart';
 import 'package:bookia/core/styles/app_colors.dart';
 import 'package:bookia/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:bookia/features/cart/presentation/screens/cart_screen.dart';
-import 'package:bookia/features/home/presentation/screens/home_screen.dart';
+import 'package:bookia/features/home/home/presentation/screens/home_screen.dart';
 import 'package:bookia/features/profile_folder/profile/presentation/screens/profile_screen.dart';
 import 'package:bookia/features/wish_list/presentation/cubit/wish_list_cubit.dart';
 import 'package:bookia/features/wish_list/presentation/screens/wish_list_screen.dart';
@@ -27,16 +27,16 @@ class _MainAppScreenState extends State<MainAppScreen> {
   }
 
   List<Widget> screens = [
-    HomeScreen(),
+    const HomeScreen(),
     BlocProvider(
       create: (context) => WishListCubit()..getWishList(),
-      child: WishlistScreen(),
+      child: const WishlistScreen(),
     ),
     BlocProvider(
       create: (context) => CartCubit()..getCartItems(),
-      child: CartScreen(),
+      child: const CartScreen(),
     ),
-    ProfileScreen(),
+    const ProfileScreen(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -60,7 +60,7 @@ class _MainAppScreenState extends State<MainAppScreen> {
           icon: SvgPicture.asset(AppImages.homeIconSvg),
           activeIcon: SvgPicture.asset(
             AppImages.homeIconSvg,
-            colorFilter: ColorFilter.mode(
+            colorFilter: const ColorFilter.mode(
               AppColors.primaryColor,
               BlendMode.srcIn,
             ),
@@ -71,7 +71,7 @@ class _MainAppScreenState extends State<MainAppScreen> {
           icon: SvgPicture.asset(AppImages.bookMarkIconSvg),
           activeIcon: SvgPicture.asset(
             AppImages.bookMarkIconSvg,
-            colorFilter: ColorFilter.mode(
+            colorFilter: const ColorFilter.mode(
               AppColors.primaryColor,
               BlendMode.srcIn,
             ),
@@ -82,7 +82,7 @@ class _MainAppScreenState extends State<MainAppScreen> {
           icon: SvgPicture.asset(AppImages.cartIconSvg),
           activeIcon: SvgPicture.asset(
             AppImages.cartIconSvg,
-            colorFilter: ColorFilter.mode(
+            colorFilter: const ColorFilter.mode(
               AppColors.primaryColor,
               BlendMode.srcIn,
             ),
@@ -93,7 +93,7 @@ class _MainAppScreenState extends State<MainAppScreen> {
           icon: SvgPicture.asset(AppImages.profileIconSvg),
           activeIcon: SvgPicture.asset(
             AppImages.profileIconSvg,
-            colorFilter: ColorFilter.mode(
+            colorFilter: const ColorFilter.mode(
               AppColors.primaryColor,
               BlendMode.srcIn,
             ),

@@ -6,7 +6,7 @@ import 'package:bookia/features/book_details/presentation/cubit/book_details_sta
 import 'package:bookia/features/book_details/presentation/widgets/book_details_body.dart';
 import 'package:bookia/features/book_details/presentation/widgets/book_details_nav_bar.dart';
 import 'package:bookia/features/book_details/presentation/widgets/wish_list_icon.dart';
-import 'package:bookia/features/home/data/models/product_model/product.dart';
+import 'package:bookia/features/home/home/data/models/product_model/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';

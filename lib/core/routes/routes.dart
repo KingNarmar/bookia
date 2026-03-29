@@ -8,8 +8,10 @@ import 'package:bookia/features/auth/presentation/screens/register_screen.dart';
 import 'package:bookia/features/book_details/presentation/cubit/book_details_cubit.dart';
 import 'package:bookia/features/book_details/presentation/screens/book_details_screen.dart';
 import 'package:bookia/features/cart/data/models/checkout_response/checkout_data.dart';
-import 'package:bookia/features/home/data/models/product_model/product.dart';
-import 'package:bookia/features/home/presentation/screens/home_screen.dart';
+import 'package:bookia/features/home/home/data/models/product_model/product.dart';
+import 'package:bookia/features/home/home/presentation/screens/home_screen.dart';
+import 'package:bookia/features/home/search/presentation/cubit/search_cubit.dart';
+import 'package:bookia/features/home/search/presentation/screens/search_screen.dart';
 import 'package:bookia/features/main/main_app_screen.dart';
 import 'package:bookia/features/my_orders/presentation/cubit/my_order_cubit.dart';
 import 'package:bookia/features/my_orders/presentation/screens/my_orders_screen.dart';
@@ -21,8 +23,6 @@ import 'package:bookia/features/profile_folder/edit_profile/presentation/screens
 import 'package:bookia/features/profile_folder/profile/presentation/screens/profile_screen.dart';
 import 'package:bookia/features/profile_folder/reset_password/presentation/cubit/reset_password_cubit.dart';
 import 'package:bookia/features/profile_folder/reset_password/presentation/screens/reset_password_screen.dart';
-import 'package:bookia/features/search/presentation/cubit/search_cubit.dart';
-import 'package:bookia/features/search/presentation/screens/search_screen.dart';
 import 'package:bookia/features/welcome/screens/splash_screen.dart';
 import 'package:bookia/features/welcome/screens/welcome_screen.dart';
 import 'package:bookia/features/wish_list/presentation/screens/wish_list_screen.dart';
@@ -154,14 +154,14 @@ class Routes {
       GoRoute(
         path: Routes.profile,
         builder: (context, state) {
-          return ProfileScreen();
+          return const ProfileScreen();
         },
       ),
       GoRoute(
         path: Routes.editProfile,
         builder: (context, state) => BlocProvider(
           create: (context) => EditProfileCubit()..loadInitialData(),
-          child: EditProfileScreen(),
+          child: const EditProfileScreen(),
         ),
       ),
 

@@ -52,29 +52,29 @@ class RegisterScreen extends StatelessWidget {
                   autovalidateMode: AutovalidateMode.onUnfocus,
                   child: Column(
                     children: [
-                      Text(
+                      const Text(
                         "Hello! Register to get started",
                         style: TextStyles.w400s30,
                       ),
-                      Gap(32),
+                      const Gap(32),
                       CustomTextFormField(
                         hint: "Username",
                         validator: AppValidators.name,
                         controller: cubit.userNameController,
                       ),
-                      Gap(11),
+                      const Gap(11),
                       CustomTextFormField(
                         hint: "Email",
                         validator: AppValidators.email,
                         controller: cubit.emailController,
                       ),
-                      Gap(11),
+                      const Gap(11),
                       PasswordTextFormField(
                         hint: "Password",
                         validator: AppValidators.password(),
                         passwordController: cubit.passwordController,
                       ),
-                      Gap(11),
+                      const Gap(11),
                       PasswordTextFormField(
                         hint: "Confirm Password",
                         validator: AppValidators.confirmPassword(
@@ -82,7 +82,7 @@ class RegisterScreen extends StatelessWidget {
                         ),
                         passwordController: cubit.confirmController,
                       ),
-                      Gap(30),
+                      const Gap(30),
 
                       MainButton(
                         text: "Register",

@@ -26,18 +26,18 @@ class WelcomeScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 22),
             child: Column(
               children: [
-                Spacer(flex: 1),
+                const Spacer(flex: 1),
                 SvgPicture.asset(AppImages.logoSvg),
-                Gap(30),
-                Text("Order Your Book Now!", style: TextStyles.w400s20),
-                Spacer(flex: 4),
+                const Gap(30),
+                const Text("Order Your Book Now!", style: TextStyles.w400s20),
+                const Spacer(flex: 4),
                 MainButton(
                   text: "Login",
                   onPressed: () {
                     pushTo(Routes.login, context);
                   },
                 ),
-                Gap(15),
+                const Gap(15),
                 MainButton(
                   text: "Register",
                   onPressed: () {
@@ -45,7 +45,7 @@ class WelcomeScreen extends StatelessWidget {
                   },
                   color: AppColors.bgColor,
                 ),
-                Spacer(flex: 1),
+                const Spacer(flex: 1),
               ],
             ),
           ),

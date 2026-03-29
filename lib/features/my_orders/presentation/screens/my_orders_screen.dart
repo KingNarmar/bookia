@@ -29,7 +29,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("My Orders", style: TextStyles.w400s20),
+        title: const Text("My Orders", style: TextStyles.w400s20),
         centerTitle: true,
         automaticallyImplyLeading: false,
         leading: IconButton(

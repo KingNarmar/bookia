@@ -32,15 +32,15 @@ class OtpVerificationScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("OTP Verification", style: TextStyles.w400s30),
-            Gap(10),
+            const Text("OTP Verification", style: TextStyles.w400s30),
+            const Gap(10),
             Text(
               "Enter the verification code we just sent on your email address.",
               style: TextStyles.w400s16.copyWith(color: AppColors.grayColor),
             ),
-            Gap(35),
+            const Gap(35),
             PinCodeSection(controller: cubit.otpController),
-            Gap(35),
+            const Gap(35),
             MainButton(
               text: "Verify",
               onPressed: () {
@@ -52,7 +52,7 @@ class OtpVerificationScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: AuthFooter(
+      bottomNavigationBar: const AuthFooter(
         text: "Didn’t received code?",
         textButton: "Resend",
       ),

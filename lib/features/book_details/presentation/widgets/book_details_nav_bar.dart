@@ -1,7 +1,7 @@
 import 'package:bookia/core/styles/app_colors.dart';
 import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/features/book_details/presentation/cubit/book_details_cubit.dart';
-import 'package:bookia/features/home/data/models/product_model/product.dart';
+import 'package:bookia/features/home/home/data/models/product_model/product.dart';
 import 'package:flutter/material.dart';
 
 class BookDetailsNavBar extends StatelessWidget {

@@ -4,10 +4,10 @@ import 'package:bookia/core/routes/routes.dart';
 import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/core/widgets/shimmer/grid_shimmer.dart';
 import 'package:bookia/core/widgets/shimmer/text_shimmer.dart';
-import 'package:bookia/features/home/presentation/cubits/home_cubit/home_cubit.dart';
-import 'package:bookia/features/home/presentation/cubits/home_cubit/home_state.dart';
-import 'package:bookia/features/home/presentation/widgets/book_card.dart';
-import 'package:bookia/features/home/presentation/widgets/home_slider.dart';
+import 'package:bookia/features/home/home/presentation/cubits/home_cubit/home_cubit.dart';
+import 'package:bookia/features/home/home/presentation/cubits/home_cubit/home_state.dart';
+import 'package:bookia/features/home/home/presentation/widgets/book_card.dart';
+import 'package:bookia/features/home/home/presentation/widgets/home_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -49,7 +49,7 @@ class HomeScreen extends StatelessWidget {
                     const Gap(31),
 
                     if (state is HomeSuccessState) ...[
-                      Text("Best Seller", style: TextStyles.w400s24),
+                      const Text("Best Seller", style: TextStyles.w400s24),
                       const Gap(15),
                       GridView.builder(
                         gridDelegate:
@@ -67,12 +67,12 @@ class HomeScreen extends StatelessWidget {
                         shrinkWrap: true,
                       ),
                     ] else
-                      Column(
+                      const Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           TextShimmer(width: 100, height: 50),
                           Gap(30),
-                          const GridShimmer(
+                          GridShimmer(
                             crossAxisCount: 2,
                             crossAxisSpacing: 11,
                             mainAxisSpacing: 11,

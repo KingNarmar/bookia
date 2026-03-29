@@ -14,7 +14,7 @@ class Bookia extends StatelessWidget {
       theme: ThemeData(
         fontFamily: AppFonts.dmSerifDisplay,
         scaffoldBackgroundColor: AppColors.bgColor,
-        appBarTheme: AppBarThemeData(backgroundColor: AppColors.bgColor),
+        appBarTheme: const AppBarThemeData(backgroundColor: AppColors.bgColor),
         dividerColor: AppColors.borderColor,
       ),
     );

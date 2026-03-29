@@ -57,21 +57,21 @@ class ForgetPasswordScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Forgot Password?", style: TextStyles.w400s30),
-                    Gap(10),
+                    const Text("Forgot Password?", style: TextStyles.w400s30),
+                    const Gap(10),
                     Text(
                       "Don't worry! It occurs. Please enter the email address linked with your account.",
                       style: TextStyles.w400s16.copyWith(
                         color: AppColors.grayColor,
                       ),
                     ),
-                    Gap(30),
+                    const Gap(30),
                     CustomTextFormField(
                       hint: "Enter Your Email",
                       validator: AppValidators.email,
                       controller: cubit.emailController,
                     ),
-                    Gap(40),
+                    const Gap(40),
                     MainButton(
                       text: "Send Code",
                       onPressed: () {

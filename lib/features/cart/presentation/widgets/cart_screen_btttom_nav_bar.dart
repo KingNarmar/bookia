@@ -25,7 +25,7 @@ class CartScreenBtttomNavBar extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
+            const Text(
               "Total:",
               style: TextStyle(
                 fontFamily: "Nunito Sans",
@@ -36,7 +36,7 @@ class CartScreenBtttomNavBar extends StatelessWidget {
             ),
             Text(
               "\$ $totalPrice",
-              style: TextStyle(
+              style: const TextStyle(
                 fontFamily: "Nunito Sans",
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
@@ -44,7 +44,7 @@ class CartScreenBtttomNavBar extends StatelessWidget {
             ),
           ],
         ),
-        Gap(19),
+        const Gap(19),
         MainButton(text: text, onPressed: onPressed, isLoading: isLoading),
       ],
     );

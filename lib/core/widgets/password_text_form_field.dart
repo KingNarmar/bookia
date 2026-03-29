@@ -34,8 +34,8 @@ class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
         filled: true,
         suffixIcon: IconButton(
           icon: ishide
-              ? Icon(Icons.remove_red_eye)
-              : Icon(Icons.visibility_off),
+              ? const Icon(Icons.remove_red_eye)
+              : const Icon(Icons.visibility_off),
           onPressed: () {
             setState(() {
               ishide = !ishide;
@@ -46,19 +46,19 @@ class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
         hintStyle: TextStyles.w400s15.copyWith(color: AppColors.grayColor),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(color: AppColors.borderColor),
+          borderSide: const BorderSide(color: AppColors.borderColor),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(color: AppColors.borderColor),
+          borderSide: const BorderSide(color: AppColors.borderColor),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(color: AppColors.errorColor),
+          borderSide: const BorderSide(color: AppColors.errorColor),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(color: AppColors.errorColor),
+          borderSide: const BorderSide(color: AppColors.errorColor),
         ),
       ),
       validator: widget.validator,
