@@ -151,7 +151,6 @@ The project demonstrates how to build a clean and scalable Flutter app using:
 # 🏗 Project Architecture
 
 The project follows a **feature-based architecture** to keep the code clean, modular, and easy to scale.
-```text
 
     lib/
     ├── app_root/
@@ -186,6 +185,7 @@ The project follows a **feature-based architecture** to keep the code clean, mod
     │
     └── main.dart
 
+```
 ## Why this structure?
 
 - better separation between business logic and UI
