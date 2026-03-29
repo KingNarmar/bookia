@@ -9,7 +9,7 @@ import 'package:bookia/features/search/presentation/cubit/search_cubit.dart';
 import 'package:bookia/features/search/presentation/cubit/search_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -23,6 +23,16 @@ class _SearchScreenState extends State<SearchScreen> {
   bool _isLoadingDialogVisible = false;
   Timer? _debounce;
 
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      context.read<SearchCubit>().getAllProducts();
+    });
+  }
+
   void _showLoader() {
     if (!_isLoadingDialogVisible) {
       _isLoadingDialogVisible = true;
@@ -32,7 +42,10 @@ class _SearchScreenState extends State<SearchScreen> {
 
   void _hideLoader() {
     if (_isLoadingDialogVisible) {
-      Navigator.of(context, rootNavigator: true).pop();
+      final navigator = Navigator.of(context, rootNavigator: true);
+      if (navigator.canPop()) {
+        navigator.pop();
+      }
       _isLoadingDialogVisible = false;
     }
   }
@@ -98,6 +111,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         }
 
                         return GridView.builder(
+                          itemCount: state.products.length,
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2,
@@ -108,7 +122,6 @@ class _SearchScreenState extends State<SearchScreen> {
                           itemBuilder: (context, index) {
                             return BookCard(product: state.products[index]);
                           },
-                          itemCount: state.products.length,
                         );
                       }
 
@@ -116,9 +129,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         return const SizedBox.shrink();
                       }
 
-                      return const Center(
-                        child: Text("Start typing to search"),
-                      );
+                      return const Center(child: Text("Loading products..."));
                     },
                   ),
                 ),

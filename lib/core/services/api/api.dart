@@ -21,4 +21,5 @@ abstract class Apis {
   static const String updatePassword = "update-password";
   static const String myOrders = "order-history";
   static const String productsSearch = "products-search";
+  static const String allProducts = "products";
 }
