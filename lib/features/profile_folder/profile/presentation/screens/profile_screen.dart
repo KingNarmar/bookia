@@ -4,6 +4,8 @@ import 'package:bookia/core/routes/routes.dart';
 import 'package:bookia/core/services/local/shared_pref.dart';
 import 'package:bookia/core/styles/app_colors.dart';
 import 'package:bookia/core/styles/text_styles.dart';
+import 'package:bookia/core/widgets/dialogs.dart';
+import 'package:bookia/features/auth/data/repo/auth_repo.dart';
 import 'package:bookia/features/profile_folder/profile/presentation/widgets/profile_tile.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -20,14 +22,29 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
-    var profileData = SharedPref.getUserInfo();
+    final profileData = SharedPref.getUserInfo();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Profile", style: TextStyles.w400s24),
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () async {
+              showLoadingDialog(context);
+
+              final success = await AuthRepo.logout();
+
+              if (!context.mounted) return;
+
+              pop(context);
+
+              if (success) {
+                pushAndClearStack(Routes.login, context);
+              } else {
+                showMyDialog(context, "Failed to log out");
+              }
+            },
             icon: SvgPicture.asset(AppImages.logoutIconSvg),
           ),
         ],
@@ -40,10 +57,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Row(
               children: [
                 CircleAvatar(
-                  backgroundImage: CachedNetworkImageProvider(
-                    profileData?.image ?? "",
-                  ),
                   radius: 40,
+                  backgroundImage:
+                      (profileData?.image != null &&
+                          profileData!.image!.isNotEmpty)
+                      ? CachedNetworkImageProvider(profileData.image!)
+                      : null,
                 ),
                 const Gap(13),
                 Column(
@@ -70,7 +89,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               title: "Edit Profile",
               onTap: () async {
                 await pushTo(Routes.editProfile, context);
-                // Rebuild with updated SharedPref data after returning
+
+                if (!context.mounted) return;
+
                 setState(() {});
               },
             ),

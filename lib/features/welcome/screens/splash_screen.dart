@@ -25,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
       if (token != null && token.isNotEmpty) {
         pushReplacment(Routes.mainApp, context);
       } else {
-        pushReplacment(Routes.mainApp, context);
+        pushReplacment(Routes.login, context);
       }
     });
   }

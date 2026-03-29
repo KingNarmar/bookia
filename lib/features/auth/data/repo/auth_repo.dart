@@ -91,4 +91,27 @@ abstract class AuthRepo {
       return null;
     }
   }
+
+  static Future<bool> logout() async {
+    try {
+      var response = await DioProvider.post(
+        endPoint: Apis.logout,
+        headers: {
+          'Authorization': 'Bearer ${SharedPref.getToken()}',
+        },
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 401) {
+        await SharedPref.clear();
+        return true;
+      } else {
+        return false;
+      }
+    } on Exception catch (e) {
+      log(e.toString());
+      // Force clear local session if network fails or token is already invalid
+      await SharedPref.clear();
+      return true;
+    }
+  }
 }
