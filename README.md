@@ -128,7 +128,7 @@ The project demonstrates how to build a clean and scalable Flutter app using:
 
 | Create New Password Screen | Password Changed Screen | Home Screen |
 |---|---|---|
-| <img src="screen_shots/create_new_password_screen.png" width="220"/> | <img src="screen_shots/password_changed_screen.png" width="220"/> | <img src="screen_shots/home_screen.png" width="220"/> |
+| <img src="screen_shots/create_new_password_screen.png" width="220"/> | <img src="screen_shots/password_cahnged_screen.png" width="220"/> | <img src="screen_shots/home_screen.png" width="220"/> |
 
 | Book Details Screen | Wishlist Screen | Cart Screen |
 |---|---|---|
@@ -151,7 +151,7 @@ The project demonstrates how to build a clean and scalable Flutter app using:
 # 🏗 Project Architecture
 
 The project follows a **feature-based architecture** to keep the code clean, modular, and easy to scale.
-
+```text
     lib/
     ├── app_root/
     │   └── app_root.dart
