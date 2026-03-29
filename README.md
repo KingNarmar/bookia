@@ -142,9 +142,9 @@ The project demonstrates how to build a clean and scalable Flutter app using:
 |---|---|---|
 | <img src="screen_shots/edit_profile_screen.png" width="220"/> | <img src="screen_shots/reset_password_screen.png" width="220"/> | <img src="screen_shots/my_orders_screen.png" width="220"/> |
 
-| Search Screen |  |  |
-|---|---|---|
-| <img src="screen_shots/search_screen.png" width="220"/> |  |  |
+| Search Screen |   
+|---
+| <img src="screen_shots/search_screen.png" width="220"/> |   
 
 ---
 
