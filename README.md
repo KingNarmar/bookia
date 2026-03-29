@@ -125,7 +125,7 @@ The previous README already covered the Session 22 features, but the current upl
 
 | Create New Password Screen | Password Changed Screen | Home Screen |
 |---|---|---|
-| <img src="screen_shots/create_new_password_screen.png" width="220"/> | <img src="screen_shots/password_changed_screen.png" width="220"/> | <img src="screen_shots/home_screen.png" width="220"/> |
+| <img src="screen_shots/create_new_password_screen.png" width="220"/> | <img src="screen_shots/password_cahnged_screen.png" width="220"/> | <img src="screen_shots/home_screen.png" width="220"/> |
 
 | Book Details Screen | Search Screen | Wishlist Screen |
 |---|---|---|
