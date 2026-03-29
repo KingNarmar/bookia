@@ -17,7 +17,6 @@ class MyOrdersScreen extends StatefulWidget {
 }
 
 class _MyOrdersScreenState extends State<MyOrdersScreen> {
-
   @override
   void initState() {
     super.initState();

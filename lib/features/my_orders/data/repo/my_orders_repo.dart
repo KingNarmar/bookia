@@ -11,9 +11,7 @@ class MyOrdersRepo {
       final token = SharedPref.getToken();
       var response = await DioProvider.get(
         endPoint: Apis.myOrders,
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
+        headers: {'Authorization': 'Bearer $token'},
       );
       if (response.statusCode == 200) {
         return MyOrdersResponse.fromJson(response.data);

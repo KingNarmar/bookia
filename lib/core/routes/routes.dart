@@ -21,6 +21,8 @@ import 'package:bookia/features/profile_folder/edit_profile/presentation/screens
 import 'package:bookia/features/profile_folder/profile/presentation/screens/profile_screen.dart';
 import 'package:bookia/features/profile_folder/reset_password/presentation/cubit/reset_password_cubit.dart';
 import 'package:bookia/features/profile_folder/reset_password/presentation/screens/reset_password_screen.dart';
+import 'package:bookia/features/search/presentation/cubit/search_cubit.dart';
+import 'package:bookia/features/search/presentation/screens/search_screen.dart';
 import 'package:bookia/features/welcome/screens/splash_screen.dart';
 import 'package:bookia/features/welcome/screens/welcome_screen.dart';
 import 'package:bookia/features/wish_list/presentation/screens/wish_list_screen.dart';
@@ -47,6 +49,7 @@ class Routes {
   static const String editProfile = "/edit-profile";
   static const String resetPassword = "/reset-password";
   static const String myOrders = "/my-orders";
+  static const String search = "/search";
 
   static var routs = GoRouter(
     routes: [
@@ -175,6 +178,14 @@ class Routes {
         builder: (context, state) => BlocProvider(
           create: (context) => MyOrderCubit(),
           child: const MyOrdersScreen(),
+        ),
+      ),
+
+      GoRoute(
+        path: Routes.search,
+        builder: (context, state) => BlocProvider(
+          create: (context) => SearchCubit(),
+          child: const SearchScreen(),
         ),
       ),
     ],
