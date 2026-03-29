@@ -168,9 +168,10 @@ Passionate about building modern, clean, and scalable mobile applications using 
 ### 📬 Contact & Collaboration
 I'm interested in freelance opportunities and open for collaboration. Feel free to reach out!
 
-- **GitHub:** [Your GitHub Profile Link]
-- **LinkedIn:** [Your LinkedIn Profile Link]
-- **Email:** [Your Email Address]
+- **GitHub:** https://github.com/KingNarmar
+- **LinkedIn:** https://www.linkedin.com/in/mina-bushra-733993317/
+- **Email:** adlymina99@gmail.com
+- **Mobile:** +971581255496 - +201555212015
 
 ---
 
