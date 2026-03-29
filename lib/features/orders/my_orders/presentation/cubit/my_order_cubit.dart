@@ -1,6 +1,6 @@
-import 'package:bookia/features/my_orders/data/models/my_orders_response/my_orders_response.dart';
-import 'package:bookia/features/my_orders/data/repo/my_orders_repo.dart';
-import 'package:bookia/features/my_orders/presentation/cubit/my_orders_state.dart';
+import 'package:bookia/features/orders/my_orders/data/models/my_orders_response/my_orders_response.dart';
+import 'package:bookia/features/orders/my_orders/data/repo/my_orders_repo.dart';
+import 'package:bookia/features/orders/my_orders/presentation/cubit/my_orders_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MyOrderCubit extends Cubit<MyOrdersState> {

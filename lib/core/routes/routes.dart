@@ -13,8 +13,10 @@ import 'package:bookia/features/home/home/presentation/screens/home_screen.dart'
 import 'package:bookia/features/home/search/presentation/cubit/search_cubit.dart';
 import 'package:bookia/features/home/search/presentation/screens/search_screen.dart';
 import 'package:bookia/features/main/main_app_screen.dart';
-import 'package:bookia/features/my_orders/presentation/cubit/my_order_cubit.dart';
-import 'package:bookia/features/my_orders/presentation/screens/my_orders_screen.dart';
+import 'package:bookia/features/orders/my_orders/presentation/cubit/my_order_cubit.dart';
+import 'package:bookia/features/orders/my_orders/presentation/screens/my_orders_screen.dart';
+import 'package:bookia/features/orders/order_details/presentation/cubit/order_details_cubit.dart';
+import 'package:bookia/features/orders/order_details/presentation/screens/order_details_screen.dart';
 import 'package:bookia/features/place_order/presentation/cubit/place_order_cubit.dart';
 import 'package:bookia/features/place_order/presentation/screens/congrats_screen.dart';
 import 'package:bookia/features/place_order/presentation/screens/place_order_screen.dart';
@@ -50,6 +52,7 @@ class Routes {
   static const String resetPassword = "/reset-password";
   static const String myOrders = "/my-orders";
   static const String search = "/search";
+  static const String orderDetails = "/order-details";
 
   static var routs = GoRouter(
     routes: [
@@ -188,6 +191,18 @@ class Routes {
           child: const SearchScreen(),
         ),
       ),
+
+     GoRoute(
+  path: Routes.orderDetails,
+  builder: (context, state) {
+    final orderId = state.extra as int;
+
+    return BlocProvider(
+      create: (context) => OrderDetailsCubit()..getOrderDetails(orderId),
+      child: OrderDetailsScreen(orderId: orderId),
+    );
+  },
+),
     ],
   );
 }

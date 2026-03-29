@@ -1,10 +1,11 @@
 import 'package:bookia/core/constants/app_images.dart';
 import 'package:bookia/core/functions/navigations.dart';
+import 'package:bookia/core/routes/routes.dart';
 import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/core/widgets/dialogs.dart';
-import 'package:bookia/features/my_orders/presentation/cubit/my_order_cubit.dart';
-import 'package:bookia/features/my_orders/presentation/cubit/my_orders_state.dart';
-import 'package:bookia/features/my_orders/presentation/widgets/order_item.dart';
+import 'package:bookia/features/orders/my_orders/presentation/cubit/my_order_cubit.dart';
+import 'package:bookia/features/orders/my_orders/presentation/cubit/my_orders_state.dart';
+import 'package:bookia/features/orders/my_orders/presentation/widgets/order_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -66,6 +67,13 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                     orderNumber: orders[index].orderCode ?? "N/A",
                     date: orders[index].orderDate ?? "N/A",
                     totalAmount: "\$${orders[index].total ?? "0"}",
+                    onTap: () {
+                      pushTo(
+                        Routes.orderDetails,
+                        context,
+                        extra: orders[index].id,
+                      );
+                    },
                   );
                 },
               ),

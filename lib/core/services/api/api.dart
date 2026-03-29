@@ -22,4 +22,5 @@ abstract class Apis {
   static const String myOrders = "order-history";
   static const String productsSearch = "products-search";
   static const String allProducts = "products";
+  static const String showSingleOrder = "order-history";
 }

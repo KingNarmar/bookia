@@ -60,7 +60,10 @@ class BookCard extends StatelessWidget {
                   isInWishList
                       ? IconButton(
                           onPressed: onRemoveFromWishList,
-                          icon: const Icon(Icons.delete, color: AppColors.errorColor),
+                          icon: const Icon(
+                            Icons.delete,
+                            color: AppColors.errorColor,
+                          ),
                         )
                       : Container(
                           height: 28,
