@@ -52,9 +52,13 @@ class BookCard extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    "${product.priceAfterDiscount ?? product.price} ${context.translate("price_currency")}",
-                    style: TextStyles.w400s16,
+                  Expanded(
+                    child: Text(
+                      "${product.priceAfterDiscount ?? product.price} ${context.translate("price_currency")}",
+                      style: TextStyles.w400s16,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                   isInWishList
                       ? IconButton(

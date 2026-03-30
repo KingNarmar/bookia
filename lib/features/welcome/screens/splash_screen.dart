@@ -1,5 +1,6 @@
 import 'package:bookia/core/constants/app_images.dart';
 import 'package:bookia/core/functions/navigations.dart';
+import 'package:bookia/core/localization/app_localizations.dart';
 import 'package:bookia/core/routes/routes.dart';
 import 'package:bookia/core/services/local/shared_pref.dart';
 import 'package:bookia/core/styles/text_styles.dart';
@@ -41,7 +42,7 @@ class _SplashScreenState extends State<SplashScreen> {
             children: [SvgPicture.asset(AppImages.logoSvg)],
           ),
           const Gap(10),
-          const Text("Order Your Book Now!", style: TextStyles.w400s18),
+          Text(context.translate("order_now"), style: TextStyles.w400s18),
         ],
       ),
     );

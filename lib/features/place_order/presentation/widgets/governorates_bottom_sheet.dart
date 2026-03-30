@@ -1,3 +1,4 @@
+import 'package:bookia/core/localization/app_localizations.dart';
 import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/features/place_order/presentation/cubit/place_order_cubit.dart';
 import 'package:bookia/features/place_order/presentation/cubit/place_order_state.dart';
@@ -23,7 +24,7 @@ class GovernoratesBottomSheet extends StatelessWidget {
         if (state is PlaceOrderGovernoratesErrorState) {
           return SizedBox(
             height: 350,
-            child: Center(child: Text(state.message)),
+            child: Center(child: Text(context.translate(state.message))),
           );
         }
 
@@ -42,7 +43,8 @@ class GovernoratesBottomSheet extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 16),
-                const Text("Select Governorate", style: TextStyles.w400s24),
+                Text(context.translate("select_governorate"),
+                    style: TextStyles.w400s24),
                 const SizedBox(height: 12),
                 Expanded(
                   child: ListView.separated(

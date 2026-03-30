@@ -1,6 +1,7 @@
 import 'package:bookia/core/constants/app_images.dart';
 import 'package:bookia/core/functions/app_validators.dart';
 import 'package:bookia/core/functions/navigations.dart';
+import 'package:bookia/core/localization/app_localizations.dart';
 import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/core/widgets/custom_text_form_field.dart';
 import 'package:bookia/core/widgets/dialogs.dart';
@@ -20,7 +21,7 @@ class EditProfileScreen extends StatelessWidget {
     var cubit = context.read<EditProfileCubit>();
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Edit Profile", style: TextStyles.w400s24),
+        title: Text(context.translate("edit_profile"), style: TextStyles.w400s24),
         centerTitle: true,
         automaticallyImplyLeading: false,
         leading: Padding(
@@ -41,7 +42,7 @@ class EditProfileScreen extends StatelessWidget {
             pop(context); // pop back to profile screen
           } else if (state is EditProfileError) {
             pop(context); // close loading dialog
-            showMyDialog(context, state.message);
+            showMyDialog(context, context.translate(state.message));
           } else if (state is EditProfileLoading) {
             showLoadingDialog(context);
           }
@@ -58,21 +59,37 @@ class EditProfileScreen extends StatelessWidget {
                     const EditProfilePicSection(),
                     const Gap(54),
                     CustomTextFormField(
-                      hint: "Full Name",
+                      hint: context.translate("fullname"),
                       controller: cubit.nameController,
-                      validator: AppValidators.name,
+                      validator: (value) => AppValidators.name(
+                        value,
+                        emptyMessage: context.translate("validation_name_empty"),
+                        invalidMessage:
+                            context.translate("validation_name_invalid"),
+                      ),
                     ),
                     const Gap(20),
                     CustomTextFormField(
-                      hint: "Phone",
+                      hint: context.translate("phone"),
                       controller: cubit.phoneController,
-                      validator: AppValidators.phone,
+                      validator: (value) => AppValidators.phone(
+                        value,
+                        emptyMessage: context.translate("validation_phone_empty"),
+                        invalidMessage:
+                            context.translate("validation_phone_invalid"),
+                      ),
                     ),
                     const Gap(20),
                     CustomTextFormField(
-                      hint: "Address",
+                      hint: context.translate("address"),
                       controller: cubit.addressController,
-                      validator: AppValidators.address,
+                      validator: (value) => AppValidators.address(
+                        value,
+                        emptyMessage:
+                            context.translate("validation_address_empty"),
+                        invalidMessage:
+                            context.translate("validation_address_short"),
+                      ),
                     ),
                   ],
                 ),
@@ -84,7 +101,7 @@ class EditProfileScreen extends StatelessWidget {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(20),
         child: MainButton(
-          text: "Update Profile",
+          text: context.translate("update_profile"),
           onPressed: () {
             if (cubit.formKey.currentState!.validate()) {
               cubit.editProfile();

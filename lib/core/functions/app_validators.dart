@@ -30,32 +30,31 @@ abstract class AppValidators {
       _egyNumberRegex.hasMatch(number);
 
   // ------------------- Validators -------------------
-  static String? email(String? input, {String? emptyMessage, String? invalidMessage}) {
+  static String? email(String? input, {required String emptyMessage, required String invalidMessage}) {
     final value = input?.trim() ?? '';
-    if (value.isEmpty) return emptyMessage ?? "Enter Your Email";
-    if (!isEmailValid(value)) return invalidMessage ?? "Enter Your Correct Email";
+    if (value.isEmpty) return emptyMessage;
+    if (!isEmailValid(value)) return invalidMessage;
     return null;
   }
 
-  static String? name(String? input, {String? emptyMessage, String? invalidMessage}) {
+  static String? name(String? input, {required String emptyMessage, required String invalidMessage}) {
     final value = input?.trim() ?? '';
-    if (value.isEmpty) return emptyMessage ?? "Please Enter the User Name";
+    if (value.isEmpty) return emptyMessage;
     if (value.length < 3 || !isNameValid(value)) {
-      return invalidMessage ?? "Please Enter Valid Name More than 3 Chr";
+      return invalidMessage;
     }
     return null;
   }
 
   static String? Function(String?) password({
-    String? emptyMessage,
-    String? invalidMessage,
+    required String emptyMessage,
+    required String invalidMessage,
   }) {
     return (String? input) {
       final value = input?.trim() ?? '';
-      if (value.isEmpty) return emptyMessage ?? "Create Your Password";
+      if (value.isEmpty) return emptyMessage;
       if (!isPasswordValid(value)) {
-        return invalidMessage ??
-            "Password Should Be (6+ chars, upper, lower, digit)";
+        return invalidMessage;
       }
       return null;
     };
@@ -63,31 +62,31 @@ abstract class AppValidators {
 
   static String? Function(String?) confirmPassword({
     required String Function() passwordProvider,
-    String? emptyMessage,
-    String? invalidMessage,
+    required String emptyMessage,
+    required String invalidMessage,
   }) {
     return (String? input) {
       final confirm = input?.trim() ?? '';
       final password = passwordProvider().trim();
 
-      if (confirm.isEmpty) return emptyMessage ?? "Confirm Password";
-      if (confirm != password) return invalidMessage ?? "password not matching";
+      if (confirm.isEmpty) return emptyMessage;
+      if (confirm != password) return invalidMessage;
       return null;
     };
   }
 
-  static String? address(String? input, {String? emptyMessage, String? invalidMessage}) {
+  static String? address(String? input, {required String emptyMessage, required String invalidMessage}) {
     final value = input?.trim() ?? '';
-    if (value.isEmpty) return emptyMessage ?? "Please Enter Your Address";
-    if (value.length < 5) return invalidMessage ?? "Address is too short";
+    if (value.isEmpty) return emptyMessage;
+    if (value.length < 5) return invalidMessage;
     return null;
   }
 
-  static String? phone(String? input, {String? emptyMessage, String? invalidMessage}) {
+  static String? phone(String? input, {required String emptyMessage, required String invalidMessage}) {
     final value = input?.trim() ?? '';
-    if (value.isEmpty) return emptyMessage ?? "Please Enter Your Phone Number";
+    if (value.isEmpty) return emptyMessage;
     if (!_phoneRegex.hasMatch(value)) {
-      return invalidMessage ?? "Please Enter Valid Phone Number";
+      return invalidMessage;
     }
     return null;
   }

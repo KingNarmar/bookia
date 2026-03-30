@@ -1,6 +1,7 @@
 import 'package:bookia/core/constants/app_images.dart';
 import 'package:bookia/core/functions/app_validators.dart';
 import 'package:bookia/core/functions/navigations.dart';
+import 'package:bookia/core/localization/app_localizations.dart';
 import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/core/widgets/dialogs.dart';
 import 'package:bookia/core/widgets/main_button.dart';
@@ -36,7 +37,7 @@ class ResetPasswordScreen extends StatelessWidget {
             pop(context); // pop back
           } else if (state is ResetPasswordError) {
             pop(context); // close loading dialog
-            showMyDialog(context, state.message);
+            showMyDialog(context, context.translate(state.message));
           } else if (state is ResetPasswordLoading) {
             showLoadingDialog(context);
           }
@@ -51,29 +52,40 @@ class ResetPasswordScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text("New Password", style: TextStyles.w400s30),
+                  Text(context.translate("new_password"),
+                      style: TextStyles.w400s30),
                   const Gap(73),
                   PasswordTextFormField(
-                    hint: "Current Password",
+                    hint: context.translate("current_password"),
                     passwordController: cubit.currentPasswordController,
                     validator: AppValidators.password(
-                      emptyMessage: "Enter Your Current Password",
+                      emptyMessage:
+                          context.translate("validation_current_password_empty"),
+                      invalidMessage:
+                          context.translate("validation_password_invalid"),
                     ),
                   ),
                   const Gap(26),
                   PasswordTextFormField(
-                    hint: "New Password",
+                    hint: context.translate("new_password"),
                     passwordController: cubit.newPasswordController,
                     validator: AppValidators.password(
-                      emptyMessage: "Enter Your New Password",
+                      emptyMessage:
+                          context.translate("validation_password_empty"),
+                      invalidMessage:
+                          context.translate("validation_password_invalid"),
                     ),
                   ),
                   const Gap(26),
                   PasswordTextFormField(
-                    hint: "Confirm Password",
+                    hint: context.translate("confirm_password"),
                     passwordController: cubit.confirmPasswordController,
                     validator: AppValidators.confirmPassword(
                       passwordProvider: () => cubit.newPasswordController.text,
+                      emptyMessage: context
+                          .translate("validation_confirm_password_empty"),
+                      invalidMessage: context.translate(
+                          "validation_confirm_password_invalid"),
                     ),
                   ),
                 ],
@@ -85,7 +97,7 @@ class ResetPasswordScreen extends StatelessWidget {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(20),
         child: MainButton(
-          text: "Update Password",
+          text: context.translate("update_password"),
           onPressed: () {
             if (cubit.formKey.currentState!.validate()) {
               cubit.updatePassword();
