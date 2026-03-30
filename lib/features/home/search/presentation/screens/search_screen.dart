@@ -53,7 +53,7 @@ class _SearchScreenState extends State<SearchScreen> {
   void _onSearchChanged(String value) {
     _debounce?.cancel();
 
-    _debounce = Timer(const Duration(milliseconds: 500), () {
+    _debounce = Timer(const Duration(milliseconds: 700), () {
       if (!mounted) return;
       context.read<SearchCubit>().searchProducts(value);
     });

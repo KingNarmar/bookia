@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bookia/core/services/api/api.dart';
 import 'package:bookia/core/services/api/dio_provider.dart';
 import 'package:bookia/core/services/local/shared_pref.dart';
@@ -50,6 +52,7 @@ class PlaceOrderRepo {
         return null;
       }
     } catch (e) {
+      log(e.toString());
       return null;
     }
   }
