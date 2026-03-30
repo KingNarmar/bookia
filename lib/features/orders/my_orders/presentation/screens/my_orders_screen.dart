@@ -1,5 +1,6 @@
 import 'package:bookia/core/constants/app_images.dart';
 import 'package:bookia/core/functions/navigations.dart';
+import 'package:bookia/core/localization/app_localizations.dart';
 import 'package:bookia/core/routes/routes.dart';
 import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/core/widgets/dialogs.dart';
@@ -30,7 +31,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("My Orders", style: TextStyles.w400s20),
+        title: Text(context.translate("my_orders"), style: TextStyles.w400s20),
         centerTitle: true,
         automaticallyImplyLeading: false,
         leading: IconButton(
@@ -46,7 +47,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
             pop(context);
           } else if (state is MyOrdersError) {
             pop(context);
-            showMyDialog(context, state.message);
+            showMyDialog(context, context.translate(state.message));
           }
         },
         builder: (context, state) {
@@ -54,7 +55,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
           var orders = cubit.myOrdersResponse?.data?.orders;
 
           if (orders != null && orders.isEmpty) {
-            return const Center(child: Text("No Orders Found."));
+            return Center(child: Text(context.translate("no_orders")));
           }
 
           if (orders != null) {
@@ -66,7 +67,8 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                   return OrderItem(
                     orderNumber: orders[index].orderCode ?? "N/A",
                     date: orders[index].orderDate ?? "N/A",
-                    totalAmount: "\$${orders[index].total ?? "0"}",
+                    totalAmount:
+                        "${orders[index].total ?? "0"} ${context.translate("price_currency")}",
                     onTap: () {
                       pushTo(
                         Routes.orderDetails,

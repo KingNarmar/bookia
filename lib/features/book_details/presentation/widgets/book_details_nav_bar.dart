@@ -1,3 +1,4 @@
+import 'package:bookia/core/localization/app_localizations.dart';
 import 'package:bookia/core/styles/app_colors.dart';
 import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/features/book_details/presentation/cubit/book_details_cubit.dart';
@@ -24,12 +25,12 @@ class BookDetailsNavBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            "\$ ${product.priceAfterDiscount ?? product.price ?? 0}",
+            "${product.priceAfterDiscount ?? product.price ?? 0} ${context.translate("price_currency")}",
             style: TextStyles.w400s24,
           ),
           isInCart
               ? Text(
-                  "Already in Cart",
+                  context.translate("already_in_cart"),
                   style: TextStyles.w400s14.copyWith(
                     color: AppColors.primaryColor,
                   ),
@@ -47,7 +48,7 @@ class BookDetailsNavBar extends StatelessWidget {
                     ),
                     child: Center(
                       child: Text(
-                        "Add to Cart",
+                        context.translate("add_to_cart"),
                         style: TextStyles.w400s14.copyWith(
                           color: AppColors.bgColor,
                         ),

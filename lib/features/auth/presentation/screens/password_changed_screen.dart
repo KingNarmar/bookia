@@ -1,5 +1,6 @@
 import 'package:bookia/core/constants/app_images.dart';
 import 'package:bookia/core/functions/navigations.dart';
+import 'package:bookia/core/localization/app_localizations.dart';
 import 'package:bookia/core/routes/routes.dart';
 import 'package:bookia/core/styles/app_colors.dart';
 import 'package:bookia/core/styles/text_styles.dart';
@@ -22,11 +23,12 @@ class PasswordChangedScreen extends StatelessWidget {
             children: [
               SvgPicture.asset(AppImages.successSvg),
               const Gap(35),
-              const Text("Password Changed!", style: TextStyles.w400s26),
+              Text(context.translate("password_changed"),
+                  style: TextStyles.w400s26),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 53),
                 child: Text(
-                  "Your password has been changed successfully.",
+                  context.translate("password_changed_subtitle"),
                   style: TextStyles.w400s15.copyWith(
                     color: AppColors.grayColor,
                   ),
@@ -35,7 +37,7 @@ class PasswordChangedScreen extends StatelessWidget {
               ),
               const Gap(40),
               MainButton(
-                text: "Back to Login",
+                text: context.translate("back_to_login"),
                 onPressed: () {
                   pushAndClearStack(Routes.login, context);
                 },

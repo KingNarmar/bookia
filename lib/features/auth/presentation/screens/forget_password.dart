@@ -1,5 +1,6 @@
 import 'package:bookia/core/constants/app_images.dart';
 import 'package:bookia/core/functions/navigations.dart';
+import 'package:bookia/core/localization/app_localizations.dart';
 import 'package:bookia/core/routes/routes.dart';
 import 'package:bookia/core/styles/app_colors.dart';
 import 'package:bookia/core/styles/text_styles.dart';
@@ -44,7 +45,7 @@ class ForgetPasswordScreen extends StatelessWidget {
               );
             } else if (state is AuthErrorState) {
               pop(context);
-              showMyDialog(context, state.message);
+              showMyDialog(context, context.translate(state.message));
             }
           },
           builder: (context, state) {
@@ -57,23 +58,29 @@ class ForgetPasswordScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text("Forgot Password?", style: TextStyles.w400s30),
+                    Text(context.translate("forgot_password_title"),
+                        style: TextStyles.w400s30),
                     const Gap(10),
                     Text(
-                      "Don't worry! It occurs. Please enter the email address linked with your account.",
+                      context.translate("forgot_password_subtitle"),
                       style: TextStyles.w400s16.copyWith(
                         color: AppColors.grayColor,
                       ),
                     ),
                     const Gap(30),
                     CustomTextFormField(
-                      hint: "Enter Your Email",
-                      validator: AppValidators.email,
+                      hint: context.translate("email_hint"),
+                      validator: (value) => AppValidators.email(
+                        value,
+                        emptyMessage: context.translate("validation_email_empty"),
+                        invalidMessage:
+                            context.translate("validation_email_invalid"),
+                      ),
                       controller: cubit.emailController,
                     ),
                     const Gap(40),
                     MainButton(
-                      text: "Send Code",
+                      text: context.translate("send_code"),
                       onPressed: () {
                         if (cubit.formKey.currentState!.validate()) {
                           cubit.forgetPassword();
@@ -87,8 +94,8 @@ class ForgetPasswordScreen extends StatelessWidget {
           },
         ),
         bottomNavigationBar: AuthFooter(
-          text: "Remember Password?",
-          textButton: "Login",
+          text: context.translate("no_account"),
+          textButton: context.translate("register_now"),
           onPressed: () => pop(context),
         ),
       ),

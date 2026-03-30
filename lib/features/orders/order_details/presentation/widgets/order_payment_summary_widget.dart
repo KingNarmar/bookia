@@ -1,3 +1,4 @@
+import 'package:bookia/core/localization/app_localizations.dart';
 import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/features/orders/order_details/data/models/order_details_response/data.dart';
 import 'package:flutter/material.dart';
@@ -13,24 +14,33 @@ class OrderPaymentSummaryWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text("Payment Summary", style: TextStyles.w400s16),
+        Text(context.translate("payment_summary"), style: TextStyles.w400s16),
         const Gap(16),
         _summaryRow(
-          title: "Sub Total",
-          value: "\$${order.subTotal ?? "0"}",
+          title: context.translate("sub_total"),
+          value: "${order.subTotal ?? "0"} ${context.translate("price_currency")}",
         ),
         const Gap(10),
-        _summaryRow(title: "Discount", value: "${order.discount ?? 0}"),
+        _summaryRow(
+          title: context.translate("discount"),
+          value: "${order.discount ?? 0} ${context.translate("price_currency")}",
+        ),
         const Gap(10),
         _summaryRow(
-          title: "Total",
-          value: "\$${order.total ?? "0"}",
+          title: context.translate("total"),
+          value: "${order.total ?? "0"} ${context.translate("price_currency")}",
           isBold: true,
         ),
         const Gap(16),
-        _summaryRow(title: "Status", value: order.status ?? "Unknown"),
+        _summaryRow(
+          title: context.translate("status", replacements: {"status": ""}).replaceAll(": ", ""),
+          value: order.status ?? "Unknown",
+        ),
         const Gap(10),
-        _summaryRow(title: "Order Date", value: order.orderDate ?? ""),
+        _summaryRow(
+          title: context.translate("order_date", replacements: {"date": ""}).replaceAll(": ", ""),
+          value: order.orderDate ?? "",
+        ),
       ],
     );
   }

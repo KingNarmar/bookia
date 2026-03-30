@@ -23,13 +23,13 @@ class HomeCubit extends Cubit<HomeState> {
       products = response[1] as List<Product>;
 
       if (sliders.isEmpty && products.isEmpty) {
-        emit(HomeErrorState(errorMsg: "Failed to load home data"));
+        emit(HomeErrorState(errorMsg: "failed_to_load_data"));
         return;
       }
 
       emit(HomeSuccessState(products: products, sliders: sliders));
     } catch (e) {
-      emit(HomeErrorState(errorMsg: "Failed to load home data"));
+      emit(HomeErrorState(errorMsg: "failed_to_load_data"));
     }
   }
 }

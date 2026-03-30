@@ -1,6 +1,7 @@
 import 'package:bookia/core/constants/app_images.dart';
 import 'package:bookia/core/functions/app_validators.dart';
 import 'package:bookia/core/functions/navigations.dart';
+import 'package:bookia/core/localization/app_localizations.dart';
 import 'package:bookia/core/routes/routes.dart';
 import 'package:bookia/core/styles/app_colors.dart';
 import 'package:bookia/core/styles/text_styles.dart';
@@ -101,13 +102,13 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
         if (state is PlaceOrderErrorState) {
           ScaffoldMessenger.of(
             context,
-          ).showSnackBar(SnackBar(content: Text(state.message)));
+          ).showSnackBar(SnackBar(content: Text(context.translate(state.message))));
         }
       },
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
-            title: IconButton(
+            leading: IconButton(
               onPressed: () {
                 pop(context);
               },
@@ -124,49 +125,72 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text("Place Your Order", style: TextStyles.w400s30),
+                    Text(context.translate("place_order"),
+                        style: TextStyles.w400s30),
                     const Gap(10),
                     Text(
-                      "Please enter your order details below.",
+                      context.translate("place_order_subtitle"),
                       style: TextStyles.w400s16.copyWith(
                         color: AppColors.grayColor,
                       ),
                     ),
                     const Gap(25),
                     CustomTextFormField(
-                      hint: "Full Name",
+                      hint: context.translate("fullname"),
                       controller: _nameController,
-                      validator: AppValidators.name,
+                      validator: (value) => AppValidators.name(
+                        value,
+                        emptyMessage: context.translate("validation_name_empty"),
+                        invalidMessage:
+                            context.translate("validation_name_invalid"),
+                      ),
                     ),
                     const Gap(12),
                     CustomTextFormField(
-                      hint: "Email",
+                      hint: context.translate("email_hint"),
                       controller: _emailController,
-                      validator: AppValidators.email,
+                      validator: (value) => AppValidators.email(
+                        value,
+                        emptyMessage: context.translate("validation_email_empty"),
+                        invalidMessage:
+                            context.translate("validation_email_invalid"),
+                      ),
                       keyboardType: TextInputType.emailAddress,
                     ),
                     const Gap(12),
                     CustomTextFormField(
-                      hint: "Address",
+                      hint: context.translate("address"),
                       controller: _addressController,
-                      validator: AppValidators.address,
+                      validator: (value) => AppValidators.address(
+                        value,
+                        emptyMessage:
+                            context.translate("validation_address_empty"),
+                        invalidMessage:
+                            context.translate("validation_address_short"),
+                      ),
                     ),
                     const Gap(12),
                     CustomTextFormField(
-                      hint: "Phone Number",
+                      hint: context.translate("phone"),
                       controller: _phoneController,
-                      validator: AppValidators.phone,
+                      validator: (value) => AppValidators.phone(
+                        value,
+                        emptyMessage: context.translate("validation_phone_empty"),
+                        invalidMessage:
+                            context.translate("validation_phone_invalid"),
+                      ),
                       keyboardType: TextInputType.phone,
                     ),
                     const Gap(12),
                     CustomTextFormField(
-                      hint: "Governorate",
+                      hint: context.translate("choose_governorate"),
                       controller: _governorateController,
                       readOnly: true,
                       onTap: _showGovernoratesBottomSheet,
                       validator: (value) {
                         if (value == null || value.trim().isEmpty) {
-                          return "Please select governorate";
+                          return context
+                              .translate("validation_governorate_empty");
                         }
                         return null;
                       },
@@ -179,7 +203,7 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
           bottomNavigationBar: Padding(
             padding: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
             child: CartScreenBtttomNavBar(
-              text: "Place Order",
+              text: context.translate("place_order"),
               totalPrice: totalPrice,
               isLoading: state is PlaceOrderSubmittingState,
               onPressed: () {

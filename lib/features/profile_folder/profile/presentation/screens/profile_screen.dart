@@ -43,7 +43,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               if (success) {
                 pushAndClearStack(Routes.login, context);
               } else {
-                showMyDialog(context, "Failed to log out");
+                showMyDialog(context, context.translate("failed_to_logout"));
               }
             },
             icon: SvgPicture.asset(AppImages.logoutIconSvg),

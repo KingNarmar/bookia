@@ -1,4 +1,5 @@
 import 'package:bookia/core/functions/navigations.dart';
+import 'package:bookia/core/localization/app_localizations.dart';
 import 'package:bookia/core/routes/routes.dart';
 import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/core/widgets/shimmer/list_shimmer.dart';
@@ -22,7 +23,7 @@ class CartScreen extends StatelessWidget {
 
           return Scaffold(
             appBar: AppBar(
-              title: const Text("My Cart", style: TextStyles.w400s24),
+              title: Text(context.translate("cart"), style: TextStyles.w400s24),
               centerTitle: true,
             ),
             body: Padding(
@@ -33,11 +34,15 @@ class CartScreen extends StatelessWidget {
                 }
 
                 if (state is CartErrorState && cubit.cartItems.isEmpty) {
-                  return const Center(child: Text("Failed to load cart"));
+                  return Center(
+                    child: Text(context.translate("failed_to_load_data")),
+                  );
                 }
 
                 if (cubit.cartItems.isEmpty) {
-                  return const Center(child: Text("Your cart is empty"));
+                  return Center(
+                    child: Text(context.translate("no_items_in_cart")),
+                  );
                 }
 
                 return Column(
@@ -52,7 +57,7 @@ class CartScreen extends StatelessWidget {
                       ),
                     ),
                     CartScreenBtttomNavBar(
-                      text: "Checkout",
+                      text: context.translate("checkout"),
                       onPressed: () async {
                         final isSuccess = await cubit.checkout();
 
@@ -60,8 +65,8 @@ class CartScreen extends StatelessWidget {
 
                         if (isSuccess) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text("Checkout successful"),
+                            SnackBar(
+                              content: Text(context.translate("checkout_success")),
                             ),
                           );
 
@@ -72,7 +77,9 @@ class CartScreen extends StatelessWidget {
                           );
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text("Checkout failed")),
+                            SnackBar(
+                                content:
+                                    Text(context.translate("checkout_failed"))),
                           );
                         }
                       },

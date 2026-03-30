@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:bookia/core/localization/app_localizations.dart';
 import 'package:bookia/core/constants/app_images.dart';
 import 'package:bookia/core/functions/navigations.dart';
 import 'package:bookia/core/widgets/custom_text_form_field.dart';
@@ -88,7 +88,7 @@ class _SearchScreenState extends State<SearchScreen> {
               _hideLoader();
             } else if (state is SearchError) {
               _hideLoader();
-              showMyDialog(context, state.message);
+              showMyDialog(context, context.translate(state.message));
             } else if (state is SearchInitial) {
               _hideLoader();
             }
@@ -97,7 +97,7 @@ class _SearchScreenState extends State<SearchScreen> {
             return Column(
               children: [
                 CustomTextFormField(
-                  hint: "Search Store",
+                  hint: context.translate("search_for_books"),
                   icon: const Icon(Icons.search),
                   onChanged: _onSearchChanged,
                 ),
@@ -107,13 +107,14 @@ class _SearchScreenState extends State<SearchScreen> {
                     builder: (context) {
                       if (state is SearchSuccess) {
                         if (state.products.isEmpty) {
-                          return const Center(child: Text("No products found"));
+                          return Center(
+                              child: Text(context.translate("no_products_found")));
                         }
 
                         return GridView.builder(
                           itemCount: state.products.length,
                           gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
+                               const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2,
                                 crossAxisSpacing: 11,
                                 mainAxisSpacing: 11,
@@ -129,7 +130,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         return const SizedBox.shrink();
                       }
 
-                      return const Center(child: Text("Loading products..."));
+                      return Center(child: Text(context.translate("loading")));
                     },
                   ),
                 ),

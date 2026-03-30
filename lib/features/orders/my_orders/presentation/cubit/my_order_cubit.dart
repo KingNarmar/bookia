@@ -18,12 +18,12 @@ class MyOrderCubit extends Cubit<MyOrdersState> {
       } else {
         emit(
           MyOrdersError(
-            message: response?.message ?? "Failed to fetch orders.",
+            message: response?.message ?? "failed_to_load_data",
           ),
         );
       }
     } catch (e) {
-      emit(MyOrdersError(message: "An error occurred"));
+      emit(MyOrdersError(message: "error"));
     }
   }
 }

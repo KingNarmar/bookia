@@ -1,5 +1,6 @@
 import 'package:bookia/core/constants/app_images.dart';
 import 'package:bookia/core/functions/navigations.dart';
+import 'package:bookia/core/localization/app_localizations.dart';
 import 'package:bookia/core/routes/routes.dart';
 import 'package:bookia/core/styles/app_colors.dart';
 import 'package:bookia/core/styles/text_styles.dart';
@@ -21,10 +22,12 @@ class CongratsScreen extends StatelessWidget {
           children: [
             SvgPicture.asset(AppImages.successSvg),
             const Gap(50),
-            const Text("SUCCESS!", style: TextStyles.w400s36),
+            Text(context.translate("congrats").toUpperCase(),
+                style: TextStyles.w400s36),
             const Gap(22),
             Text(
-              "Your order will be delivered soon.\nThank you for choosing our app!",
+              context.translate("order_success_subtitle"),
+              textAlign: TextAlign.center,
               style: TextStyles.w400s18.copyWith(
                 color: AppColors.black3,
                 fontFamily: "Nunito Sans",
@@ -32,7 +35,7 @@ class CongratsScreen extends StatelessWidget {
             ),
             const Gap(51),
             MainButton(
-              text: "Go To Home",
+              text: context.translate("back_to_home"),
               onPressed: () {
                 pushAndClearStack(
                   Routes.mainApp,

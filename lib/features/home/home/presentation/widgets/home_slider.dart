@@ -1,3 +1,4 @@
+import 'package:bookia/core/localization/app_localizations.dart';
 import 'package:bookia/core/styles/app_colors.dart';
 import 'package:bookia/core/widgets/shimmer/slider_shimmer.dart';
 import 'package:bookia/features/home/home/presentation/cubits/home_cubit/home_cubit.dart';
@@ -25,7 +26,7 @@ class _HomeSliderState extends State<HomeSlider> {
         if (state is HomeErrorState) {
           return SizedBox(
             height: 180,
-            child: Center(child: Text(state.errorMsg)),
+            child: Center(child: Text(context.translate(state.errorMsg))),
           );
         }
 
@@ -33,9 +34,9 @@ class _HomeSliderState extends State<HomeSlider> {
           final sliders = state.sliders;
 
           if (sliders.isEmpty) {
-            return const SizedBox(
+            return SizedBox(
               height: 180,
-              child: Center(child: Text('No sliders found')),
+              child: Center(child: Text(context.translate("no_products_found"))),
             );
           }
 

@@ -25,7 +25,7 @@ class PlaceOrderCubit extends Cubit<PlaceOrderState> {
     } else {
       emit(
         PlaceOrderGovernoratesErrorState(
-          message: "Failed to load governorates",
+          message: "failed_to_load_data",
         ),
       );
     }
@@ -43,7 +43,7 @@ class PlaceOrderCubit extends Cubit<PlaceOrderState> {
     required String email,
   }) async {
     if (selectedGovernorate?.id == null) {
-      emit(PlaceOrderErrorState(message: "Please select governorate"));
+      emit(PlaceOrderErrorState(message: "validation_governorate_empty"));
       return;
     }
 
@@ -60,7 +60,7 @@ class PlaceOrderCubit extends Cubit<PlaceOrderState> {
     if (orderId != null) {
       emit(PlaceOrderSuccessState(orderId: orderId));
     } else {
-      emit(PlaceOrderErrorState(message: "Failed to place order"));
+      emit(PlaceOrderErrorState(message: "error"));
     }
   }
 }

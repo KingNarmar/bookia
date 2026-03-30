@@ -38,7 +38,7 @@ class RegisterScreen extends StatelessWidget {
               pushAndClearStack(Routes.mainApp, context);
             } else if (state is AuthErrorState) {
               pop(context);
-              showMyDialog(context, state.message);
+              showMyDialog(context, context.translate(state.message));
             } else if (state is AuthLoadingState) {
               showLoadingDialog(context);
             }
@@ -60,19 +60,34 @@ class RegisterScreen extends StatelessWidget {
                       const Gap(32),
                       CustomTextFormField(
                         hint: context.translate("username_hint"),
-                        validator: AppValidators.name,
+                        validator: (value) => AppValidators.name(
+                          value,
+                          emptyMessage: context.translate("validation_name_empty"),
+                          invalidMessage:
+                              context.translate("validation_name_invalid"),
+                        ),
                         controller: cubit.userNameController,
                       ),
                       const Gap(11),
                       CustomTextFormField(
                         hint: context.translate("email_hint"),
-                        validator: AppValidators.email,
+                        validator: (value) => AppValidators.email(
+                          value,
+                          emptyMessage: context.translate("validation_email_empty"),
+                          invalidMessage:
+                              context.translate("validation_email_invalid"),
+                        ),
                         controller: cubit.emailController,
                       ),
                       const Gap(11),
                       PasswordTextFormField(
                         hint: context.translate("password_hint"),
-                        validator: AppValidators.password(),
+                        validator: AppValidators.password(
+                          emptyMessage:
+                              context.translate("validation_password_empty"),
+                          invalidMessage:
+                              context.translate("validation_password_invalid"),
+                        ),
                         passwordController: cubit.passwordController,
                       ),
                       const Gap(11),
@@ -80,6 +95,10 @@ class RegisterScreen extends StatelessWidget {
                         hint: context.translate("confirm_password"),
                         validator: AppValidators.confirmPassword(
                           passwordProvider: () => cubit.passwordController.text,
+                          emptyMessage: context
+                              .translate("validation_confirm_password_empty"),
+                          invalidMessage: context.translate(
+                              "validation_confirm_password_invalid"),
                         ),
                         passwordController: cubit.confirmController,
                       ),

@@ -1,5 +1,6 @@
 import 'package:bookia/core/constants/app_images.dart';
 import 'package:bookia/core/functions/navigations.dart';
+import 'package:bookia/core/localization/app_localizations.dart';
 import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/core/widgets/dialogs.dart';
 import 'package:bookia/core/widgets/main_button.dart';
@@ -77,7 +78,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
             _hideLoader();
           } else if (state is OrderDetailsError) {
             _hideLoader();
-            showMyDialog(context, state.message);
+            showMyDialog(context, context.translate(state.message));
           }
         },
         builder: (context, state) {
@@ -89,7 +90,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
           }
 
           if (state is OrderDetailsError && order == null) {
-            return const Center(child: Text("Failed to load order details"));
+            return Center(child: Text(context.translate("failed_to_load_data")));
           }
 
           if (order == null) {
@@ -118,9 +119,9 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
-        child: MainButton(text: "My Orders", onPressed: () => pop(context)),
+        child: MainButton(
+            text: context.translate("my_orders"), onPressed: () => pop(context)),
       ),
     );
   }
-
 }

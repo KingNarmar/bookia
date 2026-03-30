@@ -20,12 +20,12 @@ class OrderDetailsCubit extends Cubit<OrderDetailsState> {
       } else {
         emit(
           OrderDetailsError(
-            message: response?.message ?? "Failed to fetch order details.",
+            message: response?.message ?? "failed_to_load_data",
           ),
         );
       }
     } catch (e) {
-      emit(OrderDetailsError(message: "An error occurred"));
+      emit(OrderDetailsError(message: "error"));
     }
   }
 }

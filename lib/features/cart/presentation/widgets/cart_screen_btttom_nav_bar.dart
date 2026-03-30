@@ -1,3 +1,4 @@
+import 'package:bookia/core/localization/app_localizations.dart';
 import 'package:bookia/core/styles/app_colors.dart';
 import 'package:bookia/core/widgets/main_button.dart';
 import 'package:flutter/material.dart';
@@ -25,9 +26,9 @@ class CartScreenBtttomNavBar extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text(
-              "Total:",
-              style: TextStyle(
+            Text(
+              context.translate("total"),
+              style: const TextStyle(
                 fontFamily: "Nunito Sans",
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
@@ -35,7 +36,7 @@ class CartScreenBtttomNavBar extends StatelessWidget {
               ),
             ),
             Text(
-              "\$ $totalPrice",
+              "$totalPrice ${context.translate("price_currency")}",
               style: const TextStyle(
                 fontFamily: "Nunito Sans",
                 fontSize: 20,

@@ -1,5 +1,6 @@
 import 'package:bookia/core/constants/app_images.dart';
 import 'package:bookia/core/functions/navigations.dart';
+import 'package:bookia/core/localization/app_localizations.dart';
 import 'package:bookia/core/routes/routes.dart';
 import 'package:bookia/core/styles/app_colors.dart';
 import 'package:bookia/core/styles/text_styles.dart';
@@ -27,7 +28,7 @@ class CreateNewPasswordScreen extends StatelessWidget {
         } else if (state is AuthSuccessState) {
           pushReplacment(Routes.passwordChanged, context, extra: cubit);
         } else if (state is AuthErrorState) {
-          showMyDialog(context, state.message);
+          showMyDialog(context, context.translate(state.message));
         }
       },
       builder: (context, state) {
@@ -48,32 +49,40 @@ class CreateNewPasswordScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text("Create new password", style: TextStyles.w400s30),
+                  Text(context.translate("create_new_password"),
+                      style: TextStyles.w400s30),
                   const Gap(10),
                   Text(
-                    "Your new password must be unique from those previously used.",
+                    context.translate("create_new_password_subtitle"),
                     style: TextStyles.w400s16.copyWith(
                       color: AppColors.grayColor,
                     ),
                   ),
                   const Gap(32),
                   PasswordTextFormField(
-                    hint: "New Password",
-                    validator: AppValidators.password(),
+                    hint: context.translate("new_password"),
+                    validator: AppValidators.password(
+                      emptyMessage: context.translate("validation_password_empty"),
+                      invalidMessage:
+                          context.translate("validation_password_invalid"),
+                    ),
                     passwordController: cubit.passwordController,
                   ),
-
                   const Gap(15),
                   PasswordTextFormField(
-                    hint: "Confirm Password",
+                    hint: context.translate("confirm_password"),
                     validator: AppValidators.confirmPassword(
                       passwordProvider: () => cubit.passwordController.text,
+                      emptyMessage:
+                          context.translate("validation_confirm_password_empty"),
+                      invalidMessage: context
+                          .translate("validation_confirm_password_invalid"),
                     ),
                     passwordController: cubit.confirmController,
                   ),
                   const Gap(38),
                   MainButton(
-                    text: "Reset Password",
+                    text: context.translate("reset_password"),
                     onPressed: () {
                       if (cubit.formKey.currentState!.validate()) {
                         cubit.resetPassword();

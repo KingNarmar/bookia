@@ -1,5 +1,6 @@
 import 'package:bookia/core/constants/app_images.dart';
 import 'package:bookia/core/functions/navigations.dart';
+import 'package:bookia/core/localization/app_localizations.dart';
 import 'package:bookia/core/widgets/dialogs.dart';
 import 'package:bookia/features/book_details/presentation/cubit/book_details_cubit.dart';
 import 'package:bookia/features/book_details/presentation/cubit/book_details_state.dart';
@@ -27,21 +28,21 @@ class BookDetailsScreen extends StatelessWidget {
           pop(context);
           showMyDialog(
             context,
-            "Added to wish list successfully",
+            context.translate("added_to_wishlist"),
             type: DialogType.success,
           );
         } else if (state is AddToWishListErrorState) {
           pop(context);
-          showMyDialog(context, "Failed to add to wish list");
+          showMyDialog(context, context.translate("failed_to_add_to_wishlist"));
         } else if (state is AddToCartSuccessState) {
           pop(context);
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text("Added to cart successfully")),
+            SnackBar(content: Text(context.translate("added_to_cart"))),
           );
         } else if (state is AddToCartErrorState) {
           pop(context);
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text("Failed to add to cart")),
+            SnackBar(content: Text(context.translate("failed_to_add_to_cart"))),
           );
         }
       },

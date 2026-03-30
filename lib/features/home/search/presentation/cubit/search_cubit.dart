@@ -18,7 +18,7 @@ class SearchCubit extends Cubit<SearchState> {
 
       emit(SearchSuccess(products: products));
     } catch (e) {
-      emit(SearchError(message: 'Failed to load products'));
+      emit(SearchError(message: 'failed_to_load_data'));
     }
   }
 
@@ -37,7 +37,7 @@ class SearchCubit extends Cubit<SearchState> {
 
       emit(SearchSuccess(products: products));
     } catch (e) {
-      emit(SearchError(message: 'Failed to load search results'));
+      emit(SearchError(message: 'failed_to_load_data'));
     }
   }
 }

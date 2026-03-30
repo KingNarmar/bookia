@@ -26,7 +26,7 @@ class AuthCubit extends Cubit<AuthState> {
     if (response != null) {
       emit(AuthSuccessState());
     } else {
-      emit(AuthErrorState(message: "Login Failed"));
+      emit(AuthErrorState(message: "login_failed"));
     }
   }
 
@@ -43,7 +43,7 @@ class AuthCubit extends Cubit<AuthState> {
     if (response != null) {
       emit(AuthSuccessState());
     } else {
-      emit(AuthErrorState(message: "Register Failed"));
+      emit(AuthErrorState(message: "register_failed"));
     }
   }
 
@@ -58,7 +58,7 @@ class AuthCubit extends Cubit<AuthState> {
       if (response != null) {
         emit(AuthSuccessState());
       } else {
-        emit(AuthErrorState(message: "Wrong Email"));
+        emit(AuthErrorState(message: "wrong_email"));
       }
     } catch (e) {
       emit(AuthErrorState(message: e.toString()));
@@ -80,7 +80,7 @@ class AuthCubit extends Cubit<AuthState> {
       if (response != null) {
         emit(AuthSuccessState());
       } else {
-        emit(AuthErrorState(message: "Reset password failed"));
+        emit(AuthErrorState(message: "reset_password_failed"));
       }
     } catch (e) {
       emit(AuthErrorState(message: e.toString()));

@@ -1,5 +1,6 @@
 import 'package:bookia/core/constants/app_images.dart';
 import 'package:bookia/core/functions/navigations.dart';
+import 'package:bookia/core/localization/app_localizations.dart';
 import 'package:bookia/core/routes/routes.dart';
 import 'package:bookia/core/styles/app_colors.dart';
 import 'package:bookia/core/styles/text_styles.dart';
@@ -32,17 +33,18 @@ class OtpVerificationScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text("OTP Verification", style: TextStyles.w400s30),
+            Text(context.translate("otp_verification"),
+                style: TextStyles.w400s30),
             const Gap(10),
             Text(
-              "Enter the verification code we just sent on your email address.",
+              context.translate("otp_verification_subtitle"),
               style: TextStyles.w400s16.copyWith(color: AppColors.grayColor),
             ),
             const Gap(35),
             PinCodeSection(controller: cubit.otpController),
             const Gap(35),
             MainButton(
-              text: "Verify",
+              text: context.translate("verify"),
               onPressed: () {
                 if (cubit.otpController.text.trim().length == 6) {
                   pushTo(Routes.createNewPassword, context, extra: cubit);
@@ -52,9 +54,9 @@ class OtpVerificationScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: const AuthFooter(
-        text: "Didn’t received code?",
-        textButton: "Resend",
+      bottomNavigationBar: AuthFooter(
+        text: context.translate("no_account"),
+        textButton: context.translate("resend"),
       ),
     );
   }

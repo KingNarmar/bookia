@@ -1,3 +1,4 @@
+import 'package:bookia/core/localization/app_localizations.dart';
 import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/core/widgets/shimmer/grid_shimmer.dart';
 import 'package:bookia/features/home/home/presentation/widgets/book_card.dart';
@@ -13,7 +14,7 @@ class WishlistScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Wishlist", style: TextStyles.w400s24),
+        title: Text(context.translate("wishlist"), style: TextStyles.w400s24),
         centerTitle: true,
       ),
       body: BlocBuilder<WishListCubit, WishListState>(

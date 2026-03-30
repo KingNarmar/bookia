@@ -40,7 +40,7 @@ class LoginScreen extends StatelessWidget {
               pushAndClearStack(Routes.mainApp, context);
             } else if (state is AuthErrorState) {
               pop(context);
-              showMyDialog(context, state.message);
+              showMyDialog(context, context.translate(state.message));
             } else if (state is AuthLoadingState) {
               showLoadingDialog(context);
             }
@@ -62,14 +62,22 @@ class LoginScreen extends StatelessWidget {
                       const Gap(32),
                       CustomTextFormField(
                         hint: context.translate("email_hint"),
-                        validator: AppValidators.email,
+                        validator: (value) => AppValidators.email(
+                          value,
+                          emptyMessage: context.translate("validation_email_empty"),
+                          invalidMessage:
+                              context.translate("validation_email_invalid"),
+                        ),
                         controller: cubit.emailController,
                       ),
                       const Gap(15),
                       PasswordTextFormField(
                         hint: context.translate("password_hint"),
                         validator: AppValidators.password(
-                          emptyMessage: context.translate("password_hint"),
+                          emptyMessage:
+                              context.translate("validation_password_empty"),
+                          invalidMessage:
+                              context.translate("validation_password_invalid"),
                         ),
                         passwordController: cubit.passwordController,
                       ),
@@ -79,7 +87,7 @@ class LoginScreen extends StatelessWidget {
                           pushTo(Routes.forgetPassword, context);
                         },
                         child: Align(
-                          alignment: AlignmentGeometry.centerRight,
+                          alignment: AlignmentDirectional.centerEnd,
                           child: Text(
                             context.translate("forgot_password"),
                             style: TextStyles.w400s14.copyWith(

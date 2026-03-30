@@ -1,4 +1,5 @@
 import 'package:bookia/core/functions/navigations.dart';
+import 'package:bookia/core/localization/app_localizations.dart';
 import 'package:bookia/core/routes/routes.dart';
 import 'package:bookia/core/styles/app_colors.dart';
 import 'package:bookia/core/styles/text_styles.dart';
@@ -24,10 +25,8 @@ class BookCard extends StatelessWidget {
       },
       child: Hero(
         tag: product.id?.toInt() ?? 0,
-
         child: Container(
           padding: const EdgeInsets.all(11),
-
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: AppColors.secondaryColor,
@@ -54,7 +53,7 @@ class BookCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "\$ ${product.priceAfterDiscount ?? product.price}",
+                    "${product.priceAfterDiscount ?? product.price} ${context.translate("price_currency")}",
                     style: TextStyles.w400s16,
                   ),
                   isInWishList
@@ -74,7 +73,7 @@ class BookCard extends StatelessWidget {
                           ),
                           child: Center(
                             child: Text(
-                              "Buy",
+                              context.translate("buy"),
                               style: TextStyles.w400s14.copyWith(
                                 color: AppColors.bgColor,
                               ),
