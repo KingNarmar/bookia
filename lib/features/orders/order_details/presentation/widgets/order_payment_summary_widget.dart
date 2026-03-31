@@ -33,12 +33,12 @@ class OrderPaymentSummaryWidget extends StatelessWidget {
         ),
         const Gap(16),
         _summaryRow(
-          title: context.translate("status", replacements: {"status": ""}).replaceAll(": ", ""),
-          value: order.status ?? "Unknown",
+          title: context.translate("status_label"),
+          value: order.status ?? context.translate("unknown"),
         ),
         const Gap(10),
         _summaryRow(
-          title: context.translate("order_date", replacements: {"date": ""}).replaceAll(": ", ""),
+          title: context.translate("date_label"),
           value: order.orderDate ?? "",
         ),
       ],

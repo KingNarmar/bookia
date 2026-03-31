@@ -22,7 +22,7 @@ class WishlistScreen extends StatelessWidget {
           if (state is WishListSuccessState) {
             var cubit = context.read<WishListCubit>().products;
             if (cubit.isEmpty) {
-              return const Center(child: Text("No items in wishlist"));
+              return Center(child: Text(context.translate("no_items_in_wishlist")));
             }
             return Padding(
               padding: const EdgeInsets.all(22),
@@ -50,7 +50,7 @@ class WishlistScreen extends StatelessWidget {
           } else if (state is WishListLoadingState) {
             return const GridShimmer();
           } else {
-            return const Center(child: Text("No items in wishlist"));
+            return Center(child: Text(context.translate("no_items_in_wishlist")));
           }
         },
       ),

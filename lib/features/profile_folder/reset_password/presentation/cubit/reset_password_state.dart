@@ -11,5 +11,5 @@ class ResetPasswordSuccess extends ResetPasswordState {
 
 class ResetPasswordError extends ResetPasswordState {
   final String message;
-  ResetPasswordError({this.message = "An error occurred. Please try again."});
+  ResetPasswordError({this.message = "error"});
 }

@@ -17,7 +17,7 @@ class DeliveryAddressWidget extends StatelessWidget {
       children: [
         Text(context.translate("delivery_address"), style: TextStyles.w400s16),
         const Gap(12),
-        Text(order.name ?? "No Name", style: TextStyles.w400s14),
+        Text(order.name ?? context.translate("no_name"), style: TextStyles.w400s14),
         const Gap(4),
         Text(
           "${order.address ?? ""}, ${order.governorate ?? ""}",

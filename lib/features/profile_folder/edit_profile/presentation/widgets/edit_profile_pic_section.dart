@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:bookia/core/functions/navigations.dart';
+import 'package:bookia/core/localization/app_localizations.dart';
 import 'package:bookia/core/styles/app_colors.dart';
 import 'package:bookia/features/profile_folder/edit_profile/presentation/cubit/edit_profile_cubit.dart';
 import 'package:bookia/features/profile_folder/edit_profile/presentation/cubit/edit_profile_state.dart';
@@ -75,9 +76,9 @@ class EditProfilePicSection extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text(
-                "Choose Profile Picture",
-                style: TextStyle(
+              Text(
+                context.translate("choose_profile_picture"),
+                style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: AppColors.primaryColor,
@@ -106,7 +107,7 @@ class EditProfilePicSection extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 10),
-                        const Text("Camera"),
+                        Text(context.translate("camera")),
                       ],
                     ),
                   ),
@@ -129,7 +130,7 @@ class EditProfilePicSection extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 10),
-                        const Text("Gallery"),
+                        Text(context.translate("gallery")),
                       ],
                     ),
                   ),

@@ -65,7 +65,10 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                     ?.orderCode ??
                 widget.orderId.toString();
 
-            return Text("#$orderCode", style: TextStyles.w400s16);
+            return Text(
+              context.translate("order_no", replacements: {"id": orderCode}),
+              style: TextStyles.w400s16,
+            );
           },
         ),
         centerTitle: true,

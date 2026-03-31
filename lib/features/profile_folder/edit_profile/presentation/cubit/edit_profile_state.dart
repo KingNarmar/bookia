@@ -10,7 +10,7 @@ class EditProfileUpdated extends EditProfileState {}
 
 class EditProfileError extends EditProfileState {
   final String message;
-  EditProfileError({this.message = "Update failed. Please try again."});
+  EditProfileError({this.message = "failed_to_update"});
 }
 
 class EditProfileImagePicked extends EditProfileState {}
