@@ -30,7 +30,24 @@ import 'package:bookia/features/home/search/data/repositories/search_repository_
 import 'package:bookia/features/home/search/domain/repositories/search_repository.dart';
 import 'package:bookia/features/home/search/domain/usecases/get_all_products_usecase.dart';
 import 'package:bookia/features/home/search/domain/usecases/search_products_usecase.dart';
-import 'package:bookia/features/home/search/presentation/cubit/search_cubit.dart';
+import 'package:bookia/features/cart/data/data_sources/cart_remote_data_source.dart';
+import 'package:bookia/features/cart/data/repositories/cart_repository_impl.dart';
+import 'package:bookia/features/cart/domain/repositories/cart_repository.dart';
+import 'package:bookia/features/cart/domain/usecases/add_to_cart_usecase.dart';
+import 'package:bookia/features/cart/domain/usecases/checkout_usecase.dart';
+import 'package:bookia/features/cart/domain/usecases/get_cart_usecase.dart';
+import 'package:bookia/features/cart/domain/usecases/remove_from_cart_usecase.dart';
+import 'package:bookia/features/cart/domain/usecases/update_cart_usecase.dart';
+import 'package:bookia/features/cart/presentation/cubit/cart_cubit.dart';
+
+import 'package:bookia/features/wishlist/data/data_sources/wishlist_remote_data_source.dart';
+import 'package:bookia/features/wishlist/data/repositories/wishlist_repository_impl.dart';
+import 'package:bookia/features/wishlist/domain/repositories/wishlist_repository.dart';
+import 'package:bookia/features/wishlist/domain/usecases/add_to_wishlist_usecase.dart';
+import 'package:bookia/features/wishlist/domain/usecases/get_wishlist_usecase.dart';
+import 'package:bookia/features/wishlist/domain/usecases/remove_from_wishlist_usecase.dart';
+import 'package:bookia/features/wish_list/presentation/cubit/wish_list_cubit.dart';
+import 'package:bookia/features/book_details/presentation/cubit/book_details_cubit.dart';
 
 final sl = GetIt.instance;
 
@@ -39,6 +56,9 @@ final sl = GetIt.instance;
 Future<void> initDependencies() async {
   _registerAuth();
   _registerHome();
+  _registerCart();
+  _registerWishList();
+  _registerBookDetails();
 }
 
 void _registerAuth() {
@@ -79,8 +99,45 @@ void _registerHome() {
   sl.registerLazySingleton(() => GetAllProductsUseCase(sl()));
   sl.registerLazySingleton(() => SearchProductsUseCase(sl()));
 
-  sl.registerFactory(() => SearchCubit(
-    getAllProductsUseCase: sl(),
-    searchProductsUseCase: sl(),
+}
+
+void _registerCart() {
+  sl.registerLazySingleton<CartRemoteDataSource>(() => CartRemoteDataSourceImpl());
+  sl.registerLazySingleton<CartRepository>(() => CartRepositoryImpl(remoteDataSource: sl()));
+
+  sl.registerLazySingleton(() => GetCartUseCase(sl()));
+  sl.registerLazySingleton(() => AddToCartUseCase(sl()));
+  sl.registerLazySingleton(() => RemoveFromCartUseCase(sl()));
+  sl.registerLazySingleton(() => UpdateCartUseCase(sl()));
+  sl.registerLazySingleton(() => CheckoutUseCase(sl()));
+
+  sl.registerFactory(() => CartCubit(
+    getCartUseCase: sl(),
+    addToCartUseCase: sl(),
+    removeFromCartUseCase: sl(),
+    updateCartUseCase: sl(),
+    checkoutUseCase: sl(),
+  ));
+}
+
+void _registerWishList() {
+  sl.registerLazySingleton<WishlistRemoteDataSource>(() => WishlistRemoteDataSourceImpl());
+  sl.registerLazySingleton<WishlistRepository>(() => WishlistRepositoryImpl(remoteDataSource: sl()));
+
+  sl.registerLazySingleton(() => GetWishlistUseCase(sl()));
+  sl.registerLazySingleton(() => AddToWishlistUseCase(sl()));
+  sl.registerLazySingleton(() => RemoveFromWishlistUseCase(sl()));
+
+  sl.registerFactory(() => WishListCubit(
+    getWishlistUseCase: sl(),
+    addToWishlistUseCase: sl(),
+    removeFromWishlistUseCase: sl(),
+  ));
+}
+
+void _registerBookDetails() {
+  sl.registerFactory(() => BookDetailsCubit(
+    addToWishlistUseCase: sl(),
+    addToCartUseCase: sl(),
   ));
 }

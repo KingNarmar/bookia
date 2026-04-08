@@ -130,7 +130,7 @@ class Routes {
       GoRoute(
         path: Routes.bookDetails,
         builder: (context, state) => BlocProvider(
-          create: (context) => BookDetailsCubit(),
+          create: (context) => sl<BookDetailsCubit>(),
           child: BookDetailsScreen(product: state.extra as Product),
         ),
       ),

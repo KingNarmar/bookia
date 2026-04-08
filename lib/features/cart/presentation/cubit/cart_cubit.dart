@@ -1,13 +1,30 @@
 import 'package:bookia/core/services/local/shared_pref.dart';
+import 'package:bookia/core/usecase/usecase.dart';
 import 'package:bookia/features/cart/data/models/cart_response/cart_item.dart';
 import 'package:bookia/features/cart/data/models/cart_response/data.dart';
 import 'package:bookia/features/cart/data/models/checkout_response/checkout_data.dart';
-import 'package:bookia/features/cart/data/repo/cart_repo.dart';
+import 'package:bookia/features/cart/domain/usecases/add_to_cart_usecase.dart';
+import 'package:bookia/features/cart/domain/usecases/checkout_usecase.dart';
+import 'package:bookia/features/cart/domain/usecases/get_cart_usecase.dart';
+import 'package:bookia/features/cart/domain/usecases/remove_from_cart_usecase.dart';
+import 'package:bookia/features/cart/domain/usecases/update_cart_usecase.dart';
 import 'package:bookia/features/cart/presentation/cubit/cart_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CartCubit extends Cubit<CartState> {
-  CartCubit() : super(CartInitialState());
+  final GetCartUseCase getCartUseCase;
+  final AddToCartUseCase addToCartUseCase;
+  final RemoveFromCartUseCase removeFromCartUseCase;
+  final UpdateCartUseCase updateCartUseCase;
+  final CheckoutUseCase checkoutUseCase;
+
+  CartCubit({
+    required this.getCartUseCase,
+    required this.addToCartUseCase,
+    required this.removeFromCartUseCase,
+    required this.updateCartUseCase,
+    required this.checkoutUseCase,
+  }) : super(CartInitialState());
 
   Data? cartData;
   CheckoutData? checkoutData;
@@ -18,28 +35,30 @@ class CartCubit extends Cubit<CartState> {
   Future<void> getCartItems() async {
     emit(CartLoadingState());
 
-    final data = await CartRepo.getCartItems();
+    final response = await getCartUseCase.call(NoParams());
 
-    if (data != null) {
-      cartData = data;
-      SharedPref.cashCartListIds(cartItems);
-      emit(CartSuccessState());
-    } else {
-      emit(CartErrorState());
-    }
+    response.fold(
+      (l) => emit(CartErrorState()),
+      (data) {
+        cartData = data;
+        SharedPref.cashCartListIds(cartItems);
+        emit(CartSuccessState());
+      },
+    );
   }
 
   Future<void> removeFromCart(int itemId) async {
-    final isRemoved = await CartRepo.removeFromCart(itemId);
+    final response = await removeFromCartUseCase.call(itemId);
 
-    if (isRemoved) {
-      cartData?.cartItems?.removeWhere((item) => item.itemId == itemId);
-      SharedPref.cashCartListIds(cartItems);
-      emit(CartSuccessState());
-      await getCartItems();
-    } else {
-      emit(CartErrorState());
-    }
+    response.fold(
+      (l) => emit(CartErrorState()),
+      (_) async {
+        cartData?.cartItems?.removeWhere((item) => item.itemId == itemId);
+        SharedPref.cashCartListIds(cartItems);
+        emit(CartSuccessState());
+        await getCartItems();
+      },
+    );
   }
 
   Future<void> updateCartQuantity({
@@ -59,34 +78,37 @@ class CartCubit extends Cubit<CartState> {
 
     emit(CartLoadingState());
 
-    final data = await CartRepo.updateCartQuantity(
-      cartItemId: itemId,
-      quantity: quantity,
+    final response = await updateCartUseCase.call(
+      UpdateCartParams(cartItemId: itemId, quantity: quantity),
     );
 
-    if (data != null) {
-      cartData = data;
-      SharedPref.cashCartListIds(cartItems);
-      emit(CartSuccessState());
-    } else {
-      emit(CartErrorState());
-    }
+    response.fold(
+      (l) => emit(CartErrorState()),
+      (data) {
+        cartData = data;
+        SharedPref.cashCartListIds(cartItems);
+        emit(CartSuccessState());
+      },
+    );
   }
 
   Future<bool> checkout() async {
     emit(CheckoutLoadingState());
     checkoutData = null;
 
-    final data = await CartRepo.checkout();
+    final response = await checkoutUseCase.call(NoParams());
 
-    if (data != null) {
-      checkoutData = data;
-      SharedPref.cashCartListIds(cartItems);
-      emit(CheckoutSuccessState());
-      return true;
-    } else {
-      emit(CheckoutErrorState());
-      return false;
-    }
+    return response.fold(
+      (l) {
+        emit(CheckoutErrorState());
+        return false;
+      },
+      (data) {
+        checkoutData = data;
+        SharedPref.cashCartListIds(cartItems);
+        emit(CheckoutSuccessState());
+        return true;
+      },
+    );
   }
 }
