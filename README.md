@@ -1,4 +1,4 @@
-# 📚 Bookia — Modern Flutter Bookstore App
+# 📚 Bookia — Modern Flutter Bookstore App (Session 23)
 
 ![Flutter](https://img.shields.io/badge/Flutter-3.x-blue?logo=flutter)
 ![Dart](https://img.shields.io/badge/Dart-3.x-blue?logo=dart)
@@ -6,43 +6,99 @@
 ![Architecture](https://img.shields.io/badge/Architecture-Feature%20Based-green)
 ![API](https://img.shields.io/badge/API-Dio-orange)
 ![Navigation](https://img.shields.io/badge/Navigation-GoRouter-red)
-![Localization](https://img.shields.io/badge/Localization-Arabic%20%26%20English-darkgreen)
+![Session](https://img.shields.io/badge/Session-23-black)
+![Focus](https://img.shields.io/badge/Focus-Error%20Handling-critical)
 
-**Bookia** is a premium Bookstore application built with **Flutter**, featuring a sleek modern design, robust feature-based architecture, and full backend integration. This project demonstrates advanced Flutter concepts, including multi-language support (English & Arabic), real-time API communication, and efficient state management using Cubit.
+**Bookia** is a modern bookstore application built with **Flutter**, featuring a clean feature-based architecture, backend integration, responsive UI flow, and state management using **Cubit**.
+
+This README reflects the progress up to **Session 23**, where the main task was enhancing the app’s **error handling system** to make API calls safer, cleaner, and easier to maintain across the whole application.
+
+---
+
+## 🎯 Session 23 Main Task — Error Handling
+
+The main achievement in this session was improving the app’s error handling architecture across the networking, repository, and presentation layers.
+
+### ✅ What was improved
+- Added a centralized **Failure** model to standardize error handling.
+- Introduced clearer failure types such as:
+  - `ApiFailure`
+  - `NetworkFailure`
+  - `CacheFailure`
+  - `ParseFailure`
+  - `UnknownFailure`
+- Updated the networking layer to return `Either<Failure, Data>` instead of raw responses.
+- Improved request handling for:
+  - `GET`
+  - `POST`
+  - `PUT`
+  - `PATCH`
+  - `DELETE`
+- Added safer handling for:
+  - server-side errors
+  - internet connection issues
+  - timeout exceptions
+  - invalid responses
+  - parsing failures
+  - unexpected exceptions
+- Connected failures properly to UI states through **Cubit**.
+- Improved user feedback using:
+  - loading dialogs
+  - snackbars
+  - success/error states
+  - better fallback messages
 
 ---
 
 ## ✨ Key Features & Highlights
 
-### 🌍 Global Localization & RTL
-- Full **Arabic & English** support with correct **RTL (Right-to-Left)** and **LTR** text direction.
-- On-the-fly language switching from the Home Screen with persistent locale saving.
-- Complete UI translation for all major static strings and navigation labels.
+### 🌍 Localization & RTL Support
+- Arabic and English language support
+- Correct **RTL / LTR** layout behavior
+- Global language switching using `AppCubit`
+- Localized UI text through localization files
 
 ### 🔐 Authentication Flow
-- **Onboarding:** Professionally designed Splash and Welcome screens.
-- **Login/Register:** Complete with validation, social auth buttons, and API integration.
-- **Enhanced Security:** Forgot password, OTP verification, and secure password reset.
+- Splash screen
+- Welcome screen
+- Login screen
+- Register screen
+- Forgot password flow
+- OTP verification
+- Create new password
+- Password changed success screen
 
 ### 📚 Product Discovery & Details
-- **Dynamic Content:** Home screen with auto-sliding banners and "Best Seller" collections fetched from APIs.
-- **Search System:** Real-time search by book title with input debouncing for performance.
-- **Rich Details:** Comprehensive book detail screen including descriptions, pricing, and actions.
+- Home screen with slider banners
+- Best seller books loaded from API
+- Search screen with dynamic results
+- Book details screen with image, description, and pricing
 
-### 🛒 Cart & Wishlist Management
-- **Persistence:** Local caching of wishlist and cart IDs for instant UI feedback.
-- **Dynamic Cart:** Real-time quantity updates, removal, and automatic total price calculation.
-- **Wishlist Sync:** Seamlessly add or remove books from your favorites list.
+### ❤️ Wishlist Management
+- Add books to wishlist
+- Remove books from wishlist
+- Local wishlist sync for fast UI feedback
 
-### 📦 Order Tracking & History
-- **Place Order:** Multi-step process including checkout verification and governorate selection.
-- **Order Tracking:** Detailed order history with status checks and single-order retrieval by ID.
-- **Detailed Summaries:** Breakdown of delivery addresses, ordered items, and payment summaries.
+### 🛒 Cart & Checkout
+- Fetch cart items from API
+- Update quantity
+- Remove cart items
+- Calculate total price
+- Checkout flow integration
 
-### 👤 Profile & Settings
-- **Identity:** Edit personal info (Name, Phone, Address) and upload a profile picture.
-- **Security:** In-app reset password functionality.
-- **Session Management:** Secure token-based logout with cleared local cache.
+### 📦 Place Order & Orders Tracking
+- Governorates fetched from API
+- Place order form validation
+- Order creation flow
+- My Orders screen
+- Order details screen with address, items, and summary
+
+### 👤 Profile & Account Settings
+- View profile data
+- Edit profile
+- Reset password
+- Logout
+- Profile image handling
 
 ---
 
@@ -58,7 +114,7 @@
 | <img src="screen_shots/forget_password_screen.png" width="180"/> | <img src="screen_shots/otp_verification_screen.png" width="180"/> | <img src="screen_shots/create_new_password_screen.png" width="180"/> | <img src="screen_shots/password_cahnged_screen.png" width="180"/> |
 
 ### 🔹 Home, Search & Details
-| Home (English) | Search Results | Book Details |
+| Home | Search | Book Details |
 |:---:|:---:|:---:|
 | <img src="screen_shots/home_screen.png" width="220"/> | <img src="screen_shots/search_screen.png" width="220"/> | <img src="screen_shots/details_screen.png" width="220"/> |
 
@@ -67,7 +123,7 @@
 |:---:|:---:|:---:|:---:|
 | <img src="screen_shots/wish_list_screen.png" width="180"/> | <img src="screen_shots/cart_screen.png" width="180"/> | <img src="screen_shots/place_order_screen.png" width="180"/> | <img src="screen_shots/Order_success_screen.png" width="180"/> |
 
-### 🔹 Profile & Orders History
+### 🔹 Profile & Orders
 | Profile | Edit Profile | My Orders | Order Details |
 |:---:|:---:|:---:|:---:|
 | <img src="screen_shots/Profile_screen.png" width="180"/> | <img src="screen_shots/edit_profile_screen.png" width="180"/> | <img src="screen_shots/my_orders_screen.png" width="180"/> | <img src="screen_shots/order_details_screen.png" width="180"/> |
@@ -76,104 +132,203 @@
 
 ## 🛠 Tech Stack & Packages
 
-- **Core:** [Flutter SDK](https://flutter.dev) (3.x), [GoRouter](https://pub.dev/packages/go_router) for deep-linkable routing.
-- **State Management:** [Flutter Bloc / Cubit](https://pub.dev/packages/flutter_bloc) for predictable state flows.
-- **Networking:** [Dio](https://pub.dev/packages/dio) for efficient HTTP requests and interceptors.
-- **Local Storage:** [SharedPreferences](https://pub.dev/packages/shared_preferences) for token and locale persistence.
-- **Localization:** [Flutter Localizations](https://api.flutter.dev/flutter/flutter_localizations/flutter_localizations-library.html) for RTL/LTR support.
-- **UI Enhancements:**
-  - [Flutter SVG](https://pub.dev/packages/flutter_svg) for high-quality icons.
-  - [Shimmer](https://pub.dev/packages/shimmer) for skeleton loading.
-  - [Carousel Slider](https://pub.dev/packages/carousel_slider) & [Smooth Page Indicator](https://pub.dev/packages/smooth_page_indicator).
-  - [Cached Network Image](https://pub.dev/packages/cached_network_image) for optimized image loading.
-  - [Pinput](https://pub.dev/packages/pinput) for smooth OTP inputs.
+- **Flutter SDK**
+- **Dart**
+- **Flutter Bloc / Cubit**
+- **Dio**
+- **Dartz**
+- **GoRouter**
+- **SharedPreferences**
+- **Flutter SVG**
+- **Shimmer**
+- **Carousel Slider**
+- **Smooth Page Indicator**
+- **Cached Network Image**
+- **Image Picker**
+- **Pinput**
+- **Lottie**
+- **Gap**
 
 ---
 
 ## 🏗 Project Architecture
 
-The app follows a professionally structured **Feature-Based Architecture**, ensuring high maintainability and scalability.
+The app follows a clean **Feature-Based Architecture** to keep the code scalable and maintainable.
 
 ```text
-    lib/
-    ├── app_root/
-    │   └── app_root.dart           # App-level config (Routes, Themes, Locales)
-    ├── core/
-    │   ├── constants/              # Fonts, Images, Strings
-    │   ├── cubits/                 # Global Cubits (AppCubit)
-    │   ├── localization/           # Multi-language logic
-    │   ├── services/               # API (Dio) and Local (SharedPref) services
-    │   ├── styles/                 # Colors and Typography
-    │   └── widgets/                # Common reusable components (MainButtons, Shimmers)
-    ├── features/
-    │   ├── auth/                   # Authentication screens and business logic
-    │   ├── home/                   # Main Home and Search modules
-    │   ├── orders/                 # History and Details of orders
-    │   ├── cart/                   # Shopping Cart logic
-    │   ├── wish_list/              # Managed favorites
-    │   ├── profile_folder/         # User management components
-    │   └── welcome/                # Onboarding flow
-    └── main.dart                   # Entry point
+lib/
+├── app_root/
+│   └── app_root.dart
+├── core/
+│   ├── constants/
+│   ├── cubits/
+│   │   └── app_cubit/
+│   ├── functions/
+│   ├── localization/
+│   ├── routes/
+│   ├── services/
+│   │   ├── dio/
+│   │   │   ├── api.dart
+│   │   │   ├── base_response.dart
+│   │   │   ├── dio_provider.dart
+│   │   │   └── failure.dart
+│   │   └── local/
+│   ├── styles/
+│   └── widgets/
+├── features/
+│   ├── auth/
+│   ├── book_details/
+│   ├── cart/
+│   ├── home/
+│   │   ├── home/
+│   │   └── search/
+│   ├── main/
+│   ├── orders/
+│   │   ├── my_orders/
+│   │   └── order_details/
+│   ├── place_order/
+│   ├── profile_folder/
+│   │   ├── edit_profile/
+│   │   ├── profile/
+│   │   └── reset_password/
+│   ├── welcome/
+│   └── wish_list/
+└── main.dart
 ```
 
 ---
 
-## 🧠 State Management Patterns
+## 🧠 State Management
 
-The project utilizes **Cubits** for predictable state isolation per feature:
+The project uses **Cubit** to manage states in a feature-based way.
 
-| Cubit | Responsibility |
-|---|---|
-| **AppCubit** | Global locale management and persistence. |
-| **AuthCubit** | Login, Registration, OTP, and Password Reset flows. |
-| **HomeCubit** | Banners and Best Seller catalogs fetch. |
-| **CartCubit** | Item management, quantity updates, and Checkout request. |
-| **WishListCubit** | Management of favorite items and local ID synchronization. |
-| **SearchCubit** | Real-time product search and catalog loading. |
-| **MyOrderCubit** | Fetching and filtering order history. |
-| **EditProfileCubit** | Managing user profile updates and image selection. |
+### Main Cubits
+- `AppCubit`
+- `AuthCubit`
+- `HomeCubit`
+- `SearchCubit`
+- `BookDetailsCubit`
+- `CartCubit`
+- `WishListCubit`
+- `PlaceOrderCubit`
+- `MyOrderCubit`
+- `OrderDetailsCubit`
+- `EditProfileCubit`
+- `ResetPasswordCubit`
+
+---
+
+## 🛠 Error Handling Flow
+
+The app now follows a cleaner and more structured error handling pipeline:
+
+```text
+UI Screen
+   ↓
+Cubit
+   ↓
+Repository
+   ↓
+Dio Provider
+   ↓
+Either<Failure, Data>
+```
+
+### Flow Explanation
+- The **UI** triggers an action.
+- The **Cubit** calls the repository.
+- The **Repository** requests data from the networking layer.
+- The **Dio Provider** catches and maps any exception to a proper `Failure`.
+- The result is returned as `Either<Failure, Data>`.
+- The **Cubit** emits either success or error states.
+- The **UI** reacts by showing data, dialogs, snackbars, or fallback messages.
+
+### Why this is better
+- Cleaner code structure
+- Better separation of concerns
+- Easier debugging
+- Reusable failure handling
+- Safer API integration
+- More maintainable application architecture
+
+---
+
+## 📦 Packages Used
+
+```yaml
+dependencies:
+  flutter_bloc:
+  dio:
+  dartz:
+  go_router:
+  shared_preferences:
+  flutter_svg:
+  shimmer:
+  carousel_slider:
+  smooth_page_indicator:
+  cached_network_image:
+  image_picker:
+  pinput:
+  lottie:
+  gap:
+```
+
+---
+
+## 📱 Screens Included
+
+### Authentication Screens
+- Splash Screen
+- Welcome Screen
+- Login Screen
+- Register Screen
+- Forgot Password Screen
+- OTP Verification Screen
+- Create New Password Screen
+- Password Changed Screen
+
+### Main App Screens
+- Home Screen
+- Search Screen
+- Book Details Screen
+- Wishlist Screen
+- Cart Screen
+- Place Order Screen
+- Order Success Screen
+- My Orders Screen
+- Order Details Screen
+- Profile Screen
+- Edit Profile Screen
+- Reset Password Screen
 
 ---
 
 ## 🚀 Getting Started
 
-### Prerequisites
-- Flutter SDK (v3.x suggested)
-- Android Studio / VS Code
-- Stable Internet Connection for API calls
-
-### Installation
-1. **Clone the repo:**
-   ```bash
-   git clone https://github.com/[your-username]/bookia.git
-   ```
-2. **Install dependencies:**
-   ```bash
-   flutter pub get
-   ```
-3. **Run the app:**
-   ```bash
-   flutter run
-   ```
+```bash
+git clone https://github.com/[your-username]/bookia.git
+cd bookia
+flutter pub get
+flutter run
+```
 
 ---
 
 ## 👨‍💻 Developed By
 
 **Mina Adly**  
-*Flutter Developer & Professional Warehouse Manager*
+Flutter Developer
 
-Passionate about building modern, clean, and scalable mobile applications using Flutter. Focused on clean architecture, optimized state management, and high-quality user experiences.
+Passionate about building clean, scalable, and practical Flutter applications with modern UI and strong architecture.
 
 ### 📬 Contact & Collaboration
-I'm interested in freelance opportunities and open for collaboration. Feel free to reach out!
-
 - **GitHub:** https://github.com/KingNarmar
 - **LinkedIn:** https://www.linkedin.com/in/mina-bushra-733993317/
 - **Email:** adlymina99@gmail.com
-- **Mobile:** +971581255496 - +201555212015
+- **Mobile:** +971581255496 / +201555212015
 
 ---
 
-### ⭐ Show your support
-If you find this project helpful for your learning, please give it a star! It helps more people discover this repository.
+## ⭐ Final Note
+
+This README was updated to reflect the current state of the project up to **Session 23**, with special focus on the **error handling improvements** that made the app more robust, maintainable, and production-ready.
