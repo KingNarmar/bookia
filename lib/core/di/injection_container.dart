@@ -49,6 +49,37 @@ import 'package:bookia/features/wishlist/domain/usecases/remove_from_wishlist_us
 import 'package:bookia/features/wish_list/presentation/cubit/wish_list_cubit.dart';
 import 'package:bookia/features/book_details/presentation/cubit/book_details_cubit.dart';
 
+import 'package:bookia/features/orders/my_orders/data/data_sources/my_orders_remote_data_source.dart';
+import 'package:bookia/features/orders/my_orders/data/repositories/my_orders_repository_impl.dart';
+import 'package:bookia/features/orders/my_orders/domain/repositories/my_orders_repository.dart';
+import 'package:bookia/features/orders/my_orders/domain/usecases/get_orders_usecase.dart';
+import 'package:bookia/features/orders/my_orders/presentation/cubit/my_order_cubit.dart';
+
+import 'package:bookia/features/orders/order_details/data/data_sources/order_details_remote_data_source.dart';
+import 'package:bookia/features/orders/order_details/data/repositories/order_details_repository_impl.dart';
+import 'package:bookia/features/orders/order_details/domain/repositories/order_details_repository.dart';
+import 'package:bookia/features/orders/order_details/domain/usecases/get_order_details_usecase.dart';
+import 'package:bookia/features/orders/order_details/presentation/cubit/order_details_cubit.dart';
+
+import 'package:bookia/features/place_order/data/data_sources/place_order_remote_data_source.dart';
+import 'package:bookia/features/place_order/data/repositories/place_order_repository_impl.dart';
+import 'package:bookia/features/place_order/domain/repositories/place_order_repository.dart';
+import 'package:bookia/features/place_order/domain/usecases/get_governorates_usecase.dart';
+import 'package:bookia/features/place_order/domain/usecases/place_order_usecase.dart';
+import 'package:bookia/features/place_order/presentation/cubit/place_order_cubit.dart';
+
+import 'package:bookia/features/profile_folder/edit_profile/data/data_sources/edit_profile_remote_data_source.dart';
+import 'package:bookia/features/profile_folder/edit_profile/data/repositories/edit_profile_repository_impl.dart';
+import 'package:bookia/features/profile_folder/edit_profile/domain/repositories/edit_profile_repository.dart';
+import 'package:bookia/features/profile_folder/edit_profile/domain/usecases/edit_profile_usecase.dart';
+import 'package:bookia/features/profile_folder/edit_profile/presentation/cubit/edit_profile_cubit.dart';
+
+import 'package:bookia/features/profile_folder/reset_password/data/data_sources/update_password_remote_data_source.dart';
+import 'package:bookia/features/profile_folder/reset_password/data/repositories/update_password_repository_impl.dart';
+import 'package:bookia/features/profile_folder/reset_password/domain/repositories/update_password_repository.dart';
+import 'package:bookia/features/profile_folder/reset_password/domain/usecases/update_password_usecase.dart';
+import 'package:bookia/features/profile_folder/reset_password/presentation/cubit/reset_password_cubit.dart';
+
 final sl = GetIt.instance;
 
 /// Initialise all dependencies.
@@ -59,6 +90,8 @@ Future<void> initDependencies() async {
   _registerCart();
   _registerWishList();
   _registerBookDetails();
+  _registerOrders();
+  _registerProfile();
 }
 
 void _registerAuth() {
@@ -140,4 +173,52 @@ void _registerBookDetails() {
     addToWishlistUseCase: sl(),
     addToCartUseCase: sl(),
   ));
+}
+
+void _registerOrders() {
+  // My Orders
+  sl.registerLazySingleton<MyOrdersRemoteDataSource>(() => MyOrdersRemoteDataSourceImpl());
+  sl.registerLazySingleton<MyOrdersRepository>(() => MyOrdersRepositoryImpl(remoteDataSource: sl()));
+
+  sl.registerLazySingleton(() => GetOrdersUseCase(sl()));
+
+  sl.registerFactory(() => MyOrderCubit(getOrdersUseCase: sl()));
+
+  // Order Details
+  sl.registerLazySingleton<OrderDetailsRemoteDataSource>(() => OrderDetailsRemoteDataSourceImpl());
+  sl.registerLazySingleton<OrderDetailsRepository>(() => OrderDetailsRepositoryImpl(remoteDataSource: sl()));
+
+  sl.registerLazySingleton(() => GetOrderDetailsUseCase(sl()));
+
+  sl.registerFactory(() => OrderDetailsCubit(getOrderDetailsUseCase: sl()));
+
+  // Place Order
+  sl.registerLazySingleton<PlaceOrderRemoteDataSource>(() => PlaceOrderRemoteDataSourceImpl());
+  sl.registerLazySingleton<PlaceOrderRepository>(() => PlaceOrderRepositoryImpl(remoteDataSource: sl()));
+
+  sl.registerLazySingleton(() => GetGovernoratesUseCase(sl()));
+  sl.registerLazySingleton(() => PlaceOrderUseCase(sl()));
+
+  sl.registerFactory(() => PlaceOrderCubit(
+    getGovernoratesUseCase: sl(),
+    placeOrderUseCase: sl(),
+  ));
+}
+
+void _registerProfile() {
+  // Edit Profile
+  sl.registerLazySingleton<EditProfileRemoteDataSource>(() => EditProfileRemoteDataSourceImpl());
+  sl.registerLazySingleton<EditProfileRepository>(() => EditProfileRepositoryImpl(remoteDataSource: sl()));
+
+  sl.registerLazySingleton(() => EditProfileUseCase(sl()));
+
+  sl.registerFactory(() => EditProfileCubit(editProfileUseCase: sl()));
+
+  // Update Password
+  sl.registerLazySingleton<UpdatePasswordRemoteDataSource>(() => UpdatePasswordRemoteDataSourceImpl());
+  sl.registerLazySingleton<UpdatePasswordRepository>(() => UpdatePasswordRepositoryImpl(remoteDataSource: sl()));
+
+  sl.registerLazySingleton(() => UpdatePasswordUseCase(sl()));
+
+  sl.registerFactory(() => ResetPasswordCubit(updatePasswordUseCase: sl()));
 }

@@ -146,7 +146,7 @@ class Routes {
           final checkoutData = state.extra as CheckoutData;
 
           return BlocProvider(
-            create: (context) => PlaceOrderCubit()..getGovernorates(),
+            create: (context) => sl<PlaceOrderCubit>()..getGovernorates(),
             child: PlaceOrderScreen(checkoutData: checkoutData),
           );
         },
@@ -164,7 +164,7 @@ class Routes {
       GoRoute(
         path: Routes.editProfile,
         builder: (context, state) => BlocProvider(
-          create: (context) => EditProfileCubit()..loadInitialData(),
+          create: (context) => sl<EditProfileCubit>()..loadInitialData(),
           child: const EditProfileScreen(),
         ),
       ),
@@ -172,7 +172,7 @@ class Routes {
       GoRoute(
         path: Routes.resetPassword,
         builder: (context, state) => BlocProvider(
-          create: (context) => ResetPasswordCubit(),
+          create: (context) => sl<ResetPasswordCubit>(),
           child: const ResetPasswordScreen(),
         ),
       ),
@@ -180,7 +180,7 @@ class Routes {
       GoRoute(
         path: Routes.myOrders,
         builder: (context, state) => BlocProvider(
-          create: (context) => MyOrderCubit(),
+          create: (context) => sl<MyOrderCubit>()..getOrders(),
           child: const MyOrdersScreen(),
         ),
       ),
@@ -199,7 +199,7 @@ class Routes {
     final orderId = state.extra as int;
 
     return BlocProvider(
-      create: (context) => OrderDetailsCubit()..getOrderDetails(orderId),
+      create: (context) => sl<OrderDetailsCubit>()..getOrderDetails(orderId),
       child: OrderDetailsScreen(orderId: orderId),
     );
   },
