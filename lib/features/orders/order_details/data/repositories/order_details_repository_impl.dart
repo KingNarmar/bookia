@@ -10,17 +10,16 @@ class OrderDetailsRepositoryImpl implements OrderDetailsRepository {
   OrderDetailsRepositoryImpl({required this.remoteDataSource});
 
   @override
-  Future<Either<Failure, OrderDetailsResponse>> getOrderDetails(int orderId) async {
+  Future<Either<Failure, OrderDetailsResponse>> getOrderDetails(
+    int orderId,
+  ) async {
     final response = await remoteDataSource.getOrderDetails(orderId);
-    return response.fold(
-      (failure) => Left(failure),
-      (data) {
-        try {
-          return Right(OrderDetailsResponse.fromJson(data));
-        } on Exception catch (e) {
-          return Left(ParseFailure(message: e.toString()));
-        }
-      },
-    );
+    return response.fold((failure) => Left(failure), (data) {
+      try {
+        return Right(OrderDetailsResponse.fromJson(data));
+      } on Exception catch (e) {
+        return Left(ParseFailure(message: e.toString()));
+      }
+    });
   }
 }

@@ -65,9 +65,12 @@ class LoginScreen extends StatelessWidget {
                         hint: context.translate("email_hint"),
                         validator: (value) => AppValidators.email(
                           value,
-                          emptyMessage: context.translate("validation_email_empty"),
-                          invalidMessage:
-                              context.translate("validation_email_invalid"),
+                          emptyMessage: context.translate(
+                            "validation_email_empty",
+                          ),
+                          invalidMessage: context.translate(
+                            "validation_email_invalid",
+                          ),
                         ),
                         controller: cubit.emailController,
                       ),
@@ -75,10 +78,12 @@ class LoginScreen extends StatelessWidget {
                       PasswordTextFormField(
                         hint: context.translate("password_hint"),
                         validator: AppValidators.password(
-                          emptyMessage:
-                              context.translate("validation_password_empty"),
-                          invalidMessage:
-                              context.translate("validation_password_invalid"),
+                          emptyMessage: context.translate(
+                            "validation_password_empty",
+                          ),
+                          invalidMessage: context.translate(
+                            "validation_password_invalid",
+                          ),
                         ),
                         passwordController: cubit.passwordController,
                       ),
@@ -150,4 +155,3 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
-

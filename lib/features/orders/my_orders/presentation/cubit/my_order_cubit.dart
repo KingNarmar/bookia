@@ -14,17 +14,16 @@ class MyOrderCubit extends Cubit<MyOrdersState> {
   Future<void> getOrders() async {
     emit(MyOrdersLoading());
     final response = await getOrdersUseCase.call(NoParams());
-    
-    response.fold(
-      (l) => emit(MyOrdersError(message: "failed_to_load_data")),
-      (data) {
-        if (data.data != null) {
-          myOrdersResponse = data;
-          emit(MyOrdersLoaded());
-        } else {
-          emit(MyOrdersError(message: "failed_to_load_data"));
-        }
-      },
-    );
+
+    response.fold((l) => emit(MyOrdersError(message: "failed_to_load_data")), (
+      data,
+    ) {
+      if (data.data != null) {
+        myOrdersResponse = data;
+        emit(MyOrdersLoaded());
+      } else {
+        emit(MyOrdersError(message: "failed_to_load_data"));
+      }
+    });
   }
 }

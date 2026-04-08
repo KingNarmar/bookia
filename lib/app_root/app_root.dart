@@ -18,10 +18,7 @@ class Bookia extends StatelessWidget {
         builder: (context, state) {
           return MaterialApp.router(
             locale: Locale(context.read<AppCubit>().languageCode),
-            supportedLocales: const [
-              Locale('en'),
-              Locale('ar'),
-            ],
+            supportedLocales: const [Locale('en'), Locale('ar')],
             localizationsDelegates: const [
               AppLocalizationsDelegate(),
               GlobalMaterialLocalizations.delegate,
@@ -33,8 +30,9 @@ class Bookia extends StatelessWidget {
             theme: ThemeData(
               fontFamily: AppFonts.dmSerifDisplay,
               scaffoldBackgroundColor: AppColors.bgColor,
-              appBarTheme:
-                  const AppBarThemeData(backgroundColor: AppColors.bgColor),
+              appBarTheme: const AppBarThemeData(
+                backgroundColor: AppColors.bgColor,
+              ),
               dividerColor: AppColors.borderColor,
             ),
           );

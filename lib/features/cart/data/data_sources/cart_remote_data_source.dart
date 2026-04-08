@@ -8,7 +8,10 @@ abstract class CartRemoteDataSource {
   Future<Either<Failure, dynamic>> getCartItems();
   Future<Either<Failure, dynamic>> addToCart(int productId);
   Future<Either<Failure, dynamic>> removeFromCart(int cartItemId);
-  Future<Either<Failure, dynamic>> updateCartQuantity(int cartItemId, int quantity);
+  Future<Either<Failure, dynamic>> updateCartQuantity(
+    int cartItemId,
+    int quantity,
+  );
   Future<Either<Failure, dynamic>> checkout();
 }
 
@@ -41,7 +44,10 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource {
   }
 
   @override
-  Future<Either<Failure, dynamic>> updateCartQuantity(int cartItemId, int quantity) async {
+  Future<Either<Failure, dynamic>> updateCartQuantity(
+    int cartItemId,
+    int quantity,
+  ) async {
     return await DioProvider.postApi(
       endPoint: Apis.updateCart,
       data: {"cart_item_id": cartItemId, "quantity": quantity},

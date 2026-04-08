@@ -15,9 +15,7 @@ class OrderDetailsRemoteDataSourceImpl implements OrderDetailsRemoteDataSource {
 
     return await DioProvider.getApi(
       endPoint: "${Apis.showSingleOrder}/$orderId",
-      headers: {
-        'Authorization': 'Bearer $token',
-      },
+      headers: {'Authorization': 'Bearer $token'},
       unwrapData: false,
     );
   }

@@ -4,7 +4,8 @@ import 'package:bookia/features/place_order/data/models/governorates_response/go
 import 'package:bookia/features/place_order/domain/repositories/place_order_repository.dart';
 import 'package:dartz/dartz.dart';
 
-class GetGovernoratesUseCase implements UseCase<List<GovernorateModel>, NoParams> {
+class GetGovernoratesUseCase
+    implements UseCase<List<GovernorateModel>, NoParams> {
   final PlaceOrderRepository repository;
 
   GetGovernoratesUseCase(this.repository);

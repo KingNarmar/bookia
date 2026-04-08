@@ -13,31 +13,25 @@ class CartRepositoryImpl implements CartRepository {
   @override
   Future<Either<Failure, Data>> getCartItems() async {
     final response = await remoteDataSource.getCartItems();
-    return response.fold(
-      (failure) => Left(failure),
-      (data) {
-        try {
-          return Right(Data.fromJson(data));
-        } on Exception catch (e) {
-          return Left(ParseFailure(message: e.toString()));
-        }
-      },
-    );
+    return response.fold((failure) => Left(failure), (data) {
+      try {
+        return Right(Data.fromJson(data));
+      } on Exception catch (e) {
+        return Left(ParseFailure(message: e.toString()));
+      }
+    });
   }
 
   @override
   Future<Either<Failure, Data>> addToCart(int productId) async {
     final response = await remoteDataSource.addToCart(productId);
-    return response.fold(
-      (failure) => Left(failure),
-      (data) {
-        try {
-          return Right(Data.fromJson(data));
-        } on Exception catch (e) {
-          return Left(ParseFailure(message: e.toString()));
-        }
-      },
-    );
+    return response.fold((failure) => Left(failure), (data) {
+      try {
+        return Right(Data.fromJson(data));
+      } on Exception catch (e) {
+        return Left(ParseFailure(message: e.toString()));
+      }
+    });
   }
 
   @override
@@ -50,32 +44,32 @@ class CartRepositoryImpl implements CartRepository {
   }
 
   @override
-  Future<Either<Failure, Data>> updateCartQuantity(int cartItemId, int quantity) async {
-    final response = await remoteDataSource.updateCartQuantity(cartItemId, quantity);
-    return response.fold(
-      (failure) => Left(failure),
-      (data) {
-        try {
-          return Right(Data.fromJson(data));
-        } on Exception catch (e) {
-          return Left(ParseFailure(message: e.toString()));
-        }
-      },
+  Future<Either<Failure, Data>> updateCartQuantity(
+    int cartItemId,
+    int quantity,
+  ) async {
+    final response = await remoteDataSource.updateCartQuantity(
+      cartItemId,
+      quantity,
     );
+    return response.fold((failure) => Left(failure), (data) {
+      try {
+        return Right(Data.fromJson(data));
+      } on Exception catch (e) {
+        return Left(ParseFailure(message: e.toString()));
+      }
+    });
   }
 
   @override
   Future<Either<Failure, CheckoutData>> checkout() async {
     final response = await remoteDataSource.checkout();
-    return response.fold(
-      (failure) => Left(failure),
-      (data) {
-        try {
-          return Right(CheckoutData.fromJson(data));
-        } on Exception catch (e) {
-          return Left(ParseFailure(message: e.toString()));
-        }
-      },
-    );
+    return response.fold((failure) => Left(failure), (data) {
+      try {
+        return Right(CheckoutData.fromJson(data));
+      } on Exception catch (e) {
+        return Left(ParseFailure(message: e.toString()));
+      }
+    });
   }
 }

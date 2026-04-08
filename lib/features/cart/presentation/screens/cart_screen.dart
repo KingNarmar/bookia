@@ -67,7 +67,9 @@ class CartScreen extends StatelessWidget {
                         if (isSuccess) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                              content: Text(context.translate("checkout_success")),
+                              content: Text(
+                                context.translate("checkout_success"),
+                              ),
                             ),
                           );
 
@@ -79,8 +81,10 @@ class CartScreen extends StatelessWidget {
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                                content:
-                                    Text(context.translate("checkout_failed"))),
+                              content: Text(
+                                context.translate("checkout_failed"),
+                              ),
+                            ),
                           );
                         }
                       },

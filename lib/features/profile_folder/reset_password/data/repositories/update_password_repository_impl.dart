@@ -11,17 +11,16 @@ class UpdatePasswordRepositoryImpl implements UpdatePasswordRepository {
   UpdatePasswordRepositoryImpl({required this.remoteDataSource});
 
   @override
-  Future<Either<Failure, ResetPasswordResponse>> updatePassword(ResetPasswordParams params) async {
+  Future<Either<Failure, ResetPasswordResponse>> updatePassword(
+    ResetPasswordParams params,
+  ) async {
     final response = await remoteDataSource.updatePassword(params);
-    return response.fold(
-      (failure) => Left(failure),
-      (data) {
-        try {
-          return Right(ResetPasswordResponse.fromJson(data));
-        } on Exception catch (e) {
-          return Left(ParseFailure(message: e.toString()));
-        }
-      },
-    );
+    return response.fold((failure) => Left(failure), (data) {
+      try {
+        return Right(ResetPasswordResponse.fromJson(data));
+      } on Exception catch (e) {
+        return Left(ParseFailure(message: e.toString()));
+      }
+    });
   }
 }

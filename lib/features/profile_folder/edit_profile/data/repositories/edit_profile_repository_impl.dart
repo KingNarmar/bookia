@@ -19,29 +19,26 @@ class EditProfileRepositoryImpl implements EditProfileRepository {
     File? image,
   }) async {
     final response = await remoteDataSource.editProfile(params, image: image);
-    return response.fold(
-      (failure) => Left(failure),
-      (data) {
-        try {
-          var parsedData = EditProfileResponse.fromJson(data);
+    return response.fold((failure) => Left(failure), (data) {
+      try {
+        var parsedData = EditProfileResponse.fromJson(data);
 
-          // Update cached user info
-          final updatedUser = User(
-            id: SharedPref.getUserInfo()?.id,
-            name: parsedData.data?.name,
-            email: SharedPref.getUserInfo()?.email,
-            address: parsedData.data?.address,
-            phone: parsedData.data?.phone,
-            image: parsedData.data?.image,
-            emailVerified: SharedPref.getUserInfo()?.emailVerified,
-          );
-          SharedPref.setUserInfo(updatedUser);
+        // Update cached user info
+        final updatedUser = User(
+          id: SharedPref.getUserInfo()?.id,
+          name: parsedData.data?.name,
+          email: SharedPref.getUserInfo()?.email,
+          address: parsedData.data?.address,
+          phone: parsedData.data?.phone,
+          image: parsedData.data?.image,
+          emailVerified: SharedPref.getUserInfo()?.emailVerified,
+        );
+        SharedPref.setUserInfo(updatedUser);
 
-          return Right(parsedData);
-        } on Exception catch (e) {
-          return Left(ParseFailure(message: e.toString()));
-        }
-      },
-    );
+        return Right(parsedData);
+      } on Exception catch (e) {
+        return Left(ParseFailure(message: e.toString()));
+      }
+    });
   }
 }

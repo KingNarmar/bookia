@@ -95,48 +95,64 @@ Future<void> initDependencies() async {
 }
 
 void _registerAuth() {
-  sl.registerLazySingleton<AuthRemoteDataSource>(() => AuthRemoteDataSourceImpl());
-  sl.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(remoteDataSource: sl()));
-  
+  sl.registerLazySingleton<AuthRemoteDataSource>(
+    () => AuthRemoteDataSourceImpl(),
+  );
+  sl.registerLazySingleton<AuthRepository>(
+    () => AuthRepositoryImpl(remoteDataSource: sl()),
+  );
+
   sl.registerLazySingleton(() => LoginUseCase(sl()));
   sl.registerLazySingleton(() => RegisterUseCase(sl()));
   sl.registerLazySingleton(() => ForgetPasswordUseCase(sl()));
   sl.registerLazySingleton(() => ResetPasswordUseCase(sl()));
   sl.registerLazySingleton(() => LogoutUseCase(sl()));
 
-  sl.registerFactory(() => AuthCubit(
-    loginUseCase: sl(),
-    registerUseCase: sl(),
-    forgetPasswordUseCase: sl(),
-    resetPasswordUseCase: sl(),
-  ));
+  sl.registerFactory(
+    () => AuthCubit(
+      loginUseCase: sl(),
+      registerUseCase: sl(),
+      forgetPasswordUseCase: sl(),
+      resetPasswordUseCase: sl(),
+    ),
+  );
 }
 
 void _registerHome() {
   // Home feature
-  sl.registerLazySingleton<HomeRemoteDataSource>(() => HomeRemoteDataSourceImpl());
-  sl.registerLazySingleton<HomeRepository>(() => HomeRepositoryImpl(remoteDataSource: sl()));
+  sl.registerLazySingleton<HomeRemoteDataSource>(
+    () => HomeRemoteDataSourceImpl(),
+  );
+  sl.registerLazySingleton<HomeRepository>(
+    () => HomeRepositoryImpl(remoteDataSource: sl()),
+  );
 
   sl.registerLazySingleton(() => GetSlidersUseCase(sl()));
   sl.registerLazySingleton(() => GetBestSellersUseCase(sl()));
 
-  sl.registerFactory(() => HomeCubit(
-    getSlidersUseCase: sl(),
-    getBestSellersUseCase: sl(),
-  ));
+  sl.registerFactory(
+    () => HomeCubit(getSlidersUseCase: sl(), getBestSellersUseCase: sl()),
+  );
 
   // Search Feature
-  sl.registerLazySingleton<SearchRemoteDataSource>(() => SearchRemoteDataSourceImpl());
-  sl.registerLazySingleton<SearchRepository>(() => SearchRepositoryImpl(remoteDataSource: sl()));
+  sl.registerLazySingleton<SearchRemoteDataSource>(
+    () => SearchRemoteDataSourceImpl(),
+  );
+  sl.registerLazySingleton<SearchRepository>(
+    () => SearchRepositoryImpl(remoteDataSource: sl()),
+  );
 
   sl.registerLazySingleton(() => GetAllProductsUseCase(sl()));
   sl.registerLazySingleton(() => SearchProductsUseCase(sl()));
-
 }
 
 void _registerCart() {
-  sl.registerLazySingleton<CartRemoteDataSource>(() => CartRemoteDataSourceImpl());
-  sl.registerLazySingleton<CartRepository>(() => CartRepositoryImpl(remoteDataSource: sl()));
+  sl.registerLazySingleton<CartRemoteDataSource>(
+    () => CartRemoteDataSourceImpl(),
+  );
+  sl.registerLazySingleton<CartRepository>(
+    () => CartRepositoryImpl(remoteDataSource: sl()),
+  );
 
   sl.registerLazySingleton(() => GetCartUseCase(sl()));
   sl.registerLazySingleton(() => AddToCartUseCase(sl()));
@@ -144,79 +160,106 @@ void _registerCart() {
   sl.registerLazySingleton(() => UpdateCartUseCase(sl()));
   sl.registerLazySingleton(() => CheckoutUseCase(sl()));
 
-  sl.registerFactory(() => CartCubit(
-    getCartUseCase: sl(),
-    addToCartUseCase: sl(),
-    removeFromCartUseCase: sl(),
-    updateCartUseCase: sl(),
-    checkoutUseCase: sl(),
-  ));
+  sl.registerFactory(
+    () => CartCubit(
+      getCartUseCase: sl(),
+      addToCartUseCase: sl(),
+      removeFromCartUseCase: sl(),
+      updateCartUseCase: sl(),
+      checkoutUseCase: sl(),
+    ),
+  );
 }
 
 void _registerWishList() {
-  sl.registerLazySingleton<WishlistRemoteDataSource>(() => WishlistRemoteDataSourceImpl());
-  sl.registerLazySingleton<WishlistRepository>(() => WishlistRepositoryImpl(remoteDataSource: sl()));
+  sl.registerLazySingleton<WishlistRemoteDataSource>(
+    () => WishlistRemoteDataSourceImpl(),
+  );
+  sl.registerLazySingleton<WishlistRepository>(
+    () => WishlistRepositoryImpl(remoteDataSource: sl()),
+  );
 
   sl.registerLazySingleton(() => GetWishlistUseCase(sl()));
   sl.registerLazySingleton(() => AddToWishlistUseCase(sl()));
   sl.registerLazySingleton(() => RemoveFromWishlistUseCase(sl()));
 
-  sl.registerFactory(() => WishListCubit(
-    getWishlistUseCase: sl(),
-    addToWishlistUseCase: sl(),
-    removeFromWishlistUseCase: sl(),
-  ));
+  sl.registerFactory(
+    () => WishListCubit(
+      getWishlistUseCase: sl(),
+      addToWishlistUseCase: sl(),
+      removeFromWishlistUseCase: sl(),
+    ),
+  );
 }
 
 void _registerBookDetails() {
-  sl.registerFactory(() => BookDetailsCubit(
-    addToWishlistUseCase: sl(),
-    addToCartUseCase: sl(),
-  ));
+  sl.registerFactory(
+    () => BookDetailsCubit(addToWishlistUseCase: sl(), addToCartUseCase: sl()),
+  );
 }
 
 void _registerOrders() {
   // My Orders
-  sl.registerLazySingleton<MyOrdersRemoteDataSource>(() => MyOrdersRemoteDataSourceImpl());
-  sl.registerLazySingleton<MyOrdersRepository>(() => MyOrdersRepositoryImpl(remoteDataSource: sl()));
+  sl.registerLazySingleton<MyOrdersRemoteDataSource>(
+    () => MyOrdersRemoteDataSourceImpl(),
+  );
+  sl.registerLazySingleton<MyOrdersRepository>(
+    () => MyOrdersRepositoryImpl(remoteDataSource: sl()),
+  );
 
   sl.registerLazySingleton(() => GetOrdersUseCase(sl()));
 
   sl.registerFactory(() => MyOrderCubit(getOrdersUseCase: sl()));
 
   // Order Details
-  sl.registerLazySingleton<OrderDetailsRemoteDataSource>(() => OrderDetailsRemoteDataSourceImpl());
-  sl.registerLazySingleton<OrderDetailsRepository>(() => OrderDetailsRepositoryImpl(remoteDataSource: sl()));
+  sl.registerLazySingleton<OrderDetailsRemoteDataSource>(
+    () => OrderDetailsRemoteDataSourceImpl(),
+  );
+  sl.registerLazySingleton<OrderDetailsRepository>(
+    () => OrderDetailsRepositoryImpl(remoteDataSource: sl()),
+  );
 
   sl.registerLazySingleton(() => GetOrderDetailsUseCase(sl()));
 
   sl.registerFactory(() => OrderDetailsCubit(getOrderDetailsUseCase: sl()));
 
   // Place Order
-  sl.registerLazySingleton<PlaceOrderRemoteDataSource>(() => PlaceOrderRemoteDataSourceImpl());
-  sl.registerLazySingleton<PlaceOrderRepository>(() => PlaceOrderRepositoryImpl(remoteDataSource: sl()));
+  sl.registerLazySingleton<PlaceOrderRemoteDataSource>(
+    () => PlaceOrderRemoteDataSourceImpl(),
+  );
+  sl.registerLazySingleton<PlaceOrderRepository>(
+    () => PlaceOrderRepositoryImpl(remoteDataSource: sl()),
+  );
 
   sl.registerLazySingleton(() => GetGovernoratesUseCase(sl()));
   sl.registerLazySingleton(() => PlaceOrderUseCase(sl()));
 
-  sl.registerFactory(() => PlaceOrderCubit(
-    getGovernoratesUseCase: sl(),
-    placeOrderUseCase: sl(),
-  ));
+  sl.registerFactory(
+    () =>
+        PlaceOrderCubit(getGovernoratesUseCase: sl(), placeOrderUseCase: sl()),
+  );
 }
 
 void _registerProfile() {
   // Edit Profile
-  sl.registerLazySingleton<EditProfileRemoteDataSource>(() => EditProfileRemoteDataSourceImpl());
-  sl.registerLazySingleton<EditProfileRepository>(() => EditProfileRepositoryImpl(remoteDataSource: sl()));
+  sl.registerLazySingleton<EditProfileRemoteDataSource>(
+    () => EditProfileRemoteDataSourceImpl(),
+  );
+  sl.registerLazySingleton<EditProfileRepository>(
+    () => EditProfileRepositoryImpl(remoteDataSource: sl()),
+  );
 
   sl.registerLazySingleton(() => EditProfileUseCase(sl()));
 
   sl.registerFactory(() => EditProfileCubit(editProfileUseCase: sl()));
 
   // Update Password
-  sl.registerLazySingleton<UpdatePasswordRemoteDataSource>(() => UpdatePasswordRemoteDataSourceImpl());
-  sl.registerLazySingleton<UpdatePasswordRepository>(() => UpdatePasswordRepositoryImpl(remoteDataSource: sl()));
+  sl.registerLazySingleton<UpdatePasswordRemoteDataSource>(
+    () => UpdatePasswordRemoteDataSourceImpl(),
+  );
+  sl.registerLazySingleton<UpdatePasswordRepository>(
+    () => UpdatePasswordRepositoryImpl(remoteDataSource: sl()),
+  );
 
   sl.registerLazySingleton(() => UpdatePasswordUseCase(sl()));
 

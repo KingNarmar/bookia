@@ -28,13 +28,17 @@ class PlaceOrderCubit extends Cubit<PlaceOrderState> {
     final response = await getGovernoratesUseCase.call(NoParams());
 
     response.fold(
-      (l) => emit(PlaceOrderGovernoratesErrorState(message: "failed_to_load_data")),
+      (l) => emit(
+        PlaceOrderGovernoratesErrorState(message: "failed_to_load_data"),
+      ),
       (data) {
         if (data.isNotEmpty) {
           governorates = data;
           emit(PlaceOrderGovernoratesSuccessState());
         } else {
-          emit(PlaceOrderGovernoratesErrorState(message: "failed_to_load_data"));
+          emit(
+            PlaceOrderGovernoratesErrorState(message: "failed_to_load_data"),
+          );
         }
       },
     );
@@ -58,13 +62,15 @@ class PlaceOrderCubit extends Cubit<PlaceOrderState> {
 
     emit(PlaceOrderSubmittingState());
 
-    final response = await placeOrderUseCase.call(PlaceOrderParams(
-      governorateId: selectedGovernorate!.id!,
-      name: name,
-      phone: phone,
-      address: address,
-      email: email,
-    ));
+    final response = await placeOrderUseCase.call(
+      PlaceOrderParams(
+        governorateId: selectedGovernorate!.id!,
+        name: name,
+        phone: phone,
+        address: address,
+        email: email,
+      ),
+    );
 
     response.fold(
       (l) => emit(PlaceOrderErrorState(message: "failed_to_place_order")),

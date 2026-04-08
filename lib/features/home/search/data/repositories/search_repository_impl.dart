@@ -12,34 +12,28 @@ class SearchRepositoryImpl implements SearchRepository {
   @override
   Future<Either<Failure, List<Product>>> getAllProducts() async {
     final response = await remoteDataSource.getAllProducts();
-    return response.fold(
-      (failure) => Left(failure),
-      (data) {
-        try {
-          final List productsJson = data["products"] ?? [];
-          final products = productsJson.map((e) => Product.fromJson(e)).toList();
-          return Right(products);
-        } on Exception catch (e) {
-          return Left(ParseFailure(message: e.toString()));
-        }
-      },
-    );
+    return response.fold((failure) => Left(failure), (data) {
+      try {
+        final List productsJson = data["products"] ?? [];
+        final products = productsJson.map((e) => Product.fromJson(e)).toList();
+        return Right(products);
+      } on Exception catch (e) {
+        return Left(ParseFailure(message: e.toString()));
+      }
+    });
   }
 
   @override
   Future<Either<Failure, List<Product>>> searchProducts(String name) async {
     final response = await remoteDataSource.searchProducts(name: name);
-    return response.fold(
-      (failure) => Left(failure),
-      (data) {
-        try {
-          final List productsJson = data["products"] ?? [];
-          final products = productsJson.map((e) => Product.fromJson(e)).toList();
-          return Right(products);
-        } on Exception catch (e) {
-          return Left(ParseFailure(message: e.toString()));
-        }
-      },
-    );
+    return response.fold((failure) => Left(failure), (data) {
+      try {
+        final List productsJson = data["products"] ?? [];
+        final products = productsJson.map((e) => Product.fromJson(e)).toList();
+        return Right(products);
+      } on Exception catch (e) {
+        return Left(ParseFailure(message: e.toString()));
+      }
+    });
   }
 }

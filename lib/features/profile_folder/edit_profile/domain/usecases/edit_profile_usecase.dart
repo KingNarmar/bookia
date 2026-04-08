@@ -13,13 +13,16 @@ class EditProfileUseCaseParams {
   EditProfileUseCaseParams({required this.params, this.image});
 }
 
-class EditProfileUseCase implements UseCase<EditProfileResponse, EditProfileUseCaseParams> {
+class EditProfileUseCase
+    implements UseCase<EditProfileResponse, EditProfileUseCaseParams> {
   final EditProfileRepository repository;
 
   EditProfileUseCase(this.repository);
 
   @override
-  Future<Either<Failure, EditProfileResponse>> call(EditProfileUseCaseParams params) {
+  Future<Either<Failure, EditProfileResponse>> call(
+    EditProfileUseCaseParams params,
+  ) {
     return repository.editProfile(params.params, image: params.image);
   }
 }

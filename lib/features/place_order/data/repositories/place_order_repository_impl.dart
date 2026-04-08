@@ -12,17 +12,16 @@ class PlaceOrderRepositoryImpl implements PlaceOrderRepository {
   @override
   Future<Either<Failure, List<GovernorateModel>>> getGovernorates() async {
     final response = await remoteDataSource.getGovernorates();
-    return response.fold(
-      (failure) => Left(failure),
-      (data) {
-        try {
-          final List listData = data ?? [];
-          return Right(listData.map((e) => GovernorateModel.fromJson(e)).toList());
-        } on Exception catch (e) {
-          return Left(ParseFailure(message: e.toString()));
-        }
-      },
-    );
+    return response.fold((failure) => Left(failure), (data) {
+      try {
+        final List listData = data ?? [];
+        return Right(
+          listData.map((e) => GovernorateModel.fromJson(e)).toList(),
+        );
+      } on Exception catch (e) {
+        return Left(ParseFailure(message: e.toString()));
+      }
+    });
   }
 
   @override
@@ -40,17 +39,14 @@ class PlaceOrderRepositoryImpl implements PlaceOrderRepository {
       address: address,
       email: email,
     );
-    return response.fold(
-      (failure) => Left(failure),
-      (data) {
-        try {
-          final orderId = data?["id"];
-          if (orderId is int) return Right(orderId);
-          return Right(int.tryParse(orderId?.toString() ?? ''));
-        } on Exception catch (e) {
-          return Left(ParseFailure(message: e.toString()));
-        }
-      },
-    );
+    return response.fold((failure) => Left(failure), (data) {
+      try {
+        final orderId = data?["id"];
+        if (orderId is int) return Right(orderId);
+        return Right(int.tryParse(orderId?.toString() ?? ''));
+      } on Exception catch (e) {
+        return Left(ParseFailure(message: e.toString()));
+      }
+    });
   }
 }

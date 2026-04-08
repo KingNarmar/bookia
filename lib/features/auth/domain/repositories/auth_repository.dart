@@ -10,6 +10,8 @@ abstract class AuthRepository {
   Future<Either<Failure, Data>> register(RegisterParams params);
   Future<Either<Failure, Data>> login(RegisterParams params);
   Future<Either<Failure, Data>> forgetPassword(ForgetPasswordParams params);
-  Future<Either<Failure, AuthResponse>> resetPassword(ResetPasswordParams params);
+  Future<Either<Failure, AuthResponse>> resetPassword(
+    ResetPasswordParams params,
+  );
   Future<bool> logout();
 }

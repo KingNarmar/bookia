@@ -14,30 +14,25 @@ abstract class AuthRemoteDataSource {
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<Either<Failure, dynamic>> register(Map<String, dynamic> data) async {
-    return await DioProvider.postApi(
-      endPoint: Apis.register,
-      data: data,
-    );
+    return await DioProvider.postApi(endPoint: Apis.register, data: data);
   }
 
   @override
   Future<Either<Failure, dynamic>> login(Map<String, dynamic> data) async {
-    return await DioProvider.postApi(
-      endPoint: Apis.login,
-      data: data,
-    );
+    return await DioProvider.postApi(endPoint: Apis.login, data: data);
   }
 
   @override
-  Future<Either<Failure, dynamic>> forgetPassword(Map<String, dynamic> data) async {
-    return await DioProvider.postApi(
-      endPoint: Apis.forgetPassword,
-      data: data,
-    );
+  Future<Either<Failure, dynamic>> forgetPassword(
+    Map<String, dynamic> data,
+  ) async {
+    return await DioProvider.postApi(endPoint: Apis.forgetPassword, data: data);
   }
 
   @override
-  Future<Either<Failure, dynamic>> resetPassword(Map<String, dynamic> data) async {
+  Future<Either<Failure, dynamic>> resetPassword(
+    Map<String, dynamic> data,
+  ) async {
     return await DioProvider.postApi(
       endPoint: Apis.resetPassword,
       data: data,

@@ -49,8 +49,10 @@ class CreateNewPasswordScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(context.translate("create_new_password"),
-                      style: TextStyles.w400s30),
+                  Text(
+                    context.translate("create_new_password"),
+                    style: TextStyles.w400s30,
+                  ),
                   const Gap(10),
                   Text(
                     context.translate("create_new_password_subtitle"),
@@ -62,9 +64,12 @@ class CreateNewPasswordScreen extends StatelessWidget {
                   PasswordTextFormField(
                     hint: context.translate("new_password"),
                     validator: AppValidators.password(
-                      emptyMessage: context.translate("validation_password_empty"),
-                      invalidMessage:
-                          context.translate("validation_password_invalid"),
+                      emptyMessage: context.translate(
+                        "validation_password_empty",
+                      ),
+                      invalidMessage: context.translate(
+                        "validation_password_invalid",
+                      ),
                     ),
                     passwordController: cubit.passwordController,
                   ),
@@ -73,10 +78,12 @@ class CreateNewPasswordScreen extends StatelessWidget {
                     hint: context.translate("confirm_password"),
                     validator: AppValidators.confirmPassword(
                       passwordProvider: () => cubit.passwordController.text,
-                      emptyMessage:
-                          context.translate("validation_confirm_password_empty"),
-                      invalidMessage: context
-                          .translate("validation_confirm_password_invalid"),
+                      emptyMessage: context.translate(
+                        "validation_confirm_password_empty",
+                      ),
+                      invalidMessage: context.translate(
+                        "validation_confirm_password_invalid",
+                      ),
                     ),
                     passwordController: cubit.confirmController,
                   ),

@@ -9,9 +9,12 @@ abstract class UpdatePasswordRemoteDataSource {
   Future<Either<Failure, dynamic>> updatePassword(ResetPasswordParams params);
 }
 
-class UpdatePasswordRemoteDataSourceImpl implements UpdatePasswordRemoteDataSource {
+class UpdatePasswordRemoteDataSourceImpl
+    implements UpdatePasswordRemoteDataSource {
   @override
-  Future<Either<Failure, dynamic>> updatePassword(ResetPasswordParams params) async {
+  Future<Either<Failure, dynamic>> updatePassword(
+    ResetPasswordParams params,
+  ) async {
     final token = SharedPref.getToken();
 
     return await DioProvider.postApi(

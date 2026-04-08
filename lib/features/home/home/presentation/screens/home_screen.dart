@@ -58,17 +58,19 @@ class HomeScreen extends StatelessWidget {
                     const Gap(31),
 
                     if (state is HomeSuccessState) ...[
-                      Text(context.translate("best_seller"),
-                          style: TextStyles.w400s24),
+                      Text(
+                        context.translate("best_seller"),
+                        style: TextStyles.w400s24,
+                      ),
                       const Gap(15),
                       GridView.builder(
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 11,
-                          mainAxisSpacing: 11,
-                          childAspectRatio: 0.5,
-                        ),
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 11,
+                              mainAxisSpacing: 11,
+                              childAspectRatio: 0.5,
+                            ),
                         itemBuilder: (context, index) {
                           return BookCard(product: state.products[index]);
                         },

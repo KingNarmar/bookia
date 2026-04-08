@@ -42,7 +42,10 @@ abstract class DioProvider {
     }
   }
 
-  static Either<Failure, dynamic> _handleResponse(Response<dynamic> response, bool unwrapData) {
+  static Either<Failure, dynamic> _handleResponse(
+    Response<dynamic> response,
+    bool unwrapData,
+  ) {
     if (!unwrapData) return Right(response.data);
     final body = response.data;
     if (body is! Map<String, dynamic>) return Right(body);
@@ -77,7 +80,6 @@ abstract class DioProvider {
         return UnknownFailure(message: "Unknown Error");
     }
   }
-
 
   static Future<Either<Failure, dynamic>> getApi({
     required String endPoint,

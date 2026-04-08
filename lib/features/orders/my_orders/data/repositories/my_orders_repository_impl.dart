@@ -12,15 +12,12 @@ class MyOrdersRepositoryImpl implements MyOrdersRepository {
   @override
   Future<Either<Failure, MyOrdersResponse>> getOrders() async {
     final response = await remoteDataSource.getOrders();
-    return response.fold(
-      (failure) => Left(failure),
-      (data) {
-        try {
-          return Right(MyOrdersResponse.fromJson(data));
-        } on Exception catch (e) {
-          return Left(ParseFailure(message: e.toString()));
-        }
-      },
-    );
+    return response.fold((failure) => Left(failure), (data) {
+      try {
+        return Right(MyOrdersResponse.fromJson(data));
+      } on Exception catch (e) {
+        return Left(ParseFailure(message: e.toString()));
+      }
+    });
   }
 }

@@ -5,7 +5,8 @@ import 'package:bookia/features/auth/data/models/reset_password_params.dart';
 import 'package:bookia/features/auth/domain/repositories/auth_repository.dart';
 import 'package:dartz/dartz.dart';
 
-class ResetPasswordUseCase implements UseCase<AuthResponse, ResetPasswordParams> {
+class ResetPasswordUseCase
+    implements UseCase<AuthResponse, ResetPasswordParams> {
   final AuthRepository repository;
 
   ResetPasswordUseCase(this.repository);

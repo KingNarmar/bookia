@@ -10,7 +10,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class EditProfileCubit extends Cubit<EditProfileState> {
   final EditProfileUseCase editProfileUseCase;
 
-  EditProfileCubit({required this.editProfileUseCase}) : super(EditProfileInitial());
+  EditProfileCubit({required this.editProfileUseCase})
+    : super(EditProfileInitial());
 
   final formKey = GlobalKey<FormState>();
   final nameController = TextEditingController();
@@ -44,10 +45,9 @@ class EditProfileCubit extends Cubit<EditProfileState> {
     params.phone = phoneController.text;
     params.address = addressController.text;
 
-    var response = await editProfileUseCase.call(EditProfileUseCaseParams(
-      params: params,
-      image: localImage,
-    ));
+    var response = await editProfileUseCase.call(
+      EditProfileUseCaseParams(params: params, image: localImage),
+    );
 
     response.fold(
       (l) => emit(EditProfileError()),

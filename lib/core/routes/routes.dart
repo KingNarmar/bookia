@@ -193,17 +193,18 @@ class Routes {
         ),
       ),
 
-     GoRoute(
-  path: Routes.orderDetails,
-  builder: (context, state) {
-    final orderId = state.extra as int;
+      GoRoute(
+        path: Routes.orderDetails,
+        builder: (context, state) {
+          final orderId = state.extra as int;
 
-    return BlocProvider(
-      create: (context) => sl<OrderDetailsCubit>()..getOrderDetails(orderId),
-      child: OrderDetailsScreen(orderId: orderId),
-    );
-  },
-),
+          return BlocProvider(
+            create: (context) =>
+                sl<OrderDetailsCubit>()..getOrderDetails(orderId),
+            child: OrderDetailsScreen(orderId: orderId),
+          );
+        },
+      ),
     ],
   );
 }

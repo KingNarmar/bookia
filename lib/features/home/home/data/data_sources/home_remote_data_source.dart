@@ -11,10 +11,7 @@ abstract class HomeRemoteDataSource {
 class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
   @override
   Future<Either<Failure, dynamic>> getSliders() async {
-    return await DioProvider.getApi(
-      endPoint: Apis.sliders,
-      unwrapData: true,
-    );
+    return await DioProvider.getApi(endPoint: Apis.sliders, unwrapData: true);
   }
 
   @override

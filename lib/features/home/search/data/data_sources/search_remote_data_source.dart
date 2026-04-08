@@ -18,7 +18,9 @@ class SearchRemoteDataSourceImpl implements SearchRemoteDataSource {
   }
 
   @override
-  Future<Either<Failure, dynamic>> searchProducts({required String name}) async {
+  Future<Either<Failure, dynamic>> searchProducts({
+    required String name,
+  }) async {
     return await DioProvider.getApi(
       endPoint: Apis.productsSearch,
       queryParameters: {"name": name},

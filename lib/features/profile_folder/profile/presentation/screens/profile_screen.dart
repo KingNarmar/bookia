@@ -64,7 +64,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   radius: 40,
                   backgroundImage:
                       (profileData?.image != null &&
-                           profileData!.image!.isNotEmpty)
+                          profileData!.image!.isNotEmpty)
                       ? CachedNetworkImageProvider(profileData.image!)
                       : null,
                 ),

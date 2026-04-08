@@ -7,7 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ResetPasswordCubit extends Cubit<ResetPasswordState> {
   final UpdatePasswordUseCase updatePasswordUseCase;
 
-  ResetPasswordCubit({required this.updatePasswordUseCase}) : super(ResetPasswordInitial());
+  ResetPasswordCubit({required this.updatePasswordUseCase})
+    : super(ResetPasswordInitial());
 
   final formKey = GlobalKey<FormState>();
   final currentPasswordController = TextEditingController();
@@ -26,12 +27,20 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
     var response = await updatePasswordUseCase.call(params);
 
     response.fold(
-      (l) => emit(ResetPasswordError(message: "Failed to update password. Please try again.")),
+      (l) => emit(
+        ResetPasswordError(
+          message: "Failed to update password. Please try again.",
+        ),
+      ),
       (data) {
         if (data.message != null) {
           emit(ResetPasswordSuccess(message: data.message!));
         } else {
-          emit(ResetPasswordError(message: "Failed to update password. Please try again."));
+          emit(
+            ResetPasswordError(
+              message: "Failed to update password. Please try again.",
+            ),
+          );
         }
       },
     );

@@ -37,28 +37,22 @@ class CartCubit extends Cubit<CartState> {
 
     final response = await getCartUseCase.call(NoParams());
 
-    response.fold(
-      (l) => emit(CartErrorState()),
-      (data) {
-        cartData = data;
-        SharedPref.cashCartListIds(cartItems);
-        emit(CartSuccessState());
-      },
-    );
+    response.fold((l) => emit(CartErrorState()), (data) {
+      cartData = data;
+      SharedPref.cashCartListIds(cartItems);
+      emit(CartSuccessState());
+    });
   }
 
   Future<void> removeFromCart(int itemId) async {
     final response = await removeFromCartUseCase.call(itemId);
 
-    response.fold(
-      (l) => emit(CartErrorState()),
-      (_) async {
-        cartData?.cartItems?.removeWhere((item) => item.itemId == itemId);
-        SharedPref.cashCartListIds(cartItems);
-        emit(CartSuccessState());
-        await getCartItems();
-      },
-    );
+    response.fold((l) => emit(CartErrorState()), (_) async {
+      cartData?.cartItems?.removeWhere((item) => item.itemId == itemId);
+      SharedPref.cashCartListIds(cartItems);
+      emit(CartSuccessState());
+      await getCartItems();
+    });
   }
 
   Future<void> updateCartQuantity({
@@ -82,14 +76,11 @@ class CartCubit extends Cubit<CartState> {
       UpdateCartParams(cartItemId: itemId, quantity: quantity),
     );
 
-    response.fold(
-      (l) => emit(CartErrorState()),
-      (data) {
-        cartData = data;
-        SharedPref.cashCartListIds(cartItems);
-        emit(CartSuccessState());
-      },
-    );
+    response.fold((l) => emit(CartErrorState()), (data) {
+      cartData = data;
+      SharedPref.cashCartListIds(cartItems);
+      emit(CartSuccessState());
+    });
   }
 
   Future<bool> checkout() async {

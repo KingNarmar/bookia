@@ -4,5 +4,7 @@ import 'package:bookia/features/profile_folder/reset_password/data/models/reset_
 import 'package:dartz/dartz.dart';
 
 abstract class UpdatePasswordRepository {
-  Future<Either<Failure, ResetPasswordResponse>> updatePassword(ResetPasswordParams params);
+  Future<Either<Failure, ResetPasswordResponse>> updatePassword(
+    ResetPasswordParams params,
+  );
 }

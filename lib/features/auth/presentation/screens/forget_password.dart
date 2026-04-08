@@ -59,8 +59,10 @@ class ForgetPasswordScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(context.translate("forgot_password_title"),
-                        style: TextStyles.w400s30),
+                    Text(
+                      context.translate("forgot_password_title"),
+                      style: TextStyles.w400s30,
+                    ),
                     const Gap(10),
                     Text(
                       context.translate("forgot_password_subtitle"),
@@ -73,9 +75,12 @@ class ForgetPasswordScreen extends StatelessWidget {
                       hint: context.translate("email_hint"),
                       validator: (value) => AppValidators.email(
                         value,
-                        emptyMessage: context.translate("validation_email_empty"),
-                        invalidMessage:
-                            context.translate("validation_email_invalid"),
+                        emptyMessage: context.translate(
+                          "validation_email_empty",
+                        ),
+                        invalidMessage: context.translate(
+                          "validation_email_invalid",
+                        ),
                       ),
                       controller: cubit.emailController,
                     ),

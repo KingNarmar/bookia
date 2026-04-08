@@ -20,15 +20,12 @@ class BookDetailsCubit extends Cubit<BookDetailsState> {
     emit(AddToWishListLoadingState());
 
     var response = await addToWishlistUseCase.call(productId);
-    
-    response.fold(
-      (l) => emit(AddToWishListErrorState()),
-      (data) {
-        var products = data.data?.product ?? [];
-        SharedPref.cashWishListIds(products);
-        emit(AddToWishListSuccessState());
-      },
-    );
+
+    response.fold((l) => emit(AddToWishListErrorState()), (data) {
+      var products = data.data?.product ?? [];
+      SharedPref.cashWishListIds(products);
+      emit(AddToWishListSuccessState());
+    });
   }
 
   bool isInWishList(int productId) {
@@ -41,14 +38,11 @@ class BookDetailsCubit extends Cubit<BookDetailsState> {
 
     final response = await addToCartUseCase.call(productId);
 
-    response.fold(
-      (l) => emit(AddToCartErrorState()),
-      (data) {
-        cartItems = data.cartItems ?? [];
-        SharedPref.cashCartListIds(cartItems);
-        emit(AddToCartSuccessState());
-      },
-    );
+    response.fold((l) => emit(AddToCartErrorState()), (data) {
+      cartItems = data.cartItems ?? [];
+      SharedPref.cashCartListIds(cartItems);
+      emit(AddToCartSuccessState());
+    });
   }
 
   bool isInCart(int productId) {

@@ -23,26 +23,20 @@ class WishListCubit extends Cubit<WishListState> {
   void getWishList() async {
     emit(WishListLoadingState());
     var response = await getWishlistUseCase.call(NoParams());
-    response.fold(
-      (l) => emit(WishListErrorState()),
-      (data) {
-        products = data.data?.product ?? [];
-        SharedPref.cashWishListIds(products);
-        emit(WishListSuccessState());
-      },
-    );
+    response.fold((l) => emit(WishListErrorState()), (data) {
+      products = data.data?.product ?? [];
+      SharedPref.cashWishListIds(products);
+      emit(WishListSuccessState());
+    });
   }
 
   void removeFromWishList(int productId) async {
     emit(WishListLoadingState());
     var response = await removeFromWishlistUseCase.call(productId);
-    response.fold(
-      (l) => emit(WishListErrorState()),
-      (data) {
-        products = data.data?.product ?? [];
-        SharedPref.cashWishListIds(products);
-        emit(WishListSuccessState());
-      },
-    );
+    response.fold((l) => emit(WishListErrorState()), (data) {
+      products = data.data?.product ?? [];
+      SharedPref.cashWishListIds(products);
+      emit(WishListSuccessState());
+    });
   }
 }

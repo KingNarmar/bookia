@@ -6,7 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class OrderDetailsCubit extends Cubit<OrderDetailsState> {
   final GetOrderDetailsUseCase getOrderDetailsUseCase;
 
-  OrderDetailsCubit({required this.getOrderDetailsUseCase}) : super(OrderDetailsInitial());
+  OrderDetailsCubit({required this.getOrderDetailsUseCase})
+    : super(OrderDetailsInitial());
 
   OrderDetailsResponse? orderDetailsResponse;
 

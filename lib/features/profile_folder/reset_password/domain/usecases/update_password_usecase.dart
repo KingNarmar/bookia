@@ -5,13 +5,16 @@ import 'package:bookia/features/profile_folder/reset_password/data/models/reset_
 import 'package:bookia/features/profile_folder/reset_password/domain/repositories/update_password_repository.dart';
 import 'package:dartz/dartz.dart';
 
-class UpdatePasswordUseCase implements UseCase<ResetPasswordResponse, ResetPasswordParams> {
+class UpdatePasswordUseCase
+    implements UseCase<ResetPasswordResponse, ResetPasswordParams> {
   final UpdatePasswordRepository repository;
 
   UpdatePasswordUseCase(this.repository);
 
   @override
-  Future<Either<Failure, ResetPasswordResponse>> call(ResetPasswordParams params) {
+  Future<Either<Failure, ResetPasswordResponse>> call(
+    ResetPasswordParams params,
+  ) {
     return repository.updatePassword(params);
   }
 }

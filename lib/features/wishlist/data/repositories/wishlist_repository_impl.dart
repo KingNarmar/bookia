@@ -12,45 +12,38 @@ class WishlistRepositoryImpl implements WishlistRepository {
   @override
   Future<Either<Failure, WishListResponse>> getWishlist() async {
     final response = await remoteDataSource.getWishlist();
-    return response.fold(
-      (failure) => Left(failure),
-      (data) {
-        try {
-          return Right(WishListResponse.fromJson(data));
-        } on Exception catch (e) {
-          return Left(ParseFailure(message: e.toString()));
-        }
-      },
-    );
+    return response.fold((failure) => Left(failure), (data) {
+      try {
+        return Right(WishListResponse.fromJson(data));
+      } on Exception catch (e) {
+        return Left(ParseFailure(message: e.toString()));
+      }
+    });
   }
 
   @override
   Future<Either<Failure, WishListResponse>> addToWishlist(int productId) async {
     final response = await remoteDataSource.addToWishlist(productId);
-    return response.fold(
-      (failure) => Left(failure),
-      (data) {
-        try {
-          return Right(WishListResponse.fromJson(data));
-        } on Exception catch (e) {
-          return Left(ParseFailure(message: e.toString()));
-        }
-      },
-    );
+    return response.fold((failure) => Left(failure), (data) {
+      try {
+        return Right(WishListResponse.fromJson(data));
+      } on Exception catch (e) {
+        return Left(ParseFailure(message: e.toString()));
+      }
+    });
   }
 
   @override
-  Future<Either<Failure, WishListResponse>> removeFromWishlist(int productId) async {
+  Future<Either<Failure, WishListResponse>> removeFromWishlist(
+    int productId,
+  ) async {
     final response = await remoteDataSource.removeFromWishlist(productId);
-    return response.fold(
-      (failure) => Left(failure),
-      (data) {
-        try {
-          return Right(WishListResponse.fromJson(data));
-        } on Exception catch (e) {
-          return Left(ParseFailure(message: e.toString()));
-        }
-      },
-    );
+    return response.fold((failure) => Left(failure), (data) {
+      try {
+        return Right(WishListResponse.fromJson(data));
+      } on Exception catch (e) {
+        return Left(ParseFailure(message: e.toString()));
+      }
+    });
   }
 }
