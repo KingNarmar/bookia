@@ -1,5 +1,5 @@
 import 'package:bookia/app_root/app_root.dart';
-import 'package:bookia/core/services/api/dio_provider.dart';
+import 'package:bookia/core/services/dio/dio_provider.dart';
 import 'package:bookia/core/services/local/shared_pref.dart';
 import 'package:flutter/material.dart';
 

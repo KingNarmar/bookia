@@ -13,23 +13,17 @@ class HomeCubit extends Cubit<HomeState> {
   Future<void> getHomeData() async {
     emit(HomeLoadingState());
 
-    try {
-      final response = await Future.wait([
-        HomeRepo.getSliders(),
-        HomeRepo.getBestSellerProducts(),
-      ]);
+    final slidersResult = await HomeRepo.getSliders();
+    final productsResult = await HomeRepo.getBestSellerProducts();
 
-      sliders = response[0] as List<SliderModel>;
-      products = response[1] as List<Product>;
+    sliders = (slidersResult ?? []).cast<SliderModel>();
+    products = (productsResult ?? []).cast<Product>();
 
-      if (sliders.isEmpty && products.isEmpty) {
-        emit(HomeErrorState(errorMsg: "failed_to_load_data"));
-        return;
-      }
-
-      emit(HomeSuccessState(products: products, sliders: sliders));
-    } catch (e) {
+    if (sliders.isEmpty && products.isEmpty) {
       emit(HomeErrorState(errorMsg: "failed_to_load_data"));
+      return;
     }
+
+    emit(HomeSuccessState(products: products, sliders: sliders));
   }
 }

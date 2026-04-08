@@ -23,11 +23,14 @@ class AuthCubit extends Cubit<AuthState> {
         password: passwordController.text,
       ),
     );
-    if (response != null) {
-      emit(AuthSuccessState());
-    } else {
-      emit(AuthErrorState(message: "login_failed"));
-    }
+    response.fold(
+      (l) {
+        emit(AuthErrorState(message: l.message));
+      },
+      (r) {
+        emit(AuthSuccessState());
+      },
+    );
   }
 
   Future<void> register() async {
@@ -40,50 +43,45 @@ class AuthCubit extends Cubit<AuthState> {
         passwordConfirmation: confirmController.text,
       ),
     );
-    if (response != null) {
-      emit(AuthSuccessState());
-    } else {
-      emit(AuthErrorState(message: "register_failed"));
-    }
+    response.fold(
+      (l) {
+        emit(AuthErrorState(message: l.message));
+      },
+      (r) {
+        emit(AuthSuccessState());
+      },
+    );
   }
 
   Future<void> forgetPassword() async {
     emit(AuthLoadingState());
 
-    try {
-      final params = ForgetPasswordParams(email: emailController.text);
+    final params = ForgetPasswordParams(email: emailController.text);
 
-      final response = await AuthRepo.forgetPassword(params);
-
-      if (response != null) {
+    final response = await AuthRepo.forgetPassword(params);
+    response.fold(
+      (l) {
+        emit(AuthErrorState(message: l.message));
+      },
+      (r) {
         emit(AuthSuccessState());
-      } else {
-        emit(AuthErrorState(message: "wrong_email"));
-      }
-    } catch (e) {
-      emit(AuthErrorState(message: e.toString()));
-    }
+      },
+    );
   }
 
   Future<void> resetPassword() async {
     emit(AuthLoadingState());
 
-    try {
-      final params = ResetPasswordParams(
-        verifyCode: otpController.text,
-        newPassword: passwordController.text,
-        confirmPassword: confirmController.text,
-      );
+    final params = ResetPasswordParams(
+      verifyCode: otpController.text,
+      newPassword: passwordController.text,
+      confirmPassword: confirmController.text,
+    );
 
-      final response = await AuthRepo.resetPassword(params);
-
-      if (response != null) {
-        emit(AuthSuccessState());
-      } else {
-        emit(AuthErrorState(message: "reset_password_failed"));
-      }
-    } catch (e) {
-      emit(AuthErrorState(message: e.toString()));
-    }
+    final response = await AuthRepo.resetPassword(params);
+    response.fold(
+      (l) => emit(AuthErrorState(message: l.message)),
+      (r) => emit(AuthSuccessState()),
+    );
   }
 }

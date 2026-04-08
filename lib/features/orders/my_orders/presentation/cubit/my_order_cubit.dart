@@ -10,20 +10,12 @@ class MyOrderCubit extends Cubit<MyOrdersState> {
 
   Future<void> getOrders() async {
     emit(MyOrdersLoading());
-    try {
-      final response = await MyOrdersRepo.getOrders();
-      if (response != null && response.data != null) {
-        myOrdersResponse = response;
-        emit(MyOrdersLoaded());
-      } else {
-        emit(
-          MyOrdersError(
-            message: response?.message ?? "failed_to_load_data",
-          ),
-        );
-      }
-    } catch (e) {
-      emit(MyOrdersError(message: "error"));
+    final response = await MyOrdersRepo.getOrders();
+    if (response != null && response.data != null) {
+      myOrdersResponse = response;
+      emit(MyOrdersLoaded());
+    } else {
+      emit(MyOrdersError(message: response?.message ?? "failed_to_load_data"));
     }
   }
 }

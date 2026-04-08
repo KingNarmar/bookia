@@ -1,117 +1,114 @@
-import 'dart:developer';
 
-import 'package:bookia/core/services/api/api.dart';
-import 'package:bookia/core/services/api/dio_provider.dart';
+import 'package:bookia/core/services/dio/api.dart';
+import 'package:bookia/core/services/dio/dio_provider.dart';
+import 'package:bookia/core/services/dio/failure.dart';
 import 'package:bookia/core/services/local/shared_pref.dart';
 import 'package:bookia/features/auth/data/models/auth_response/auth_response.dart';
+import 'package:bookia/features/auth/data/models/auth_response/data.dart';
 import 'package:bookia/features/auth/data/models/forget_password_params.dart';
 import 'package:bookia/features/auth/data/models/register_params.dart';
 import 'package:bookia/features/auth/data/models/reset_password_params.dart';
+import 'package:dartz/dartz.dart';
 
 abstract class AuthRepo {
-  static Future<AuthResponse?> register(RegisterParams params) async {
-    try {
-      var response = await DioProvider.post(
-        endPoint: Apis.register,
-        data: params.toJson(),
-      );
+  static Future<Either<Failure, Data>> register(RegisterParams params) async {
+    var response = await DioProvider.postApi(
+      endPoint: Apis.register,
+      data: params.toJson(),
+    );
 
-      if (response.statusCode == 201) {
-        var data = AuthResponse.fromJson(response.data);
-        SharedPref.setToken(data.data?.token ?? "");
-
-        SharedPref.setUserInfo(data.data!.user);
-        return data;
-      } else {
-        return null;
-      }
-    } on Exception catch (e) {
-      log(e.toString());
-      return null;
-    }
+    return response.fold(
+      (l) {
+        return Left(l);
+      },
+      (right) {
+        try {
+          var data = Data.fromJson(right);
+          SharedPref.setToken(data.token ?? "");
+          SharedPref.setUserInfo(data.user);
+          return Right(data);
+        } on Exception catch (e) {
+          return Left(ParseFailure(message: e.toString()));
+        }
+      },
+    );
   }
 
-  static Future<AuthResponse?> login(RegisterParams params) async {
-    try {
-      var response = await DioProvider.post(
-        endPoint: Apis.login,
-        data: params.toJson(),
-      );
+  static Future<Either<Failure, Data>> login(RegisterParams params) async {
+    var response = await DioProvider.postApi(
+      endPoint: Apis.login,
+      data: params.toJson(),
+    );
 
-      if (response.statusCode == 200) {
-        var data = AuthResponse.fromJson(response.data);
-        SharedPref.setToken(data.data?.token ?? "");
-        SharedPref.setUserInfo(data.data!.user);
-        return data;
-      } else {
-        return null;
-      }
-    } on Exception catch (e) {
-      log(e.toString());
-      return null;
-    }
+    return response.fold(
+      (l) {
+        return Left(l);
+      },
+      (right) {
+        try {
+          var data = Data.fromJson(right);
+          SharedPref.setToken(data.token ?? "");
+          SharedPref.setUserInfo(data.user);
+          return Right(data);
+        } on Exception catch (e) {
+          return Left(ParseFailure(message: e.toString()));
+        }
+      },
+    );
   }
 
-  static Future<AuthResponse?> forgetPassword(
+  static Future<Either<Failure, Data>> forgetPassword(
     ForgetPasswordParams params,
   ) async {
-    try {
-      var response = await DioProvider.post(
-        endPoint: Apis.forgetPassword,
-        data: params.toJson(),
-      );
+    var response = await DioProvider.postApi(
+      endPoint: Apis.forgetPassword,
+      data: params.toJson(),
+    );
 
-      if (response.statusCode == 200) {
-        var data = AuthResponse.fromJson(response.data);
-        return data;
-      } else {
-        return null;
-      }
-    } on Exception catch (e) {
-      log(e.toString());
-      return null;
-    }
+    return response.fold(
+      (l) {
+        return Left(l);
+      },
+      (right) {
+        try {
+          var data = Data.fromJson(right);
+          SharedPref.setToken(data.token ?? "");
+          SharedPref.setUserInfo(data.user);
+          return Right(data);
+        } on Exception catch (e) {
+          return Left(ParseFailure(message: e.toString()));
+        }
+      },
+    );
   }
 
-  static Future<AuthResponse?> resetPassword(ResetPasswordParams params) async {
-    try {
-      var response = await DioProvider.post(
-        endPoint: Apis.resetPassword,
-        data: params.toJson(),
-      );
+  static Future<Either<Failure, AuthResponse>> resetPassword(ResetPasswordParams params) async {
+    var response = await DioProvider.postApi(
+      endPoint: Apis.resetPassword,
+      data: params.toJson(),
+      unwrapData: false,
+    );
 
-      if (response.statusCode == 200) {
-        var data = AuthResponse.fromJson(response.data);
-        return data;
-      } else {
-        return null;
-      }
-    } on Exception catch (e) {
-      log(e.toString());
-      return null;
-    }
+    return response.fold(
+      (l) => Left(l),
+      (r) {
+        try {
+          return Right(AuthResponse.fromJson(r));
+        } on Exception catch (e) {
+          return Left(ParseFailure(message: e.toString()));
+        }
+      },
+    );
   }
 
   static Future<bool> logout() async {
-    try {
-      var response = await DioProvider.post(
-        endPoint: Apis.logout,
-        headers: {
-          'Authorization': 'Bearer ${SharedPref.getToken()}',
-        },
-      );
+    await DioProvider.postApi(
+      endPoint: Apis.logout,
+      headers: {'Authorization': 'Bearer ${SharedPref.getToken()}'},
+    );
 
-      if (response.statusCode == 200 || response.statusCode == 401) {
-        await SharedPref.clear();
-        return true;
-      } else {
-        return false;
-      }
-    } on Exception catch (e) {
-      log(e.toString());
-      // Force clear local session if network fails or token is already invalid
-      await SharedPref.clear();
-      return true;
-    }
+    // Force clear local session if network fails or token is already invalid
+    await SharedPref.clear();
+    return true;
   }
 }

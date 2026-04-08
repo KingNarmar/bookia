@@ -11,21 +11,15 @@ class OrderDetailsCubit extends Cubit<OrderDetailsState> {
   Future<void> getOrderDetails(int orderId) async {
     emit(OrderDetailsLoading());
 
-    try {
-      final response = await OrderDetailsRepo.getOrderDetails(orderId);
+    final response = await OrderDetailsRepo.getOrderDetails(orderId);
 
-      if (response != null && response.data != null) {
-        orderDetailsResponse = response;
-        emit(OrderDetailsLoaded());
-      } else {
-        emit(
-          OrderDetailsError(
-            message: response?.message ?? "failed_to_load_data",
-          ),
-        );
-      }
-    } catch (e) {
-      emit(OrderDetailsError(message: "error"));
+    if (response != null && response.data != null) {
+      orderDetailsResponse = response;
+      emit(OrderDetailsLoaded());
+    } else {
+      emit(OrderDetailsError(
+        message: response?.message ?? "failed_to_load_data",
+      ));
     }
   }
 }

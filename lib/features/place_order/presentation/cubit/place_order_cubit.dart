@@ -60,7 +60,7 @@ class PlaceOrderCubit extends Cubit<PlaceOrderState> {
     if (orderId != null) {
       emit(PlaceOrderSuccessState(orderId: orderId));
     } else {
-      emit(PlaceOrderErrorState(message: "error"));
+      emit(PlaceOrderErrorState(message: "failed_to_place_order"));
     }
   }
 }

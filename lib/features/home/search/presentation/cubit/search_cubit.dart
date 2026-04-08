@@ -11,15 +11,9 @@ class SearchCubit extends Cubit<SearchState> {
   Future<void> getAllProducts() async {
     emit(SearchLoading());
 
-    try {
-      final response = await SearchRepo.getAllProducts();
-
-      products = response ?? [];
-
-      emit(SearchSuccess(products: products));
-    } catch (e) {
-      emit(SearchError(message: 'failed_to_load_data'));
-    }
+    final response = await SearchRepo.getAllProducts();
+    products = response ?? [];
+    emit(SearchSuccess(products: products));
   }
 
   Future<void> searchProducts(String name) async {
@@ -30,14 +24,8 @@ class SearchCubit extends Cubit<SearchState> {
 
     emit(SearchLoading());
 
-    try {
-      final response = await SearchRepo.searchProducts(name: name.trim());
-
-      products = response ?? [];
-
-      emit(SearchSuccess(products: products));
-    } catch (e) {
-      emit(SearchError(message: 'failed_to_load_data'));
-    }
+    final response = await SearchRepo.searchProducts(name: name.trim());
+    products = response ?? [];
+    emit(SearchSuccess(products: products));
   }
 }
