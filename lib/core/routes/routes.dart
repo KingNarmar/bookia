@@ -11,6 +11,7 @@ import 'package:bookia/features/cart/data/models/checkout_response/checkout_data
 import 'package:bookia/features/home/home/data/models/product_model/product.dart';
 import 'package:bookia/features/home/home/presentation/screens/home_screen.dart';
 import 'package:bookia/features/home/search/presentation/cubit/search_cubit.dart';
+import 'package:bookia/core/di/injection_container.dart';
 import 'package:bookia/features/home/search/presentation/screens/search_screen.dart';
 import 'package:bookia/features/main/main_app_screen.dart';
 import 'package:bookia/features/orders/my_orders/presentation/cubit/my_order_cubit.dart';
@@ -187,7 +188,7 @@ class Routes {
       GoRoute(
         path: Routes.search,
         builder: (context, state) => BlocProvider(
-          create: (context) => SearchCubit(),
+          create: (context) => sl<SearchCubit>(),
           child: const SearchScreen(),
         ),
       ),

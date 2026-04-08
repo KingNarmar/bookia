@@ -7,6 +7,7 @@ import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/core/widgets/shimmer/grid_shimmer.dart';
 import 'package:bookia/core/widgets/shimmer/text_shimmer.dart';
 import 'package:bookia/features/home/home/presentation/cubits/home_cubit/home_cubit.dart';
+import 'package:bookia/core/di/injection_container.dart';
 import 'package:bookia/features/home/home/presentation/cubits/home_cubit/home_state.dart';
 import 'package:bookia/features/home/home/presentation/widgets/book_card.dart';
 import 'package:bookia/features/home/home/presentation/widgets/home_slider.dart';
@@ -22,7 +23,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) {
-        final cubit = HomeCubit();
+        final cubit = sl<HomeCubit>();
         Future.microtask(() => cubit.getHomeData());
         return cubit;
       },
