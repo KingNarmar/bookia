@@ -180,7 +180,7 @@ class Routes {
       GoRoute(
         path: Routes.myOrders,
         builder: (context, state) => BlocProvider(
-          create: (context) => sl<MyOrderCubit>()..getOrders(),
+          create: (context) => sl<MyOrderCubit>(),
           child: const MyOrdersScreen(),
         ),
       ),
