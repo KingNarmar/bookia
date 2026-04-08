@@ -2,7 +2,7 @@ import 'package:bookia/core/services/local/shared_pref.dart';
 import 'package:bookia/features/book_details/presentation/cubit/book_details_state.dart';
 import 'package:bookia/features/cart/data/models/cart_response/cart_item.dart';
 import 'package:bookia/features/cart/domain/usecases/add_to_cart_usecase.dart';
-import 'package:bookia/features/wishlist/domain/usecases/add_to_wishlist_usecase.dart';
+import 'package:bookia/features/wish_list/domain/usecases/add_to_wishlist_usecase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BookDetailsCubit extends Cubit<BookDetailsState> {

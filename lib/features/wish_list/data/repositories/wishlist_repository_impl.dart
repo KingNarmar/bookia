@@ -1,7 +1,7 @@
 import 'package:bookia/core/error/failure.dart';
-import 'package:bookia/features/wishlist/data/data_sources/wishlist_remote_data_source.dart';
+import 'package:bookia/features/wish_list/data/data_sources/wishlist_remote_data_source.dart';
 import 'package:bookia/features/wish_list/data/models/wish_list_response/wish_list_response.dart';
-import 'package:bookia/features/wishlist/domain/repositories/wishlist_repository.dart';
+import 'package:bookia/features/wish_list/domain/repositories/wishlist_repository.dart';
 import 'package:dartz/dartz.dart';
 
 class WishlistRepositoryImpl implements WishlistRepository {

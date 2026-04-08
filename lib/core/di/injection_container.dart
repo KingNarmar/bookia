@@ -40,12 +40,12 @@ import 'package:bookia/features/cart/domain/usecases/remove_from_cart_usecase.da
 import 'package:bookia/features/cart/domain/usecases/update_cart_usecase.dart';
 import 'package:bookia/features/cart/presentation/cubit/cart_cubit.dart';
 
-import 'package:bookia/features/wishlist/data/data_sources/wishlist_remote_data_source.dart';
-import 'package:bookia/features/wishlist/data/repositories/wishlist_repository_impl.dart';
-import 'package:bookia/features/wishlist/domain/repositories/wishlist_repository.dart';
-import 'package:bookia/features/wishlist/domain/usecases/add_to_wishlist_usecase.dart';
-import 'package:bookia/features/wishlist/domain/usecases/get_wishlist_usecase.dart';
-import 'package:bookia/features/wishlist/domain/usecases/remove_from_wishlist_usecase.dart';
+import 'package:bookia/features/wish_list/data/data_sources/wishlist_remote_data_source.dart';
+import 'package:bookia/features/wish_list/data/repositories/wishlist_repository_impl.dart';
+import 'package:bookia/features/wish_list/domain/repositories/wishlist_repository.dart';
+import 'package:bookia/features/wish_list/domain/usecases/add_to_wishlist_usecase.dart';
+import 'package:bookia/features/wish_list/domain/usecases/get_wishlist_usecase.dart';
+import 'package:bookia/features/wish_list/domain/usecases/remove_from_wishlist_usecase.dart';
 import 'package:bookia/features/wish_list/presentation/cubit/wish_list_cubit.dart';
 import 'package:bookia/features/book_details/presentation/cubit/book_details_cubit.dart';
 

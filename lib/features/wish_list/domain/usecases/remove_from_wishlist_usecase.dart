@@ -1,7 +1,7 @@
 import 'package:bookia/core/error/failure.dart';
 import 'package:bookia/core/usecase/usecase.dart';
 import 'package:bookia/features/wish_list/data/models/wish_list_response/wish_list_response.dart';
-import 'package:bookia/features/wishlist/domain/repositories/wishlist_repository.dart';
+import 'package:bookia/features/wish_list/domain/repositories/wishlist_repository.dart';
 import 'package:dartz/dartz.dart';
 
 class RemoveFromWishlistUseCase implements UseCase<WishListResponse, int> {
